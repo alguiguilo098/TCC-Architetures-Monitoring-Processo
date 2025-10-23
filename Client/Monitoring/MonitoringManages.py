@@ -5,10 +5,11 @@ import yaml
 from datetime import datetime
 import time
 import concurrent.futures
-from src.DBmanages.TinyDBManages import TinyDBManages
+import threading
+from Client.DBmanages.TinyDBManages import TinyDBManages
 class MonitoringManages:
     
-    def __init__(self,config_path_env:str,path_db:str):
+    def __init__(self,config_path_env:str):
         
         """
             initialize MonitoringManages class
@@ -21,9 +22,15 @@ class MonitoringManages:
         """
         
         metrics=self.__get_metrics_ymal(config_path_env)
-        self.__threads_using=metrics.get("threads_using",)
-        self.__interval = metrics.get("check_interval",10) 
-        self.__db=TinyDBManages(db_path=path_db,table_name="MonitoringData")
+        self.__path_db=metrics.get("database_name")
+        self.__path_db_new=metrics.get("export_database_name")
+        self.__threads_using=metrics.get("threads_using")
+        self.__interval = metrics.get("check_interval")
+        self.__register_migrate=metrics.get("register_migrate")
+        self.__path_db=metrics.get("database_name")
+        self.__path_db_new=metrics.get("export_database_name") 
+        self.__db=TinyDBManages(db_path=self.__path_db,table_name="MonitoringData")
+        self.__db_new=TinyDBManages(db_path=self.__path_db_new,table_name="MonitoringDataNew")
         
     def __get_metrics_ymal(self, config_path_env:str):
         
@@ -55,23 +62,20 @@ class MonitoringManages:
         try:
             p = psutil.Process(pid)
             data_process['pid']=pid
-            data_process["uid"]=p.uids().real
-            data_process["gid"]=p.gids().real
             data_process['name']=p.name()
             data_process["user"]=p.username()
             data_process['timestamp']=datetime.now().isoformat()
             data_process['status']=p.status()
             data_process['create_time']=p.create_time()
             data_process["num_threads"]=p.num_threads()
-            data_process["exe"]=p.exe()
-            data_process["cmdline"]=p.cmdline()
             data_process['cpu_percent']=p.cpu_percent(interval=0.1)
-            mem_info=p.memory_info()
-            data_process['memory_rss']=mem_info.rss
-            data_process['memory_vms']=mem_info.vms
+            data_process["memory"]=p.memory_percent()
             io_counters=p.io_counters()
             data_process['read_bytes']=io_counters.read_bytes
             data_process['write_bytes']=io_counters.write_bytes
+            data_process["open_files"]=p.open_files()
+            data_process["num_fds"]=p.num_fds() if hasattr(p,'num_fds') else None
+            data_process["nice"]=p.nice()
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
         return data_process
@@ -135,13 +139,21 @@ class MonitoringManages:
 
 
     
-    def run(self):
+    def run(self,stop=3,sempahore:threading.Semaphore=None):
+        count=0
         while True:
-            data_list=self.get_all_metrics_monitoring(['cpu_percent','io_counters'])
-            self.__db.insert_multiples(data_list)
-            time.sleep(self.__interval)
+            if self.__register_migrate>len(self.__db.get_all()):
+                data_list=self.get_all_metrics_monitoring(['cpu_percent','io_counters'])
+                self.__db.insert_multiples(data_list)
+                print("Dormindo Durante")
+                time.sleep(self.__interval)
+                
+            else:
+                self.__db.migrate_to_new_db_data(target_db=self.__db_new)
+                self.__db.delete_all_bank()
+                if count>0 and count%2==0:
+                    sempahore.acquire()
+                count+=1
+                
             
-if __name__ =="__main__":
-    monitor=MonitoringManages(config_path_env="src/env.yaml",intervargetmetric=10,interval_send_data=30)
-    data_list=monitor.get_all_metrics_monitoring(['cpu_percent','io_counters'])
-    
+            

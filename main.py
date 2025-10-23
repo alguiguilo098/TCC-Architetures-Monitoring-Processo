@@ -1,13 +1,22 @@
-import src.Monitoring.MonitoringManages as mm
-import src.DBmanages.TinyDBManages as tdbm
-if __name__ =="__main__":
-    try:
-        monitor=mm.MonitoringManages(config_path_env="src/env.yaml",
-                                 path_db="./monitoring_db.json")
-        monitor.run()
-    except KeyboardInterrupt:
-        print("Monitoring stopped by user.")
-        db=tdbm.TinyDBManages(db_path="./monitoring_db.json",
-                                      table_name="MonitoringData")
-        print(len(db.get_all()))
-        
+import threading
+from Client.Monitoring.MonitoringManages import MonitoringManages
+from Client.AlertaManeger.AlertaManager import AlertaManager
+from Client.DBmanages.TinyDBManages import TinyDBManages
+
+
+semaphore_agent = threading.Semaphore()
+semaphore_alerta = threading.Semaphore()
+
+def start_monitoring():
+    monitor = MonitoringManages(config_path_env="Client/env.yaml")
+    monitor.run()
+    
+
+if __name__ == "__main__":
+    monitoring_thread = threading.Thread(target=start_monitoring)
+    monitoring_thread.start()
+    
+    alerta_manager = AlertaManager()
+    # Aqui você pode adicionar chamadas para métodos do alerta_manager conforme necessário
+    monitoring_thread.join()
+       
