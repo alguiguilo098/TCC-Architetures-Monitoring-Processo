@@ -5,7 +5,15 @@ class TinyDBManages:
     A class to manage TinyDB operations including insert, delete,
     migrate, and query.
     """
-
+    def get_all_pids(self):
+        self_query=Query()
+        pids = self.__table.search(self_query.pid.exists())
+        unique_pids = set()
+        for record in pids:
+            unique_pids.add(record['pid'])
+        return list(unique_pids)
+    
+        
     def __init__(self, db_path: str, table_name: str):
         """
         Initialize TinyDBManages class.
@@ -66,9 +74,6 @@ class TinyDBManages:
         q=Query()
         response = self.__table.search(q.pid == pid)
 
-        total = len(response)
-        print(f"Registros encontrados para pid {pid}: {total}")
-
         # Aplicar o fatiamento do intervalo solicitado
         sliced_records = response[begin:end]
 
@@ -76,7 +81,6 @@ class TinyDBManages:
         "records": sliced_records,
         "begin": begin,
         "end": end,
-        "total": total
     }
 
     

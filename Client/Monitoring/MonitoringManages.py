@@ -6,7 +6,7 @@ from datetime import datetime
 import time
 import concurrent.futures
 import threading
-from Client.DBmanages.TinyDBManages import TinyDBManages
+from Client.Monitoring.TinyDBManages import TinyDBManages
 class MonitoringManages:
     
     def __init__(self,config_path_env:str):
@@ -69,6 +69,7 @@ class MonitoringManages:
             data_process['create_time']=p.create_time()
             data_process["num_threads"]=p.num_threads()
             data_process['cpu_percent']=p.cpu_percent(interval=0.1)
+            data_process["num_child_processes"]=len(p.children())
             data_process["memory"]=p.memory_percent()
             io_counters=p.io_counters()
             data_process['read_bytes']=io_counters.read_bytes
@@ -151,9 +152,9 @@ class MonitoringManages:
             else:
                 self.__db.migrate_to_new_db_data(target_db=self.__db_new)
                 self.__db.delete_all_bank()
-                if count>0 and count%2==0:
-                    sempahore.acquire()
-                count+=1
+                # if count>0 and count%2==0:
+                #     sempahore.acquire()
+                # count+=1
                 
             
             
