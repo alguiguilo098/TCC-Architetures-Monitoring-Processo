@@ -1,6 +1,9 @@
 import ast
 import yaml
-from TinyDBManages import TinyDBManages
+from Client.Monitoring.TinyDBManages import TinyDBManages
+from threading import Semaphore
+
+import concurrent.futures
 class AlertaManager:
     def __load_config(self, config_path_env:str):
         with open(config_path_env,'r') as file:
@@ -58,17 +61,48 @@ class AlertaManager:
             if violations >= max_violations:
                 msg = f"[ALERTA] Processo {pid} ultrapassou limite em {violations} métricas (janela {i})"
                 self.send_alert(msg)
-                return True
+                return pid
 
-        return False
+        return -1
 
-        
+    def run(self, semaphore, max_workers: int = 5) -> None:
+        """
+    Run anomaly detection on all PIDs using a thread pool.
+
+    Args:
+        semaphore: Semaphore for synchronization
+        max_workers: Maximum number of concurrent threads
+    """
+        try:
+            pids = self.__db.get_all_pids()
+            if not pids:
+                print("No PIDs found in database")
+                return
+
+            def task(pid):
+                semaphore.acquire()
+                try:
+                    return self.check_anomaly(pid, times=3)
+                finally:
+                    semaphore.release()
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = [executor.submit(task, pid) for pid in pids]
+                for future, pid in zip(concurrent.futures.as_completed(futures), pids):
+                    try:
+                        result = future.result()
+                        if result:
+                            continue
+                    except Exception as e:
+                        print(f"Error checking anomaly for PID {pid}: {str(e)}")
+
+        except Exception as e:
+            print(f"Error in run method: {str(e)}")
+
     def send_alert(self, message):
         # Logic to send alert
         print(f"Alert sent: {message}")
         
 if __name__=="__main__":
-    alerta_manager = AlertaManager()
-    pids = alerta_manager._AlertaManager__db.get_all_pids()
-    for pid in pids:
-        alerta_manager.check_anomaly(pid=pid, times=3)
+    alerta_manager=AlertaManager()
+    alerta_manager.run(semaphore=Semaphore())

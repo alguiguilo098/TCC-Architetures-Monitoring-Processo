@@ -137,24 +137,27 @@ class MonitoringManages:
                 print(f"Erro ao coletar métricas de um chunk: {e}")
 
         return results
-
-
     
-    def run(self,stop=3,sempahore:threading.Semaphore=None):
-        count=0
+    def run(self, stop=3, semaphore: threading.Semaphore = None):
+        count = 0
         while True:
-            if self.__register_migrate>len(self.__db.get_all()):
-                data_list=self.get_all_metrics_monitoring(['cpu_percent','io_counters'])
+            if self.__register_migrate > len(self.__db.get_all()):
+                data_list = self.get_all_metrics_monitoring(['cpu_percent', 'io_counters'])
                 self.__db.insert_multiples(data_list)
                 print("Dormindo Durante")
                 time.sleep(self.__interval)
-                
             else:
                 self.__db.migrate_to_new_db_data(target_db=self.__db_new)
                 self.__db.delete_all_bank()
-                # if count>0 and count%2==0:
-                #     sempahore.acquire()
-                # count+=1
+            
+                if count > 0 and count % 2 == 0:
+                    print("Releasing semaphore for MonitoringManages")
+                    if semaphore is not None:
+                        print("Releasing semaphore for AlertaManager")
+                        semaphore.release()
+                print("Dormindo Fora:"+str(count))
+                count += 1
+
                 
             
             
