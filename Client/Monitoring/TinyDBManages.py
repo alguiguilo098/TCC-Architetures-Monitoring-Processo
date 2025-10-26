@@ -1,4 +1,4 @@
-from tinydb import TinyDB, Query, where
+from tinydb import TinyDB, Query
 
 class TinyDBManages:
     """

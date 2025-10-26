@@ -74,7 +74,6 @@ class MonitoringManages:
             io_counters=p.io_counters()
             data_process['read_bytes']=io_counters.read_bytes
             data_process['write_bytes']=io_counters.write_bytes
-            data_process["open_files"]=p.open_files()
             data_process["num_fds"]=p.num_fds() if hasattr(p,'num_fds') else None
             data_process["nice"]=p.nice()
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
