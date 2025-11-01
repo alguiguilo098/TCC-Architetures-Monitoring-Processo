@@ -6,7 +6,9 @@ from datetime import datetime
 import time
 import concurrent.futures
 import threading
+from Client.Monitoring.LogManager import LogManager
 from Client.Monitoring.TinyDBManages import TinyDBManages
+
 class MonitoringManages:
     
     def __init__(self,config_path_env:str):
@@ -137,25 +139,66 @@ class MonitoringManages:
 
         return results
     
-    def run(self, stop=3, semaphore: threading.Semaphore = None):
+    def run(self, stop=3, semaphore: threading.Semaphore = None, lock: threading.Lock = None):
         count = 0
+        manager = LogManager(log_file="monitoring_manager.log")
+        log_manager = LogManager(log_file="database_manager.log")
+
         while True:
-            if self.__register_migrate > len(self.__db.get_all()):
-                data_list = self.get_all_metrics_monitoring(['cpu_percent', 'io_counters'])
-                self.__db.insert_multiples(data_list)
-                print("Dormindo Durante")
+            try:
+            # 🔹 BLOQUEIO OPCIONAL: evita que outro processo migre ou insira ao mesmo tempo
+                if lock:
+                    lock.acquire()
+
+                total_records = len(self.__db.get_all())
+
+            # 🔹 Coleta normal de métricas
+                if self.__register_migrate > total_records:
+                    data_list = self.get_all_metrics_monitoring(['cpu_percent', 'io_counters'])
+                    manager.log_info(f"Collected {len(data_list)} metrics.")
+                    self.__db.insert_multiples(data_list)
+                    log_manager.log_info(f"Inserted {len(data_list)} metrics into the database.")
+                    time.sleep(self.__interval)
+
+            # 🔹 Inicia migração segura
+                else:
+                    log_manager.log_info("Starting database migration.")
+                    migrated_count = self.__db.migrate_to_new_db_data(target_db=self.__db_new)
+                    log_manager.log_info(f"Database migration completed. Migrated {migrated_count} records.")
+
+                # Verifica consistência antes de apagar
+                    remaining = len(self.__db.get_all())
+                    if remaining == 0 or remaining == migrated_count:
+                        self.__db.delete_all_bank()
+                        log_manager.log_info("Source database cleared after migration.")
+                    else:
+                        log_manager.log_warning(
+                        f"Migration mismatch: migrated={migrated_count}, remaining={remaining}. "
+                        f"Skipping delete to prevent data loss."
+                        )
+
+                # 🔹 Controle de semáforo (coordenação com outros gerenciadores)
+                    if count > 0 and count % 2 == 0:
+                        print("Releasing semaphore for MonitoringManager")
+                        if semaphore is not None:
+                            print("Releasing semaphore for AlertManager")
+                            semaphore.release()
+
+                    print("Dormindo Fora:" + str(count))
+                    count += 1
+
+            # 🔹 Fim do ciclo
                 time.sleep(self.__interval)
-            else:
-                self.__db.migrate_to_new_db_data(target_db=self.__db_new)
-                self.__db.delete_all_bank()
-            
-                if count > 0 and count % 2 == 0:
-                    print("Releasing semaphore for MonitoringManages")
-                    if semaphore is not None:
-                        print("Releasing semaphore for AlertaManager")
-                        semaphore.release()
-                print("Dormindo Fora:"+str(count))
-                count += 1
+
+            except Exception as e:
+                manager.log_error(f"Error in MonitoringManager.run: {str(e)}")
+                time.sleep(self.__interval)
+
+            finally:
+            # 🔹 Libera lock se estiver ativo
+                if lock and lock.locked():
+                    lock.release()
+
 
                 
             

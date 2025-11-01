@@ -1,9 +1,10 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import time
 import yaml
 from elasticsearch import Elasticsearch
 from Client.Monitoring.TinyDBManages import TinyDBManages
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from Client.Monitoring.LogManager import LogManager
+
 class ElasticsearchClient:
     def get_config(self,config_path_env:str):
         with open(config_path_env, 'r') as file:
@@ -15,20 +16,19 @@ class ElasticsearchClient:
         self.es = Elasticsearch([{'host': host, 'port': port, "scheme": "http"}])
         metric= self.get_config(path)
         path = metric.get("export_database_name")
+        self.__log_manager= LogManager(log_file='elasticsearch_client.log')
         self.__db = TinyDBManages(db_path=path, table_name="MonitoringDataNew")
         
     def send_data(self, index_name, data):
-        print(f"📤 Enviando dados para o índice '{index_name}'...")
+        print(f"Enviando dado para o índice {index_name}: {data}")
         response = self.es.index(index=index_name, document=data)
         return response
     
 
     def all_send_data(self,index_name, max_workers=10, chunk_size=50):
         process_data = self.__db.get_all()
-    
-        if not process_data:
-            return
-    
+        self.__log_manager.log_info(f"Iniciando envio de {len(process_data)} registros para o Elasticsearch.")
+        
     # Função que envia um lote de dados
         def send_chunk(chunk):
             for data in chunk:
@@ -54,5 +54,3 @@ class ElasticsearchClient:
     def is_connected(self):
         return self.es.ping()
 
-if __name__ == "__main__":
-    pass
