@@ -191,7 +191,7 @@ class MonitoringManages:
                 time.sleep(self.__interval)
 
             except Exception as e:
-                manager.log_error(f"Error in MonitoringManager.run: {str(e)}")
+                manager.log_error(f"Error: {str(e)}")
                 time.sleep(self.__interval)
 
             finally:

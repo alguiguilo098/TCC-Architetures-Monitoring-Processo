@@ -2,10 +2,30 @@ import threading
 import time
 from Client.Monitoring.MonitoringManages import MonitoringManages
 from Client.Monitoring.ElastichSearch import ElasticsearchClient
-
-
+import distro
 
 semaphore_alerta = threading.Semaphore(0)  # Inicialmente bloqueado
+semaphore_alerta_versao = threading.Semaphore(0)  # Inicialmente bloqueado
+
+
+def sistema_info():
+    # Nome da distribuição e versão
+    nome_distro = distro.name(pretty=True)
+    versao_distro = distro.version()
+    
+    def kernel_version():
+        with open("/proc/version", "r") as f:
+            return f.read().strip()
+    
+    return f"{nome_distro} {versao_distro}, Kernel: {kernel_version()}"
+
+
+def start_monitoring_sistema_info():
+    semaphore_alerta_versao.acquire()
+    info = sistema_info()
+    print(f"Sistema Operacional: {info}")
+    
+    
 
 def start_monitoring():
     monitor = MonitoringManages(config_path_env="Client/env.yaml")
@@ -38,11 +58,14 @@ def start_elastic_search():
 
 if __name__ == "__main__":
     thread_monitoring = threading.Thread(target=start_monitoring)
-    thread_elastic_search = threading.Thread(target=start_elastic_search)  
+    thread_elastic_search = threading.Thread(target=start_elastic_search)
+    threads_sistemas = threading.Thread(target=start_monitoring_sistema_info)
+      
     thread_monitoring.start()
     thread_elastic_search.start()
     thread_monitoring.join()
     thread_elastic_search.join()
+    
     
 
        
