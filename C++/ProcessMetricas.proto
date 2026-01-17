@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package ProcessMetricas;
+
+
+
+
+message ProcessMetrics {
+  int32 pid = 1;                          
+  string name = 2;                        
+  string user = 3;                        
+  string timestamp = 4;                   
+  string status = 5;                      
+  double create_time = 6;                 
+  int32 num_threads = 7;                  
+  float cpu_percent = 8;                  
+  int32 num_child_processes = 9;           
+  float memory_percent = 10;               
+  uint64 read_bytes = 11;                
+  uint64 write_bytes = 12;                
+  int32 num_fds = 13;                     
+  int32 nice = 14;
+
+};
+
+message ProcessMetricsList {
+  repeated ProcessMetrics processes = 1;  
+};
+
+
+
+
+
+
