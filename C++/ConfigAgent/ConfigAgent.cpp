@@ -2,7 +2,6 @@
 #include <sstream>
 #include <iostream>
 #include <algorithm>
-#
 #include "ConfigAgent.hpp"
 
 static inline std::string trim(std::string s)
