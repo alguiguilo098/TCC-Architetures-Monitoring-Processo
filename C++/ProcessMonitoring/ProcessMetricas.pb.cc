@@ -60,8 +60,49 @@ struct ProcessMetricsListDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ProcessMetricsListDefaultTypeInternal _ProcessMetricsList_default_instance_;
+PROTOBUF_CONSTEXPR KernelDistro::KernelDistro(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.kernel_version_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.distro_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct KernelDistroDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR KernelDistroDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~KernelDistroDefaultTypeInternal() {}
+  union {
+    KernelDistro _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 KernelDistroDefaultTypeInternal _KernelDistro_default_instance_;
+PROTOBUF_CONSTEXPR InstalledProgram::InstalledProgram(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.version_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct InstalledProgramDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR InstalledProgramDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~InstalledProgramDefaultTypeInternal() {}
+  union {
+    InstalledProgram _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 InstalledProgramDefaultTypeInternal _InstalledProgram_default_instance_;
+PROTOBUF_CONSTEXPR InstalledProgramList::InstalledProgramList(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.programs_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct InstalledProgramListDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR InstalledProgramListDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~InstalledProgramListDefaultTypeInternal() {}
+  union {
+    InstalledProgramList _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 InstalledProgramListDefaultTypeInternal _InstalledProgramList_default_instance_;
 }  // namespace ProcessMetricas
-static ::_pb::Metadata file_level_metadata_ProcessMetricas_2eproto[2];
+static ::_pb::Metadata file_level_metadata_ProcessMetricas_2eproto[5];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_ProcessMetricas_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_ProcessMetricas_2eproto = nullptr;
 
@@ -93,15 +134,44 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetricsList, _impl_.processes_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::KernelDistro, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::KernelDistro, _impl_.kernel_version_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::KernelDistro, _impl_.distro_name_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgram, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgram, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgram, _impl_.version_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.programs_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
   { 20, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
+  { 27, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
+  { 35, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
+  { 43, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::ProcessMetricas::_ProcessMetrics_default_instance_._instance,
   &::ProcessMetricas::_ProcessMetricsList_default_instance_._instance,
+  &::ProcessMetricas::_KernelDistro_default_instance_._instance,
+  &::ProcessMetricas::_InstalledProgram_default_instance_._instance,
+  &::ProcessMetricas::_InstalledProgramList_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -114,14 +184,18 @@ const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_
   "rcent\030\n \001(\002\022\022\n\nread_bytes\030\013 \001(\004\022\023\n\013write"
   "_bytes\030\014 \001(\004\022\017\n\007num_fds\030\r \001(\005\022\014\n\004nice\030\016 "
   "\001(\005\"H\n\022ProcessMetricsList\0222\n\tprocesses\030\001"
-  " \003(\0132\037.ProcessMetricas.ProcessMetricsb\006p"
-  "roto3"
+  " \003(\0132\037.ProcessMetricas.ProcessMetrics\";\n"
+  "\014KernelDistro\022\026\n\016kernel_version\030\001 \001(\t\022\023\n"
+  "\013distro_name\030\002 \001(\t\"1\n\020InstalledProgram\022\014"
+  "\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"K\n\024Install"
+  "edProgramList\0223\n\010programs\030\001 \003(\0132!.Proces"
+  "sMetricas.InstalledProgramb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProcessMetricas_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProcessMetricas_2eproto = {
-    false, false, 405, descriptor_table_protodef_ProcessMetricas_2eproto,
+    false, false, 594, descriptor_table_protodef_ProcessMetricas_2eproto,
     "ProcessMetricas.proto",
-    &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 2,
+    &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 5,
     schemas, file_default_instances, TableStruct_ProcessMetricas_2eproto::offsets,
     file_level_metadata_ProcessMetricas_2eproto, file_level_enum_descriptors_ProcessMetricas_2eproto,
     file_level_service_descriptors_ProcessMetricas_2eproto,
@@ -960,6 +1034,697 @@ void ProcessMetricsList::InternalSwap(ProcessMetricsList* other) {
       file_level_metadata_ProcessMetricas_2eproto[1]);
 }
 
+// ===================================================================
+
+class KernelDistro::_Internal {
+ public:
+};
+
+KernelDistro::KernelDistro(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:ProcessMetricas.KernelDistro)
+}
+KernelDistro::KernelDistro(const KernelDistro& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  KernelDistro* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.kernel_version_){}
+    , decltype(_impl_.distro_name_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.kernel_version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.kernel_version_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_kernel_version().empty()) {
+    _this->_impl_.kernel_version_.Set(from._internal_kernel_version(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.distro_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.distro_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_distro_name().empty()) {
+    _this->_impl_.distro_name_.Set(from._internal_distro_name(), 
+      _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:ProcessMetricas.KernelDistro)
+}
+
+inline void KernelDistro::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.kernel_version_){}
+    , decltype(_impl_.distro_name_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.kernel_version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.kernel_version_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.distro_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.distro_name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+KernelDistro::~KernelDistro() {
+  // @@protoc_insertion_point(destructor:ProcessMetricas.KernelDistro)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void KernelDistro::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.kernel_version_.Destroy();
+  _impl_.distro_name_.Destroy();
+}
+
+void KernelDistro::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void KernelDistro::Clear() {
+// @@protoc_insertion_point(message_clear_start:ProcessMetricas.KernelDistro)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.kernel_version_.ClearToEmpty();
+  _impl_.distro_name_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* KernelDistro::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string kernel_version = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_kernel_version();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.KernelDistro.kernel_version"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string distro_name = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_distro_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.KernelDistro.distro_name"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* KernelDistro::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ProcessMetricas.KernelDistro)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string kernel_version = 1;
+  if (!this->_internal_kernel_version().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_kernel_version().data(), static_cast<int>(this->_internal_kernel_version().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.KernelDistro.kernel_version");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_kernel_version(), target);
+  }
+
+  // string distro_name = 2;
+  if (!this->_internal_distro_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_distro_name().data(), static_cast<int>(this->_internal_distro_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.KernelDistro.distro_name");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_distro_name(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ProcessMetricas.KernelDistro)
+  return target;
+}
+
+size_t KernelDistro::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ProcessMetricas.KernelDistro)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string kernel_version = 1;
+  if (!this->_internal_kernel_version().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_kernel_version());
+  }
+
+  // string distro_name = 2;
+  if (!this->_internal_distro_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_distro_name());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData KernelDistro::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    KernelDistro::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*KernelDistro::GetClassData() const { return &_class_data_; }
+
+
+void KernelDistro::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<KernelDistro*>(&to_msg);
+  auto& from = static_cast<const KernelDistro&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ProcessMetricas.KernelDistro)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_kernel_version().empty()) {
+    _this->_internal_set_kernel_version(from._internal_kernel_version());
+  }
+  if (!from._internal_distro_name().empty()) {
+    _this->_internal_set_distro_name(from._internal_distro_name());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void KernelDistro::CopyFrom(const KernelDistro& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ProcessMetricas.KernelDistro)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool KernelDistro::IsInitialized() const {
+  return true;
+}
+
+void KernelDistro::InternalSwap(KernelDistro* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.kernel_version_, lhs_arena,
+      &other->_impl_.kernel_version_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.distro_name_, lhs_arena,
+      &other->_impl_.distro_name_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata KernelDistro::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ProcessMetricas_2eproto_getter, &descriptor_table_ProcessMetricas_2eproto_once,
+      file_level_metadata_ProcessMetricas_2eproto[2]);
+}
+
+// ===================================================================
+
+class InstalledProgram::_Internal {
+ public:
+};
+
+InstalledProgram::InstalledProgram(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:ProcessMetricas.InstalledProgram)
+}
+InstalledProgram::InstalledProgram(const InstalledProgram& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  InstalledProgram* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.name_){}
+    , decltype(_impl_.version_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_name().empty()) {
+    _this->_impl_.name_.Set(from._internal_name(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.version_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_version().empty()) {
+    _this->_impl_.version_.Set(from._internal_version(), 
+      _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:ProcessMetricas.InstalledProgram)
+}
+
+inline void InstalledProgram::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.name_){}
+    , decltype(_impl_.version_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.version_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+InstalledProgram::~InstalledProgram() {
+  // @@protoc_insertion_point(destructor:ProcessMetricas.InstalledProgram)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void InstalledProgram::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.name_.Destroy();
+  _impl_.version_.Destroy();
+}
+
+void InstalledProgram::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void InstalledProgram::Clear() {
+// @@protoc_insertion_point(message_clear_start:ProcessMetricas.InstalledProgram)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.name_.ClearToEmpty();
+  _impl_.version_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* InstalledProgram::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string name = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_name();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.InstalledProgram.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string version = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_version();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.InstalledProgram.version"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* InstalledProgram::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ProcessMetricas.InstalledProgram)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (!this->_internal_name().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.InstalledProgram.name");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_name(), target);
+  }
+
+  // string version = 2;
+  if (!this->_internal_version().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_version().data(), static_cast<int>(this->_internal_version().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.InstalledProgram.version");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_version(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ProcessMetricas.InstalledProgram)
+  return target;
+}
+
+size_t InstalledProgram::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ProcessMetricas.InstalledProgram)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string name = 1;
+  if (!this->_internal_name().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_name());
+  }
+
+  // string version = 2;
+  if (!this->_internal_version().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_version());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData InstalledProgram::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    InstalledProgram::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*InstalledProgram::GetClassData() const { return &_class_data_; }
+
+
+void InstalledProgram::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<InstalledProgram*>(&to_msg);
+  auto& from = static_cast<const InstalledProgram&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ProcessMetricas.InstalledProgram)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_name().empty()) {
+    _this->_internal_set_name(from._internal_name());
+  }
+  if (!from._internal_version().empty()) {
+    _this->_internal_set_version(from._internal_version());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void InstalledProgram::CopyFrom(const InstalledProgram& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ProcessMetricas.InstalledProgram)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool InstalledProgram::IsInitialized() const {
+  return true;
+}
+
+void InstalledProgram::InternalSwap(InstalledProgram* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.name_, lhs_arena,
+      &other->_impl_.name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.version_, lhs_arena,
+      &other->_impl_.version_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata InstalledProgram::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ProcessMetricas_2eproto_getter, &descriptor_table_ProcessMetricas_2eproto_once,
+      file_level_metadata_ProcessMetricas_2eproto[3]);
+}
+
+// ===================================================================
+
+class InstalledProgramList::_Internal {
+ public:
+};
+
+InstalledProgramList::InstalledProgramList(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:ProcessMetricas.InstalledProgramList)
+}
+InstalledProgramList::InstalledProgramList(const InstalledProgramList& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  InstalledProgramList* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.programs_){from._impl_.programs_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:ProcessMetricas.InstalledProgramList)
+}
+
+inline void InstalledProgramList::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.programs_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+InstalledProgramList::~InstalledProgramList() {
+  // @@protoc_insertion_point(destructor:ProcessMetricas.InstalledProgramList)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void InstalledProgramList::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.programs_.~RepeatedPtrField();
+}
+
+void InstalledProgramList::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void InstalledProgramList::Clear() {
+// @@protoc_insertion_point(message_clear_start:ProcessMetricas.InstalledProgramList)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.programs_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* InstalledProgramList::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated .ProcessMetricas.InstalledProgram programs = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_programs(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* InstalledProgramList::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ProcessMetricas.InstalledProgramList)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated .ProcessMetricas.InstalledProgram programs = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_programs_size()); i < n; i++) {
+    const auto& repfield = this->_internal_programs(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ProcessMetricas.InstalledProgramList)
+  return target;
+}
+
+size_t InstalledProgramList::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ProcessMetricas.InstalledProgramList)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .ProcessMetricas.InstalledProgram programs = 1;
+  total_size += 1UL * this->_internal_programs_size();
+  for (const auto& msg : this->_impl_.programs_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData InstalledProgramList::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    InstalledProgramList::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*InstalledProgramList::GetClassData() const { return &_class_data_; }
+
+
+void InstalledProgramList::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<InstalledProgramList*>(&to_msg);
+  auto& from = static_cast<const InstalledProgramList&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ProcessMetricas.InstalledProgramList)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_impl_.programs_.MergeFrom(from._impl_.programs_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void InstalledProgramList::CopyFrom(const InstalledProgramList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ProcessMetricas.InstalledProgramList)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool InstalledProgramList::IsInitialized() const {
+  return true;
+}
+
+void InstalledProgramList::InternalSwap(InstalledProgramList* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.programs_.InternalSwap(&other->_impl_.programs_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata InstalledProgramList::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ProcessMetricas_2eproto_getter, &descriptor_table_ProcessMetricas_2eproto_once,
+      file_level_metadata_ProcessMetricas_2eproto[4]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace ProcessMetricas
 PROTOBUF_NAMESPACE_OPEN
@@ -970,6 +1735,18 @@ Arena::CreateMaybeMessage< ::ProcessMetricas::ProcessMetrics >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::ProcessMetricas::ProcessMetricsList*
 Arena::CreateMaybeMessage< ::ProcessMetricas::ProcessMetricsList >(Arena* arena) {
   return Arena::CreateMessageInternal< ::ProcessMetricas::ProcessMetricsList >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ProcessMetricas::KernelDistro*
+Arena::CreateMaybeMessage< ::ProcessMetricas::KernelDistro >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ProcessMetricas::KernelDistro >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ProcessMetricas::InstalledProgram*
+Arena::CreateMaybeMessage< ::ProcessMetricas::InstalledProgram >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ProcessMetricas::InstalledProgram >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ProcessMetricas::InstalledProgramList*
+Arena::CreateMaybeMessage< ::ProcessMetricas::InstalledProgramList >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ProcessMetricas::InstalledProgramList >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

@@ -1,42 +1,104 @@
 #include "Collection.hpp"
+#include <array>
+#include <pwd.h>
+#include <sstream>
+#include <string>
+#include <pwd.h>
+#include <sys/types.h>
 
-Collection::Collection(std::string config_path) {
-    LoadConfig(config_path,this->configAgent);
-    std::cout << "Config loaded: \n";
-    std::cout << "BufferSize: " << this->configAgent.BufferSize << "\n";
-    std::cout << "NumberOfThreads: " << this->configAgent.NumberOfThreads << "\n";
-    std::cout << "TruePeriodicScriptHours: " << this->configAgent.TruePeriodicScriptHours << "\n";
-    std::cout << "TimeSpleepBetweenReads: " << this->configAgent.TimeSpleepBetweenReads << "\n";
-
+Collection::Collection(std::string config_path)
+{
+    LoadConfig(config_path, this->configAgent);
 }
 Collection::~Collection() {}
 
-void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics& metrics,int pid) {
+void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     metrics.set_pid(pid);
 }
-void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics& metrics, int pid) {
+/**
+ * @brief Coleta o nome do processo a partir do arquivo /proc/[pid]/comm
+ * @param metrics Referência ao objeto ProcessMetrics onde o nome será armazenado
+ * @param pid ID do processo cujo nome será coletado
+*/
+void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     std::ifstream status_file("/proc/" + std::to_string(pid) + "/comm");
-    if (status_file.is_open()) {
+    if (status_file.is_open())
+    {
         std::string name;
         std::getline(status_file, name);
         metrics.set_name(name);
-    } else {
+    }
+    else
+    {
         metrics.set_name("Unknown");
     }
 }
 
-void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics& metrics, int pid) {
-    
-}
-void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics& metrics, int pid) {
+void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
-    metrics.set_timestamp(static_cast<int64_t>(now_c));
+    std::string timestamp = std::ctime(&now_c);
+    metrics.set_timestamp(timestamp);
 }
 
-void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics& metrics, int pid) {
+/**
+ * @brief Coleta o nome do usuário do processo a partir do arquivo /proc/[pid]/status
+ * @param metrics Referência ao objeto ProcessMetrics onde o nome do usuário será armazenado
+ * @param pid ID do processo cujo nome do usuário será coletado
+ */
+void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int pid){
+    // Abrir o arquivo /proc/<pid>/status
+    std::ifstream status_file("/proc/" + std::to_string(pid) + "/status");
+    if (!status_file.is_open())
+    {
+        metrics.set_user("Unknown");
+        return;
+    }
+
+    std::string line;
+    while (std::getline(status_file, line))
+    {
+        // Procurar a linha que começa com "Uid:"
+        if (line.compare(0, 4, "Uid:") == 0)
+        {
+            std::istringstream iss(line);
+            std::string uid_label;
+            int uid_real;
+
+            // Ler o primeiro UID (real) do processo
+            iss >> uid_label >> uid_real;
+
+            // Converter UID para nome de usuário
+            struct passwd *pw = getpwuid(uid_real);
+            if (pw)
+            {
+                metrics.set_user(std::string(pw->pw_name));
+            }
+            else
+            {
+                metrics.set_user("Unknown");
+            }
+            return;
+        }
+    }
+
+    // Caso a linha "Uid:" não seja encontrada
+    metrics.set_user("Unknown");
+}
+
+/**
+ * @brief Coleta o status do processo a partir do arquivo /proc/[pid]/stat
+ * @param metrics Referência ao objeto ProcessMetrics onde o status será armazenado
+ * @param pid ID do processo cujo status será coletado
+ */
+void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     std::ifstream stat_file("/proc/" + std::to_string(pid) + "/stat");
-    if (!stat_file.is_open()) {
+    if (!stat_file.is_open())
+    {
         metrics.set_status("Unknown");
         return;
     }
@@ -47,8 +109,10 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics& metrics, in
     std::string token;
     int field = 1;
     std::string status;
-    while (iss >> token) {
-        if (field == 3) { // 3º campo é o estado
+    while (iss >> token)
+    {
+        if (field == 3)
+        { // 3º campo é o estado
             status = token;
             break;
         }
@@ -56,12 +120,16 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics& metrics, in
     }
 
     // Traduzir status do Linux para algo legível
-    if (status == "R") metrics.set_status("Running");
-    else if (status == "S") metrics.set_status("Sleeping");
-    else if (status == "D") metrics.set_status("Uninterruptible sleep");
-    else if (status == "Z") metrics.set_status("Zombie");
-    else if (status == "T") metrics.set_status("Stopped");
-    else metrics.set_status("Unknown");
+    if (status == "R")
+        metrics.set_status("Running");
+    else if (status == "S")
+        metrics.set_status("Sleeping");
+    else if (status == "D")
+        metrics.set_status("Uninterruptible sleep");
+    else if (status == "Z")
+        metrics.set_status("Zombie");
+    else if (status == "T")
+        metrics.set_status("Stopped");
+    else
+        metrics.set_status("Unknown");
 }
-
-

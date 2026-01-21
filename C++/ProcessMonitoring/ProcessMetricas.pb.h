@@ -45,6 +45,15 @@ struct TableStruct_ProcessMetricas_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_ProcessMetricas_2eproto;
 namespace ProcessMetricas {
+class InstalledProgram;
+struct InstalledProgramDefaultTypeInternal;
+extern InstalledProgramDefaultTypeInternal _InstalledProgram_default_instance_;
+class InstalledProgramList;
+struct InstalledProgramListDefaultTypeInternal;
+extern InstalledProgramListDefaultTypeInternal _InstalledProgramList_default_instance_;
+class KernelDistro;
+struct KernelDistroDefaultTypeInternal;
+extern KernelDistroDefaultTypeInternal _KernelDistro_default_instance_;
 class ProcessMetrics;
 struct ProcessMetricsDefaultTypeInternal;
 extern ProcessMetricsDefaultTypeInternal _ProcessMetrics_default_instance_;
@@ -53,6 +62,9 @@ struct ProcessMetricsListDefaultTypeInternal;
 extern ProcessMetricsListDefaultTypeInternal _ProcessMetricsList_default_instance_;
 }  // namespace ProcessMetricas
 PROTOBUF_NAMESPACE_OPEN
+template<> ::ProcessMetricas::InstalledProgram* Arena::CreateMaybeMessage<::ProcessMetricas::InstalledProgram>(Arena*);
+template<> ::ProcessMetricas::InstalledProgramList* Arena::CreateMaybeMessage<::ProcessMetricas::InstalledProgramList>(Arena*);
+template<> ::ProcessMetricas::KernelDistro* Arena::CreateMaybeMessage<::ProcessMetricas::KernelDistro>(Arena*);
 template<> ::ProcessMetricas::ProcessMetrics* Arena::CreateMaybeMessage<::ProcessMetricas::ProcessMetrics>(Arena*);
 template<> ::ProcessMetricas::ProcessMetricsList* Arena::CreateMaybeMessage<::ProcessMetricas::ProcessMetricsList>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -526,6 +538,501 @@ class ProcessMetricsList final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_ProcessMetricas_2eproto;
 };
+// -------------------------------------------------------------------
+
+class KernelDistro final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProcessMetricas.KernelDistro) */ {
+ public:
+  inline KernelDistro() : KernelDistro(nullptr) {}
+  ~KernelDistro() override;
+  explicit PROTOBUF_CONSTEXPR KernelDistro(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  KernelDistro(const KernelDistro& from);
+  KernelDistro(KernelDistro&& from) noexcept
+    : KernelDistro() {
+    *this = ::std::move(from);
+  }
+
+  inline KernelDistro& operator=(const KernelDistro& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline KernelDistro& operator=(KernelDistro&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const KernelDistro& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const KernelDistro* internal_default_instance() {
+    return reinterpret_cast<const KernelDistro*>(
+               &_KernelDistro_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(KernelDistro& a, KernelDistro& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(KernelDistro* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(KernelDistro* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  KernelDistro* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<KernelDistro>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const KernelDistro& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const KernelDistro& from) {
+    KernelDistro::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(KernelDistro* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ProcessMetricas.KernelDistro";
+  }
+  protected:
+  explicit KernelDistro(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kKernelVersionFieldNumber = 1,
+    kDistroNameFieldNumber = 2,
+  };
+  // string kernel_version = 1;
+  void clear_kernel_version();
+  const std::string& kernel_version() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_kernel_version(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_kernel_version();
+  PROTOBUF_NODISCARD std::string* release_kernel_version();
+  void set_allocated_kernel_version(std::string* kernel_version);
+  private:
+  const std::string& _internal_kernel_version() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_kernel_version(const std::string& value);
+  std::string* _internal_mutable_kernel_version();
+  public:
+
+  // string distro_name = 2;
+  void clear_distro_name();
+  const std::string& distro_name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_distro_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_distro_name();
+  PROTOBUF_NODISCARD std::string* release_distro_name();
+  void set_allocated_distro_name(std::string* distro_name);
+  private:
+  const std::string& _internal_distro_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_distro_name(const std::string& value);
+  std::string* _internal_mutable_distro_name();
+  public:
+
+  // @@protoc_insertion_point(class_scope:ProcessMetricas.KernelDistro)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr kernel_version_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr distro_name_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_ProcessMetricas_2eproto;
+};
+// -------------------------------------------------------------------
+
+class InstalledProgram final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProcessMetricas.InstalledProgram) */ {
+ public:
+  inline InstalledProgram() : InstalledProgram(nullptr) {}
+  ~InstalledProgram() override;
+  explicit PROTOBUF_CONSTEXPR InstalledProgram(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  InstalledProgram(const InstalledProgram& from);
+  InstalledProgram(InstalledProgram&& from) noexcept
+    : InstalledProgram() {
+    *this = ::std::move(from);
+  }
+
+  inline InstalledProgram& operator=(const InstalledProgram& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline InstalledProgram& operator=(InstalledProgram&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const InstalledProgram& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const InstalledProgram* internal_default_instance() {
+    return reinterpret_cast<const InstalledProgram*>(
+               &_InstalledProgram_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(InstalledProgram& a, InstalledProgram& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(InstalledProgram* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(InstalledProgram* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  InstalledProgram* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<InstalledProgram>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const InstalledProgram& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const InstalledProgram& from) {
+    InstalledProgram::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(InstalledProgram* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ProcessMetricas.InstalledProgram";
+  }
+  protected:
+  explicit InstalledProgram(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNameFieldNumber = 1,
+    kVersionFieldNumber = 2,
+  };
+  // string name = 1;
+  void clear_name();
+  const std::string& name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
+  // string version = 2;
+  void clear_version();
+  const std::string& version() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_version(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_version();
+  PROTOBUF_NODISCARD std::string* release_version();
+  void set_allocated_version(std::string* version);
+  private:
+  const std::string& _internal_version() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_version(const std::string& value);
+  std::string* _internal_mutable_version();
+  public:
+
+  // @@protoc_insertion_point(class_scope:ProcessMetricas.InstalledProgram)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr version_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_ProcessMetricas_2eproto;
+};
+// -------------------------------------------------------------------
+
+class InstalledProgramList final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProcessMetricas.InstalledProgramList) */ {
+ public:
+  inline InstalledProgramList() : InstalledProgramList(nullptr) {}
+  ~InstalledProgramList() override;
+  explicit PROTOBUF_CONSTEXPR InstalledProgramList(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  InstalledProgramList(const InstalledProgramList& from);
+  InstalledProgramList(InstalledProgramList&& from) noexcept
+    : InstalledProgramList() {
+    *this = ::std::move(from);
+  }
+
+  inline InstalledProgramList& operator=(const InstalledProgramList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline InstalledProgramList& operator=(InstalledProgramList&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const InstalledProgramList& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const InstalledProgramList* internal_default_instance() {
+    return reinterpret_cast<const InstalledProgramList*>(
+               &_InstalledProgramList_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(InstalledProgramList& a, InstalledProgramList& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(InstalledProgramList* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(InstalledProgramList* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  InstalledProgramList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<InstalledProgramList>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const InstalledProgramList& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const InstalledProgramList& from) {
+    InstalledProgramList::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(InstalledProgramList* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ProcessMetricas.InstalledProgramList";
+  }
+  protected:
+  explicit InstalledProgramList(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kProgramsFieldNumber = 1,
+  };
+  // repeated .ProcessMetricas.InstalledProgram programs = 1;
+  int programs_size() const;
+  private:
+  int _internal_programs_size() const;
+  public:
+  void clear_programs();
+  ::ProcessMetricas::InstalledProgram* mutable_programs(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProcessMetricas::InstalledProgram >*
+      mutable_programs();
+  private:
+  const ::ProcessMetricas::InstalledProgram& _internal_programs(int index) const;
+  ::ProcessMetricas::InstalledProgram* _internal_add_programs();
+  public:
+  const ::ProcessMetricas::InstalledProgram& programs(int index) const;
+  ::ProcessMetricas::InstalledProgram* add_programs();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProcessMetricas::InstalledProgram >&
+      programs() const;
+
+  // @@protoc_insertion_point(class_scope:ProcessMetricas.InstalledProgramList)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProcessMetricas::InstalledProgram > programs_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_ProcessMetricas_2eproto;
+};
 // ===================================================================
 
 
@@ -981,9 +1488,267 @@ ProcessMetricsList::processes() const {
   return _impl_.processes_;
 }
 
+// -------------------------------------------------------------------
+
+// KernelDistro
+
+// string kernel_version = 1;
+inline void KernelDistro::clear_kernel_version() {
+  _impl_.kernel_version_.ClearToEmpty();
+}
+inline const std::string& KernelDistro::kernel_version() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.KernelDistro.kernel_version)
+  return _internal_kernel_version();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void KernelDistro::set_kernel_version(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.kernel_version_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.KernelDistro.kernel_version)
+}
+inline std::string* KernelDistro::mutable_kernel_version() {
+  std::string* _s = _internal_mutable_kernel_version();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.KernelDistro.kernel_version)
+  return _s;
+}
+inline const std::string& KernelDistro::_internal_kernel_version() const {
+  return _impl_.kernel_version_.Get();
+}
+inline void KernelDistro::_internal_set_kernel_version(const std::string& value) {
+  
+  _impl_.kernel_version_.Set(value, GetArenaForAllocation());
+}
+inline std::string* KernelDistro::_internal_mutable_kernel_version() {
+  
+  return _impl_.kernel_version_.Mutable(GetArenaForAllocation());
+}
+inline std::string* KernelDistro::release_kernel_version() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.KernelDistro.kernel_version)
+  return _impl_.kernel_version_.Release();
+}
+inline void KernelDistro::set_allocated_kernel_version(std::string* kernel_version) {
+  if (kernel_version != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.kernel_version_.SetAllocated(kernel_version, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.kernel_version_.IsDefault()) {
+    _impl_.kernel_version_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.KernelDistro.kernel_version)
+}
+
+// string distro_name = 2;
+inline void KernelDistro::clear_distro_name() {
+  _impl_.distro_name_.ClearToEmpty();
+}
+inline const std::string& KernelDistro::distro_name() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.KernelDistro.distro_name)
+  return _internal_distro_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void KernelDistro::set_distro_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.distro_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.KernelDistro.distro_name)
+}
+inline std::string* KernelDistro::mutable_distro_name() {
+  std::string* _s = _internal_mutable_distro_name();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.KernelDistro.distro_name)
+  return _s;
+}
+inline const std::string& KernelDistro::_internal_distro_name() const {
+  return _impl_.distro_name_.Get();
+}
+inline void KernelDistro::_internal_set_distro_name(const std::string& value) {
+  
+  _impl_.distro_name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* KernelDistro::_internal_mutable_distro_name() {
+  
+  return _impl_.distro_name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* KernelDistro::release_distro_name() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.KernelDistro.distro_name)
+  return _impl_.distro_name_.Release();
+}
+inline void KernelDistro::set_allocated_distro_name(std::string* distro_name) {
+  if (distro_name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.distro_name_.SetAllocated(distro_name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.distro_name_.IsDefault()) {
+    _impl_.distro_name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.KernelDistro.distro_name)
+}
+
+// -------------------------------------------------------------------
+
+// InstalledProgram
+
+// string name = 1;
+inline void InstalledProgram::clear_name() {
+  _impl_.name_.ClearToEmpty();
+}
+inline const std::string& InstalledProgram::name() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.InstalledProgram.name)
+  return _internal_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void InstalledProgram::set_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.InstalledProgram.name)
+}
+inline std::string* InstalledProgram::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.InstalledProgram.name)
+  return _s;
+}
+inline const std::string& InstalledProgram::_internal_name() const {
+  return _impl_.name_.Get();
+}
+inline void InstalledProgram::_internal_set_name(const std::string& value) {
+  
+  _impl_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* InstalledProgram::_internal_mutable_name() {
+  
+  return _impl_.name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* InstalledProgram::release_name() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.InstalledProgram.name)
+  return _impl_.name_.Release();
+}
+inline void InstalledProgram::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.InstalledProgram.name)
+}
+
+// string version = 2;
+inline void InstalledProgram::clear_version() {
+  _impl_.version_.ClearToEmpty();
+}
+inline const std::string& InstalledProgram::version() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.InstalledProgram.version)
+  return _internal_version();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void InstalledProgram::set_version(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.version_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.InstalledProgram.version)
+}
+inline std::string* InstalledProgram::mutable_version() {
+  std::string* _s = _internal_mutable_version();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.InstalledProgram.version)
+  return _s;
+}
+inline const std::string& InstalledProgram::_internal_version() const {
+  return _impl_.version_.Get();
+}
+inline void InstalledProgram::_internal_set_version(const std::string& value) {
+  
+  _impl_.version_.Set(value, GetArenaForAllocation());
+}
+inline std::string* InstalledProgram::_internal_mutable_version() {
+  
+  return _impl_.version_.Mutable(GetArenaForAllocation());
+}
+inline std::string* InstalledProgram::release_version() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.InstalledProgram.version)
+  return _impl_.version_.Release();
+}
+inline void InstalledProgram::set_allocated_version(std::string* version) {
+  if (version != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.version_.SetAllocated(version, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.version_.IsDefault()) {
+    _impl_.version_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.InstalledProgram.version)
+}
+
+// -------------------------------------------------------------------
+
+// InstalledProgramList
+
+// repeated .ProcessMetricas.InstalledProgram programs = 1;
+inline int InstalledProgramList::_internal_programs_size() const {
+  return _impl_.programs_.size();
+}
+inline int InstalledProgramList::programs_size() const {
+  return _internal_programs_size();
+}
+inline void InstalledProgramList::clear_programs() {
+  _impl_.programs_.Clear();
+}
+inline ::ProcessMetricas::InstalledProgram* InstalledProgramList::mutable_programs(int index) {
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.InstalledProgramList.programs)
+  return _impl_.programs_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProcessMetricas::InstalledProgram >*
+InstalledProgramList::mutable_programs() {
+  // @@protoc_insertion_point(field_mutable_list:ProcessMetricas.InstalledProgramList.programs)
+  return &_impl_.programs_;
+}
+inline const ::ProcessMetricas::InstalledProgram& InstalledProgramList::_internal_programs(int index) const {
+  return _impl_.programs_.Get(index);
+}
+inline const ::ProcessMetricas::InstalledProgram& InstalledProgramList::programs(int index) const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.InstalledProgramList.programs)
+  return _internal_programs(index);
+}
+inline ::ProcessMetricas::InstalledProgram* InstalledProgramList::_internal_add_programs() {
+  return _impl_.programs_.Add();
+}
+inline ::ProcessMetricas::InstalledProgram* InstalledProgramList::add_programs() {
+  ::ProcessMetricas::InstalledProgram* _add = _internal_add_programs();
+  // @@protoc_insertion_point(field_add:ProcessMetricas.InstalledProgramList.programs)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProcessMetricas::InstalledProgram >&
+InstalledProgramList::programs() const {
+  // @@protoc_insertion_point(field_list:ProcessMetricas.InstalledProgramList.programs)
+  return _impl_.programs_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

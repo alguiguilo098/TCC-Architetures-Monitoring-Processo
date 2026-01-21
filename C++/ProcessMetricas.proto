@@ -27,6 +27,22 @@ message ProcessMetricsList {
   repeated ProcessMetrics processes = 1;  
 };
 
+message KernelDistro {
+  string kernel_version = 1;              
+  string distro_name = 2;                 
+}
+
+// Mensagem que representa um programa instalado
+message InstalledProgram {
+  string name = 1;       // Nome do pacote/programa
+  string version = 2;    // Versão do pacote/programa
+}
+
+// Mensagem que representa a lista de todos os programas
+message InstalledProgramList {
+  repeated InstalledProgram programs = 1;  // Lista de programas
+}
+
 
 
 
