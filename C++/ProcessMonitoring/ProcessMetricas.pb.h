@@ -197,6 +197,9 @@ class ProcessMetrics final :
     kUserFieldNumber = 3,
     kTimestampFieldNumber = 4,
     kStatusFieldNumber = 5,
+    kBoottimeFieldNumber = 15,
+    kTimestartprocessFieldNumber = 16,
+    kHostipFieldNumber = 17,
     kPidFieldNumber = 1,
     kNumThreadsFieldNumber = 7,
     kCreateTimeFieldNumber = 6,
@@ -262,6 +265,48 @@ class ProcessMetrics final :
   const std::string& _internal_status() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(const std::string& value);
   std::string* _internal_mutable_status();
+  public:
+
+  // string boottime = 15;
+  void clear_boottime();
+  const std::string& boottime() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_boottime(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_boottime();
+  PROTOBUF_NODISCARD std::string* release_boottime();
+  void set_allocated_boottime(std::string* boottime);
+  private:
+  const std::string& _internal_boottime() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_boottime(const std::string& value);
+  std::string* _internal_mutable_boottime();
+  public:
+
+  // string timestartprocess = 16;
+  void clear_timestartprocess();
+  const std::string& timestartprocess() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_timestartprocess(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_timestartprocess();
+  PROTOBUF_NODISCARD std::string* release_timestartprocess();
+  void set_allocated_timestartprocess(std::string* timestartprocess);
+  private:
+  const std::string& _internal_timestartprocess() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_timestartprocess(const std::string& value);
+  std::string* _internal_mutable_timestartprocess();
+  public:
+
+  // string hostip = 17;
+  void clear_hostip();
+  const std::string& hostip() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_hostip(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_hostip();
+  PROTOBUF_NODISCARD std::string* release_hostip();
+  void set_allocated_hostip(std::string* hostip);
+  private:
+  const std::string& _internal_hostip() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_hostip(const std::string& value);
+  std::string* _internal_mutable_hostip();
   public:
 
   // int32 pid = 1;
@@ -366,6 +411,9 @@ class ProcessMetrics final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr boottime_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestartprocess_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
     int32_t pid_;
     int32_t num_threads_;
     double create_time_;
@@ -1442,6 +1490,156 @@ inline void ProcessMetrics::_internal_set_nice(int32_t value) {
 inline void ProcessMetrics::set_nice(int32_t value) {
   _internal_set_nice(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.nice)
+}
+
+// string boottime = 15;
+inline void ProcessMetrics::clear_boottime() {
+  _impl_.boottime_.ClearToEmpty();
+}
+inline const std::string& ProcessMetrics::boottime() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.boottime)
+  return _internal_boottime();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProcessMetrics::set_boottime(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.boottime_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.boottime)
+}
+inline std::string* ProcessMetrics::mutable_boottime() {
+  std::string* _s = _internal_mutable_boottime();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.boottime)
+  return _s;
+}
+inline const std::string& ProcessMetrics::_internal_boottime() const {
+  return _impl_.boottime_.Get();
+}
+inline void ProcessMetrics::_internal_set_boottime(const std::string& value) {
+  
+  _impl_.boottime_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::_internal_mutable_boottime() {
+  
+  return _impl_.boottime_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::release_boottime() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.boottime)
+  return _impl_.boottime_.Release();
+}
+inline void ProcessMetrics::set_allocated_boottime(std::string* boottime) {
+  if (boottime != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.boottime_.SetAllocated(boottime, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.boottime_.IsDefault()) {
+    _impl_.boottime_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.boottime)
+}
+
+// string timestartprocess = 16;
+inline void ProcessMetrics::clear_timestartprocess() {
+  _impl_.timestartprocess_.ClearToEmpty();
+}
+inline const std::string& ProcessMetrics::timestartprocess() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.timestartprocess)
+  return _internal_timestartprocess();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProcessMetrics::set_timestartprocess(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.timestartprocess_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.timestartprocess)
+}
+inline std::string* ProcessMetrics::mutable_timestartprocess() {
+  std::string* _s = _internal_mutable_timestartprocess();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.timestartprocess)
+  return _s;
+}
+inline const std::string& ProcessMetrics::_internal_timestartprocess() const {
+  return _impl_.timestartprocess_.Get();
+}
+inline void ProcessMetrics::_internal_set_timestartprocess(const std::string& value) {
+  
+  _impl_.timestartprocess_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::_internal_mutable_timestartprocess() {
+  
+  return _impl_.timestartprocess_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::release_timestartprocess() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.timestartprocess)
+  return _impl_.timestartprocess_.Release();
+}
+inline void ProcessMetrics::set_allocated_timestartprocess(std::string* timestartprocess) {
+  if (timestartprocess != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.timestartprocess_.SetAllocated(timestartprocess, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.timestartprocess_.IsDefault()) {
+    _impl_.timestartprocess_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.timestartprocess)
+}
+
+// string hostip = 17;
+inline void ProcessMetrics::clear_hostip() {
+  _impl_.hostip_.ClearToEmpty();
+}
+inline const std::string& ProcessMetrics::hostip() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.hostip)
+  return _internal_hostip();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProcessMetrics::set_hostip(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.hostip_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.hostip)
+}
+inline std::string* ProcessMetrics::mutable_hostip() {
+  std::string* _s = _internal_mutable_hostip();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.hostip)
+  return _s;
+}
+inline const std::string& ProcessMetrics::_internal_hostip() const {
+  return _impl_.hostip_.Get();
+}
+inline void ProcessMetrics::_internal_set_hostip(const std::string& value) {
+  
+  _impl_.hostip_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::_internal_mutable_hostip() {
+  
+  return _impl_.hostip_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::release_hostip() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.hostip)
+  return _impl_.hostip_.Release();
+}
+inline void ProcessMetrics::set_allocated_hostip(std::string* hostip) {
+  if (hostip != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.hostip_.SetAllocated(hostip, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.hostip_.IsDefault()) {
+    _impl_.hostip_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.hostip)
 }
 
 // -------------------------------------------------------------------

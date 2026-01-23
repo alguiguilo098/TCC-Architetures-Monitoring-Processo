@@ -4,7 +4,11 @@
 #include <string>
 #include <stdexcept>
 
-
+/**
+ * @brief Coleta o valor "nice" de um processo específico.
+ * @param metrics Referência ao objeto ProcessMetrics onde o valor será armazenado.
+ * @param pid ID do processo alvo.
+ */
 void Collection::get_metrics_nice(ProcessMetricas::ProcessMetrics &metrics, int pid){
     std::string stat_path = "/proc/" + std::to_string(pid) + "/stat";
     std::ifstream stat_file(stat_path);
@@ -26,7 +30,11 @@ void Collection::get_metrics_nice(ProcessMetricas::ProcessMetrics &metrics, int 
     metrics.set_nice(nice_value);
 
 }
-
+/**
+ * @brief Coleta o número de descritores de arquivo abertos por um processo específico.
+ * @param metrics Referência ao objeto ProcessMetrics onde o valor será armazenado.
+ * @param pid ID do processo alvo.
+ */
 void Collection::get_metrics_num_fds(ProcessMetricas::ProcessMetrics &metrics, int pid){
 
     std::string fd_path = "/proc/" + std::to_string(pid) + "/fd";
@@ -46,7 +54,11 @@ void Collection::get_metrics_num_fds(ProcessMetricas::ProcessMetrics &metrics, i
     metrics.set_num_fds(num_fds);
 }
 
-
+/**
+ * @brief Coleta a porcentagem de uso de CPU de um processo específico.
+ * @param metrics Referência ao objeto ProcessMetrics onde o valor será armazenado.
+ * @param pid ID do processo alvo.
+ */
 void Collection::get_metrics_cpu_percent(ProcessMetricas::ProcessMetrics &metrics, int pid) {
     try {
         // Monta o comando ps
@@ -86,7 +98,11 @@ void Collection::get_metrics_cpu_percent(ProcessMetricas::ProcessMetrics &metric
     }
 }
 
-
+/**
+ * @brief Coleta o número de processos filhos de um processo específico.
+ * @param metrics Referência ao objeto ProcessMetrics onde o valor será armazenado.
+ * @param pid ID do processo alvo.
+ */
 void Collection::get_metrics_num_child_processes(ProcessMetricas::ProcessMetrics &metrics, int pid){
     int num_children = 0;
     std::string task_path = "/proc/" + std::to_string(pid) + "/task";

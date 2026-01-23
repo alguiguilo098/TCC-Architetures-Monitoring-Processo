@@ -3,12 +3,16 @@
 int main(){
     try
     {
+        // Inicia o monitoramento do agente
         AgentMonitoring* agent = new AgentMonitoring(PATH_CONFIG);
+        // Start monitoring
         agent->start_monitoring();
+        // Cleanup
         delete agent;
     }
     catch(const std::exception& e)
     {
+        // Print any exceptions that occur
         std::cerr << e.what() << '\n';
     }
     

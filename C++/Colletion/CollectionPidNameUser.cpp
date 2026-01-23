@@ -5,13 +5,21 @@
 #include <string>
 #include <pwd.h>
 #include <sys/types.h>
-
+/**
+ * @brief Construtor da classe Collection que carrega a configuração do agente.
+ * @param config_path Caminho para o arquivo de configuração.
+*/
 Collection::Collection(std::string config_path)
 {
     LoadConfig(config_path, this->configAgent);
 }
 Collection::~Collection() {}
 
+/**
+ * @brief Coleta o PID do processo e o define no objeto ProcessMetrics.
+ * @param metrics Referência ao objeto ProcessMetrics onde o PID será armazenado.
+ * @param pid ID do processo alvo.
+ */
 void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
     metrics.set_pid(pid);
@@ -35,7 +43,11 @@ void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int 
         metrics.set_name("Unknown");
     }
 }
-
+/**
+ * @brief Coleta o timestamp atual e o define no objeto ProcessMetrics.
+ * @param metrics Referência ao objeto ProcessMetrics onde o timestamp será armazenado.
+ * @param pid ID do processo alvo.
+ */
 void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
     auto now = std::chrono::system_clock::now();

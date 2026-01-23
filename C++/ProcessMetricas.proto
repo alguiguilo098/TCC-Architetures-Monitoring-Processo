@@ -9,7 +9,7 @@ message ProcessMetrics {
   int32 pid = 1;                          
   string name = 2;                        
   string user = 3;                        
-  string timestamp = 4;                   
+  string timestamp = 4;
   string status = 5;                      
   double create_time = 6;                 
   int32 num_threads = 7;                  
@@ -20,7 +20,10 @@ message ProcessMetrics {
   uint64 write_bytes = 12;                
   int32 num_fds = 13;                     
   int32 nice = 14;
-
+  string boottime = 15;
+  string timestartprocess = 16;                   
+  string hostip= 17;
+  
 };
 
 message ProcessMetricsList {

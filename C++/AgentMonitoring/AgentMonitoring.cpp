@@ -1,6 +1,8 @@
 #include "AgentMonitoring.hpp"
 #include "../Scripts/Script.hpp"
 #include <filesystem>
+#define DEBUG_AGENT_MONITORING false
+
 void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &metrics)
 {
     collection->get_metrics_pid(metrics, pid);
@@ -11,6 +13,10 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_nice(metrics, pid);
     collection->get_metrics_num_fds(metrics, pid);
     collection->get_metrics_cpu_percent(metrics, pid);
+
+    this->mutexBuffer.lock();
+    this->BufferOutput.add_processes()->CopyFrom(metrics);
+    this->mutexBuffer.unlock();
 }
 
 void AgentMonitoring::monitor_kernel_distro(ProcessMetricas::KernelDistro &kernelDistro)
@@ -38,18 +44,21 @@ void AgentMonitoring::monitor_all_processes()
         size_t start_index = i * pids_per_thread;
         size_t end_index = std::min(start_index + pids_per_thread, total_pids);
 
-        threads.emplace_back([this, &pids, start_index, end_index]() {
+        threads.emplace_back([this, &pids, start_index, end_index]()
+                             {
             for (size_t j = start_index; j < end_index; ++j)
             {
                 ProcessMetricas::ProcessMetrics metrics;
                 monitor_process(pids[j], metrics);
+
                 // Aqui você pode armazenar ou processar os dados coletados conforme necessário
-            }
-        });
+            } });
     }
 
-    for (auto &thread : threads) {
-        if (thread.joinable()) {
+    for (auto &thread : threads)
+    {
+        if (thread.joinable())
+        {
             thread.join();
         }
     }
@@ -58,7 +67,7 @@ namespace fs = std::filesystem;
 
 void AgentMonitoring::get_all_pids(std::vector<int> &pids)
 {
-    for (const auto & entry : fs::directory_iterator("/proc"))
+    for (const auto &entry : fs::directory_iterator("/proc"))
     {
         if (entry.is_directory())
         {
@@ -75,8 +84,10 @@ void AgentMonitoring::get_all_pids(std::vector<int> &pids)
 AgentMonitoring::AgentMonitoring(std::string config_path)
 {
     this->collection = new Collection(config_path);
+    this->programList = ProcessMetricas::InstalledProgramList();
+    this->kernelDistro = ProcessMetricas::KernelDistro();
+    this->last_monitor_time = std::chrono::steady_clock::now();
     load_config(config_path);
-
 }
 
 AgentMonitoring::~AgentMonitoring()
@@ -86,18 +97,47 @@ AgentMonitoring::~AgentMonitoring()
 void AgentMonitoring::load_config(std::string config_path)
 {
     LoadConfig(config_path, this->configAgent);
-
+}
+bool has_time_passed(
+    const std::chrono::steady_clock::time_point &last_time,
+    std::chrono::seconds interval)
+{
+    return (std::chrono::steady_clock::now() - last_time) >= interval;
 }
 
 void AgentMonitoring::start_monitoring()
 {
+
     while (true)
     {
         monitor_all_processes();
-        ProcessMetricas::KernelDistro kernelDistro;
-        monitor_kernel_distro(kernelDistro);
-        ProcessMetricas::InstalledProgramList programList;
-        monitor_installed_programs(programList);
-        std::this_thread::sleep_for(std::chrono::hours(this->configAgent.TruePeriodicScriptHours));
+        if (has_time_passed(
+                this->last_monitor_time,
+                std::chrono::hours(this->configAgent.TruePeriodicScriptHours)))
+        {
+            monitor_kernel_distro(kernelDistro);
+            monitor_installed_programs(programList);
+            auto now_sys = std::chrono::system_clock::now();
+            std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
+
+            std::cout << "[Periodic Script] "
+                      << std::put_time(std::localtime(&now_time), "%H:%M:%S")
+                      << " Executed periodic scripts."
+                      << std::endl;
+
+            this->last_monitor_time = std::chrono::steady_clock::now();
+        }
+
+        std::this_thread::sleep_for(std::chrono::seconds(this->configAgent.TimeSpleepBetweenReads));
+#if DEBUG_AGENT_MONITORING
+        std::cout << "Buffer Output Size: " << this->BufferOutput.processes_size() << std::endl;
+        std::cout << "Buffer Input Size: " << this->BufferInput.processes_size() << std::endl;
+
+        std::cout << "Kernel Distro: " << this->kernelDistro.kernel_version() << " - " << this->kernelDistro.distro_name() << std::endl;
+        std::cout << "Installed Programs Count: " << this->programList.programs_size() << std::endl;
+
+        std::cout << std::endl;
+
+#endif
     }
 }
