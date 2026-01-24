@@ -1,7 +1,9 @@
 #include "AgentMonitoring.hpp"
 #include "../Scripts/Script.hpp"
 #include <filesystem>
-#define DEBUG_AGENT_MONITORING false
+#include <iostream>
+#include <iomanip>
+#define DEBUG_AGENT_MONITORING true
 
 void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &metrics)
 {
@@ -13,6 +15,11 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_nice(metrics, pid);
     collection->get_metrics_num_fds(metrics, pid);
     collection->get_metrics_cpu_percent(metrics, pid);
+    collection->get_metrics_num_threads(metrics, pid);
+    collection->get_metrics_num_child_processes(metrics, pid);
+    collection->get_host_ip(metrics);
+    collection->get_metrics_boottime(metrics);
+    collection->get_metrics_num_threads(metrics, pid);
 
     this->mutexBuffer.lock();
     this->BufferOutput.add_processes()->CopyFrom(metrics);
@@ -110,34 +117,33 @@ void AgentMonitoring::start_monitoring()
 
     while (true)
     {
-        monitor_all_processes();
+        auto now_sys_agent = std::chrono::system_clock::now();
+        std::time_t now_time_now = std::chrono::system_clock::to_time_t(now_sys_agent);
         if (has_time_passed(
-                this->last_monitor_time,
-                std::chrono::hours(this->configAgent.TruePeriodicScriptHours)))
-        {
-            monitor_kernel_distro(kernelDistro);
-            monitor_installed_programs(programList);
-            auto now_sys = std::chrono::system_clock::now();
-            std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
-
-            std::cout << "[Periodic Script] "
-                      << std::put_time(std::localtime(&now_time), "%H:%M:%S")
-                      << " Executed periodic scripts."
-                      << std::endl;
-
-            this->last_monitor_time = std::chrono::steady_clock::now();
-        }
-
+            this->last_monitor_time,
+            std::chrono::hours(this->configAgent.TruePeriodicScriptHours)))
+            {
+                monitor_kernel_distro(kernelDistro);
+                monitor_installed_programs(programList);
+                auto now_sys = std::chrono::system_clock::now();
+                std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
+                
+                std::cout << "[Periodic Script] "
+                << std::put_time(std::localtime(&now_time), "%H:%M:%S")
+                << " Executed periodic scripts."
+                << std::endl;
+                
+                this->last_monitor_time = std::chrono::steady_clock::now();
+            }
+            
+        monitor_all_processes();
+        
+        std::cout << "[Agent Monitoring] "<<std::put_time(std::localtime(&now_time_now), "%H:%M:%S")<<" Collected metrics for all processes." << std::endl;
+        
+        this->mutexBuffer.lock();
+        WriteProcessMetricsToFile(this->BufferOutput, "process_metrics_output.json");
+        this->mutexBuffer.unlock();
         std::this_thread::sleep_for(std::chrono::seconds(this->configAgent.TimeSpleepBetweenReads));
-#if DEBUG_AGENT_MONITORING
-        std::cout << "Buffer Output Size: " << this->BufferOutput.processes_size() << std::endl;
-        std::cout << "Buffer Input Size: " << this->BufferInput.processes_size() << std::endl;
 
-        std::cout << "Kernel Distro: " << this->kernelDistro.kernel_version() << " - " << this->kernelDistro.distro_name() << std::endl;
-        std::cout << "Installed Programs Count: " << this->programList.programs_size() << std::endl;
-
-        std::cout << std::endl;
-
-#endif
     }
 }

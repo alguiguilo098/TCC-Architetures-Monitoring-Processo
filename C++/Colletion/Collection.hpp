@@ -16,6 +16,9 @@ class Collection {
         void get_metrics_status(ProcessMetricas::ProcessMetrics& metrics, int pid);
         void get_metrics_create_time(ProcessMetricas::ProcessMetrics& metrics,  int pid);
         void get_metrics_num_threads(ProcessMetricas::ProcessMetrics& metrics, int pid);
+        void get_host_ip(ProcessMetricas::ProcessMetrics& metrics);
+        void get_metrics_boottime(ProcessMetricas::ProcessMetrics& metrics);
+        void get_metrics_time_start_process(ProcessMetricas::ProcessMetrics& metrics, int pid);
         void get_metrics_cpu_percent(ProcessMetricas::ProcessMetrics& metrics, int pid);
         void get_metrics_num_child_processes(ProcessMetricas::ProcessMetrics& metrics, int pid);
         void get_metrics_memory_percent(ProcessMetricas::ProcessMetrics& metrics, int pid);

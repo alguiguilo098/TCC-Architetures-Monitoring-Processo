@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <cstdio>
+#include <google/protobuf/util/json_util.h>
 
 void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro){
     // Coleta a versão do kernel
@@ -54,4 +55,19 @@ void collectionInstalledPrograms(ProcessMetricas::InstalledProgramList &programL
     }
 
     pclose(pipe);
-};
+}
+void WriteProcessMetricsToFile(
+    const ProcessMetricas::ProcessMetricsList& metricsList,
+    const std::string& filename
+) {
+    std::string json;
+    google::protobuf::util::MessageToJsonString(metricsList, &json);
+
+    std::ofstream out(filename, std::ios::out | std::ios::trunc);
+    if (!out.is_open()) {
+        throw std::runtime_error("Não foi possível abrir o arquivo: " + filename);
+    }
+
+    out << json;
+    out.close();
+}
