@@ -8,7 +8,7 @@
 /**
  * @brief Construtor da classe Collection que carrega a configuração do agente.
  * @param config_path Caminho para o arquivo de configuração.
-*/
+ */
 Collection::Collection(std::string config_path)
 {
     LoadConfig(config_path, this->configAgent);
@@ -28,7 +28,7 @@ void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics &metrics, int p
  * @brief Coleta o nome do processo a partir do arquivo /proc/[pid]/comm
  * @param metrics Referência ao objeto ProcessMetrics onde o nome será armazenado
  * @param pid ID do processo cujo nome será coletado
-*/
+ */
 void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
     std::ifstream status_file("/proc/" + std::to_string(pid) + "/comm");
@@ -61,7 +61,8 @@ void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics,
  * @param metrics Referência ao objeto ProcessMetrics onde o nome do usuário será armazenado
  * @param pid ID do processo cujo nome do usuário será coletado
  */
-void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int pid){
+void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     // Abrir o arquivo /proc/<pid>/status
     std::ifstream status_file("/proc/" + std::to_string(pid) + "/status");
     if (!status_file.is_open())
@@ -131,17 +132,33 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, in
         field++;
     }
 
-    // Traduzir status do Linux para algo legível
-    if (status == "R")
-        metrics.set_status("Running");
-    else if (status == "S")
-        metrics.set_status("Sleeping");
-    else if (status == "D")
-        metrics.set_status("Uninterruptible sleep");
-    else if (status == "Z")
-        metrics.set_status("Zombie");
-    else if (status == "T")
-        metrics.set_status("Stopped");
-    else
-        metrics.set_status("Unknown");
+    metrics.set_status(status);
+}
+
+void Collection::get_metrics_create_time(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
+    std::ifstream stat_file("/proc/" + std::to_string(pid) + "/stat");
+    if (!stat_file.is_open())
+    {
+        metrics.set_create_time(0);
+        return;
+    }
+
+    std::string line;
+    std::getline(stat_file, line);
+    std::istringstream iss(line);
+    std::string token;
+    int field = 1;
+    long long int starttime = 0;
+    while (iss >> token)
+    {
+        if (field == 22)
+        { // 22º campo é o starttime
+            starttime = std::stoll(token);
+            break;
+        }
+        field++;
+    }
+
+    metrics.set_create_time(starttime);
 }

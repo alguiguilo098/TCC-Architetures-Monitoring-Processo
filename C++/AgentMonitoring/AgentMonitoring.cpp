@@ -7,20 +7,29 @@
 
 void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &metrics)
 {
+    // Coleta as métricas do processo usando a classe Collection
     collection->get_metrics_pid(metrics, pid);
     collection->get_metrics_name(metrics, pid);
     collection->get_metrics_user(metrics, pid);
+
+    // Coleta o status do processo
     collection->get_metrics_status(metrics, pid);
     collection->get_metrics_timestamp(metrics, pid);
     collection->get_metrics_nice(metrics, pid);
+
+    // Coleta métricas de E/S e memória
     collection->get_metrics_num_fds(metrics, pid);
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_num_threads(metrics, pid);
+    // Coleta as métricas adicionais
     collection->get_metrics_num_child_processes(metrics, pid);
     collection->get_host_ip(metrics);
-    collection->get_metrics_boottime(metrics);
-    collection->get_metrics_num_threads(metrics, pid);
 
+    
+    collection->get_metrics_boottime(metrics);
+    
+
+    
     this->mutexBuffer.lock();
     this->BufferOutput.add_processes()->CopyFrom(metrics);
     this->mutexBuffer.unlock();
