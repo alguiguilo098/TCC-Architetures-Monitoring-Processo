@@ -6,22 +6,30 @@ package ProcessMetricas;
 
 
 message ProcessMetrics {
+  // Campos básicos do processo
   int32 pid = 1;                          
   string name = 2;                        
   string user = 3;                        
-  string timestamp = 4;
-  string status = 5;                      
-  double create_time = 6;                 
+  string status = 5;
+  
+  // Campos adicionais do processo                 
   int32 num_threads = 7;                  
   float cpu_percent = 8;                  
   int32 num_child_processes = 9;           
-  float memory_percent = 10;               
+  float memory_percent = 10;
+  
+  // Campos de I/O e FDs
   uint64 read_bytes = 11;                
   uint64 write_bytes = 12;                
   int32 num_fds = 13;                     
   int32 nice = 14;
+
+  // Campos de timestamp, boottime, timestartprocess
+  string timestamp = 4;
   string boottime = 15;
-  string timestartprocess = 16;                   
+  string timestartprocess = 16;
+   
+  // Campo para o IP do host                  
   string hostip= 17;
   
 };

@@ -24,12 +24,13 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_num_child_processes(metrics, pid);
     collection->get_metrics_read_bytes(metrics, pid);
     collection->get_metrics_write_bytes(metrics, pid);
-
+    collection->get_metrics_create_time(metrics, pid);
+    
     // Coleta métricas de E/S e memória
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_memory_percent(metrics, pid);
 
-    // Coleta as métricas adicionais
+    
 
     // Coleta o tempo de atividade do processo
 

@@ -5,6 +5,8 @@
 #include <string>
 #include <pwd.h>
 #include <sys/types.h>
+#include <unistd.h>
+#include <iomanip>
 /**
  * @brief Construtor da classe Collection que carrega a configuração do agente.
  * @param config_path Caminho para o arquivo de configuração.
@@ -53,7 +55,7 @@ void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics,
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
     std::string timestamp = std::ctime(&now_c);
-    timestamp.erase(timestamp.find_last_not_of(" \n\r\t")+1);
+    timestamp.erase(timestamp.find_last_not_of(" \n\r\t") + 1);
     metrics.set_timestamp(timestamp);
 }
 
@@ -136,30 +138,68 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, in
     metrics.set_status(status);
 }
 
+/**
+ * @brief Coleta o tempo de criação do processo a partir do arquivo /proc/[pid]/stat
+ * @param metrics Referência ao objeto ProcessMetrics onde o tempo de criação será armazenado
+ * @param pid ID do processo cujo tempo de criação será coletado
+ */
 void Collection::get_metrics_create_time(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
     std::ifstream stat_file("/proc/" + std::to_string(pid) + "/stat");
     if (!stat_file.is_open())
     {
-        metrics.set_create_time(0);
+        metrics.set_timestartprocess("");
         return;
     }
 
     std::string line;
     std::getline(stat_file, line);
     std::istringstream iss(line);
+
     std::string token;
     int field = 1;
-    long long int starttime = 0;
+    long long starttime_jiffies = 0;
+
     while (iss >> token)
     {
         if (field == 22)
-        { // 22º campo é o starttime
-            starttime = std::stoll(token);
+        { // starttime
+            starttime_jiffies = std::stoll(token);
             break;
         }
         field++;
     }
 
-    metrics.set_create_time(starttime);
+    // Jiffies por segundo
+    long hertz = sysconf(_SC_CLK_TCK);
+
+    // Converte jiffies → segundos desde o boot
+    double seconds_after_boot =
+        static_cast<double>(starttime_jiffies) / hertz;
+
+    // Lê uptime
+    std::ifstream uptime_file("/proc/uptime");
+    double uptime = 0.0;
+    uptime_file >> uptime;
+
+    // Tempo atual
+    std::time_t now = std::time(nullptr);
+
+    // Calcula boot time real
+    std::time_t boot_time =
+        now - static_cast<std::time_t>(uptime);
+
+    // Tempo real de criação do processo
+    std::time_t process_start_time =
+        boot_time + static_cast<std::time_t>(seconds_after_boot);
+
+    // Converte para tm
+    std::tm tm = *std::localtime(&process_start_time);
+
+    // Formata exatamente:
+    // Tue Jan 27 18:27:56 2026
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%a %b %d %H:%M:%S %Y");
+
+    metrics.set_timestartprocess(oss.str());
 }
