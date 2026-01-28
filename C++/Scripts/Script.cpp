@@ -71,3 +71,31 @@ void WriteProcessMetricsToFile(
     out << json;
     out.close();
 }
+
+void WriteKernelDistroToFile(const ProcessMetricas::KernelDistro &kernelDistro, const std::string &filename)
+{
+    std::string json;
+    google::protobuf::util::MessageToJsonString(kernelDistro, &json);
+
+    std::ofstream out(filename, std::ios::out | std::ios::trunc);
+    if (!out.is_open()) {
+        throw std::runtime_error("Não foi possível abrir o arquivo: " + filename);
+    }
+
+    out << json;
+    out.close();
+}
+
+void WriteInstalledProgramsToFile(const ProcessMetricas::InstalledProgramList &programList, const std::string &filename)
+{
+    std::string json;
+    google::protobuf::util::MessageToJsonString(programList, &json);
+
+    std::ofstream out(filename, std::ios::out | std::ios::trunc);
+    if (!out.is_open()) {
+        throw std::runtime_error("Não foi possível abrir o arquivo: " + filename);
+    }
+
+    out << json;
+    out.close();
+}

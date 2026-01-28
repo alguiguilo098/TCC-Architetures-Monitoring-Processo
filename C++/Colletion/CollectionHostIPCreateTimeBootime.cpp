@@ -77,7 +77,7 @@ void Collection::get_metrics_boottime(ProcessMetricas::ProcessMetrics &metrics)
                 std::tm tm = *std::localtime(&t); // converte para horário local
 
                 std::ostringstream oss;
-                oss << std::put_time(&tm, "%A, %d %B %Y %H:%M:%S");
+                oss << std::put_time(&tm, "%a  %b %d  %H:%M:%S %Y");
                 // Exemplo de saída: "Saturday, 25 January 2026 23:45:12"
 
                 metrics.set_boottime(oss.str());

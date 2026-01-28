@@ -10,26 +10,28 @@
 /// @param metrics Estrutura onde as métricas coletadas serão armazenadas
 void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &metrics)
 {
-    // Coleta as métricas do processo usando a classe Collection
+    // Corretas
     collection->get_metrics_pid(metrics, pid);
     collection->get_metrics_name(metrics, pid);
     collection->get_metrics_user(metrics, pid);
-
-    // Coleta o status do processo
-    collection->get_metrics_status(metrics, pid);
+    collection->get_host_ip(metrics);
     collection->get_metrics_timestamp(metrics, pid);
+    collection->get_metrics_num_fds(metrics, pid);
     collection->get_metrics_nice(metrics, pid);
+    collection->get_metrics_status(metrics, pid);
+    collection->get_metrics_boottime(metrics);
+    collection->get_metrics_num_threads(metrics, pid);
+    collection->get_metrics_num_child_processes(metrics, pid);
+    collection->get_metrics_read_bytes(metrics, pid);
+    collection->get_metrics_write_bytes(metrics, pid);
 
     // Coleta métricas de E/S e memória
-    collection->get_metrics_num_fds(metrics, pid);
     collection->get_metrics_cpu_percent(metrics, pid);
-    collection->get_metrics_num_threads(metrics, pid);
+    collection->get_metrics_memory_percent(metrics, pid);
+
     // Coleta as métricas adicionais
-    collection->get_metrics_num_child_processes(metrics, pid);
-    collection->get_host_ip(metrics);
 
     // Coleta o tempo de atividade do processo
-    collection->get_metrics_boottime(metrics);
 
     this->mutexBuffer.lock();
     // Adiciona as métricas coletadas ao buffer de saída
@@ -149,22 +151,24 @@ void AgentMonitoring::start_monitoring()
                       << std::put_time(std::localtime(&now_time), "%H:%M:%S")
                       << " Executed periodic scripts."
                       << std::endl;
-
+            WriteKernelDistroToFile(this->kernelDistro, "kernel_distro_data.json");
+            WriteInstalledProgramsToFile(this->programList, "installed_programs_data.json");
             this->last_monitor_time = std::chrono::steady_clock::now();
         }
 
         if (this->BufferOutput.processes_size() < this->configAgent.BufferSize)
         {
-            std::cout << "[Agent Monitoring] " 
-            << std::put_time(std::localtime(&now_time_now), "%H:%M:%S") 
-            << " First data collection." 
-            << this->BufferOutput.processes_size() << std::endl;
+            std::cout << "[Agent Monitoring] "
+                      << std::put_time(std::localtime(&now_time_now), "%H:%M:%S")
+                      << " First data collection."
+                      << this->BufferOutput.processes_size() << std::endl;
             monitor_all_processes();
         }
         else
         {
             std::cout << "[Agent Monitoring] " << std::put_time(std::localtime(&now_time_now), "%H:%M:%S") << " Subsequent data collection." << std::endl;
             this->BufferInput.Swap(&this->BufferOutput);
+            WriteProcessMetricsToFile(this->BufferInput, "process_metrics_data.json");
             this->BufferOutput.Clear();
             sem_post(&this->semaphoreBuffer);
         }
@@ -175,7 +179,6 @@ void AgentMonitoring::start_monitoring()
 
 void AgentMonitoring::strart_sending_data_server()
 {
-
 
     while (true)
     {

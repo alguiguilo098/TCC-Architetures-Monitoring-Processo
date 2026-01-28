@@ -9,34 +9,42 @@
  * @param metrics Referência ao objeto ProcessMetrics onde o valor será armazenado.
  * @param pid ID do processo alvo.
  */
-void Collection::get_metrics_memory_percent(ProcessMetricas::ProcessMetrics& metrics, int pid) {
-    std::ifstream statm_file("/proc/" + std::to_string(pid) + "/statm");
-    if (!statm_file.is_open()) {
-        metrics.set_memory_percent(0.0f);
-        return;
-    }
+void Collection::get_metrics_memory_percent(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
+    try
+    {
+        std::string cmd = "ps -p " + std::to_string(pid) + " -o %mem=";
 
-    long total_program_pages = 0, resident_pages = 0;
-    statm_file >> total_program_pages >> resident_pages;
-
-    long page_size_kb = sysconf(_SC_PAGESIZE) / 1024; // tamanho da página em KB
-    long rss_kb = resident_pages * page_size_kb;
-
-    // Pegando memória total do sistema
-    std::ifstream meminfo("/proc/meminfo");
-    std::string line;
-    long mem_total_kb = 1; // default para evitar divisão por zero
-    while (std::getline(meminfo, line)) {
-        if (line.find("MemTotal:") == 0) {
-            std::istringstream iss(line);
-            std::string label;
-            iss >> label >> mem_total_kb; // valor já em KB
-            break;
+        FILE *pipe = popen(cmd.c_str(), "r");
+        if (!pipe)
+        {
+            metrics.set_memory_percent(0.0f);
+            return;
         }
-    }
 
-    float mem_percent = (static_cast<float>(rss_kb) / mem_total_kb) * 100.0f;
-    metrics.set_memory_percent(mem_percent);
+        char buffer[128];
+        std::string result;
+
+        if (fgets(buffer, sizeof(buffer), pipe) != nullptr)
+        {
+            result = buffer;
+        }
+
+        pclose(pipe);
+
+        if (result.empty())
+        {
+            metrics.set_memory_percent(0.0f);
+            return;
+        }
+
+        float mem_percent = std::stof(result);
+        metrics.set_memory_percent(mem_percent);
+    }
+    catch (...)
+    {
+        metrics.set_memory_percent(0.0f);
+    }
 }
 
 /**
@@ -45,16 +53,20 @@ void Collection::get_metrics_memory_percent(ProcessMetricas::ProcessMetrics& met
  * @param pid ID do processo alvo.
  */
 
-void Collection::get_metrics_read_bytes(ProcessMetricas::ProcessMetrics& metrics, int pid) {
+void Collection::get_metrics_read_bytes(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     std::ifstream io_file("/proc/" + std::to_string(pid) + "/io");
-    if (!io_file.is_open()) {
+    if (!io_file.is_open())
+    {
         metrics.set_read_bytes(0);
         return;
     }
 
     std::string line;
-    while (std::getline(io_file, line)) {
-        if (line.find("read_bytes:") == 0) {
+    while (std::getline(io_file, line))
+    {
+        if (line.find("read_bytes:") == 0)
+        {
             std::istringstream iss(line);
             std::string label;
             uint64_t read_bytes;
@@ -72,16 +84,20 @@ void Collection::get_metrics_read_bytes(ProcessMetricas::ProcessMetrics& metrics
  * @param metrics Referência ao objeto ProcessMetrics onde o valor será armazenado.
  * @param pid ID do processo alvo.
  */
-void Collection::get_metrics_write_bytes(ProcessMetricas::ProcessMetrics& metrics, int pid) {
+void Collection::get_metrics_write_bytes(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
     std::ifstream io_file("/proc/" + std::to_string(pid) + "/io");
-    if (!io_file.is_open()) {
+    if (!io_file.is_open())
+    {
         metrics.set_write_bytes(0);
         return;
     }
 
     std::string line;
-    while (std::getline(io_file, line)) {
-        if (line.find("write_bytes:") == 0) {
+    while (std::getline(io_file, line))
+    {
+        if (line.find("write_bytes:") == 0)
+        {
             std::istringstream iss(line);
             std::string label;
             uint64_t write_bytes;

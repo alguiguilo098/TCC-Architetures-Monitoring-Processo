@@ -53,6 +53,7 @@ void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics,
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
     std::string timestamp = std::ctime(&now_c);
+    timestamp.erase(timestamp.find_last_not_of(" \n\r\t")+1);
     metrics.set_timestamp(timestamp);
 }
 
