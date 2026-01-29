@@ -1,6 +1,10 @@
 #include "AgentMonitoring/AgentMonitoring.hpp"
 #include <thread>
 #define PATH_CONFIG "/home/galmeidalopes/TCC-Architetures-Monitoring-Processo/C++/confagent.conf"
+
+// Descrição: Ponto de entrada principal do programa de monitoramento de processos
+// Nome: Guilherme Almeida Lopes
+// Data: 2025-01-29
 int main(){
     try
     {
@@ -8,6 +12,7 @@ int main(){
         AgentMonitoring* agent = new AgentMonitoring(PATH_CONFIG);
         // Start monitoring
         std::thread monitoring_thread(&AgentMonitoring::start_monitoring, agent);
+        // Start server sending data thread
         std::thread server_send_thread(&AgentMonitoring::strart_sending_data_server,agent);
         
         monitoring_thread.join();

@@ -3,8 +3,6 @@
 #include "../ProcessMonitoring/ProcessMetricas.pb.h"
 
 class Collection {
-    private:
-    
     public:
         ~Collection();
         Config configAgent;

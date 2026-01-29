@@ -36,12 +36,14 @@ void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int 
     std::ifstream status_file("/proc/" + std::to_string(pid) + "/comm");
     if (status_file.is_open())
     {
+        // Lê o nome do processo
         std::string name;
         std::getline(status_file, name);
         metrics.set_name(name);
     }
     else
     {
+        // Caso não consiga abrir o arquivo, definir nome como "Unknown"
         metrics.set_name("Unknown");
     }
 }
@@ -52,9 +54,12 @@ void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int 
  */
 void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
+    // Obtém o tempo atual.
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
+    // Converte para string.
     std::string timestamp = std::ctime(&now_c);
+    // Remove espaços em branco e nova linha.
     timestamp.erase(timestamp.find_last_not_of(" \n\r\t") + 1);
     metrics.set_timestamp(timestamp);
 }
@@ -70,10 +75,12 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
     std::ifstream status_file("/proc/" + std::to_string(pid) + "/status");
     if (!status_file.is_open())
     {
+        // Caso não consiga abrir o arquivo, definir usuário como "Unknown"
         metrics.set_user("Unknown");
         return;
     }
 
+    // Ler o arquivo linha por linha para encontrar a linha "Uid:"
     std::string line;
     while (std::getline(status_file, line))
     {
@@ -91,10 +98,12 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
             struct passwd *pw = getpwuid(uid_real);
             if (pw)
             {
+                // Definir o nome do usuário no objeto metrics
                 metrics.set_user(std::string(pw->pw_name));
             }
             else
             {
+                // Caso não consiga converter, definir como "Unknown"
                 metrics.set_user("Unknown");
             }
             return;
@@ -102,7 +111,7 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
     }
 
     // Caso a linha "Uid:" não seja encontrada
-    metrics.set_user("Unknown");
+    metrics.set_user("");
 }
 
 /**
@@ -112,29 +121,53 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
  */
 void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
+    // Abrir o arquivo /proc/<pid>/stat
     std::ifstream stat_file("/proc/" + std::to_string(pid) + "/stat");
     if (!stat_file.is_open())
     {
-        metrics.set_status("Unknown");
+        // Caso não consiga abrir o arquivo, definir status como "Unknown"
+        metrics.set_status("");
         return;
     }
 
+    // Ler o conteúdo do arquivo
     std::string line;
     std::getline(stat_file, line);
+
+    // Analisar a linha para extrair o status (3º campo)
     std::istringstream iss(line);
     std::string token;
     int field = 1;
     std::string status;
+    
     while (iss >> token)
     {
+        // O campo do status pode estar entre parênteses, então precisamos lidar com isso
         if (field == 3)
         { // 3º campo é o estado
             status = token;
             break;
         }
         field++;
-    }
 
+    }
+    if (status =="Z")
+    {
+        // Zombie
+        metrics.set_status("Zombie");
+        return;
+    }else if (status == "S")
+    {
+        // Sleeping
+        metrics.set_status("Sleeping");
+        return;
+    }else if (status == "R")
+    {
+        // Running
+        metrics.set_status("Running");
+        return;
+    }
+    // Definir o status no objeto metrics
     metrics.set_status(status);
 }
 

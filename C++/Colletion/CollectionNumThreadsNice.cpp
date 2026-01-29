@@ -25,6 +25,7 @@ void Collection::get_metrics_nice(ProcessMetricas::ProcessMetrics &metrics, int 
     for (int i = 0; i < 18; ++i) {
         iss >> token;
     }
+    // Ler o 19º campo (valor "nice")
     int nice_value;
     iss >> nice_value; // O 19º campo é o valor "nice"
     metrics.set_nice(nice_value);
@@ -36,7 +37,7 @@ void Collection::get_metrics_nice(ProcessMetricas::ProcessMetrics &metrics, int 
  * @param pid ID do processo alvo.
  */
 void Collection::get_metrics_num_fds(ProcessMetricas::ProcessMetrics &metrics, int pid){
-
+    // Lê o diretório /proc/[pid]/fd para contar os descritores de arquivo abertos
     std::string fd_path = "/proc/" + std::to_string(pid) + "/fd";
     int num_fds = 0;
     DIR* dir = opendir(fd_path.c_str());
@@ -105,6 +106,7 @@ void Collection::get_metrics_cpu_percent(ProcessMetricas::ProcessMetrics &metric
  */
 void Collection::get_metrics_num_child_processes(ProcessMetricas::ProcessMetrics &metrics, int pid){
     int num_children = 0;
+    // Lê o diretório /proc/[pid]/task para contar os threads (processos filhos)
     std::string task_path = "/proc/" + std::to_string(pid) + "/task";
     DIR* dir = opendir(task_path.c_str());
     if (dir == nullptr) {

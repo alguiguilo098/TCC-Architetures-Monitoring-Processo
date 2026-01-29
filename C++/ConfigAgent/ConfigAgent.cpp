@@ -4,6 +4,12 @@
 #include <algorithm>
 #include "ConfigAgent.hpp"
 
+// Descrição: Função para carregar a configuração do agente a partir de um arquivo
+// Nome: Guilherme Almeida Lopes
+// Data: 2025-01-29
+
+// Helper function to trim whitespace from both ends of a string
+// Used in LoadConfig function
 static inline std::string trim(std::string s)
 {
     // Remove leading and trailing whitespace
@@ -15,7 +21,8 @@ static inline std::string trim(std::string s)
 
     return s;
 }
-
+// Function to load configuration from a file into a Config struct
+/// Expects the file to have key=value pairs, one per line
 void LoadConfig(const std::string& filename, Config& config)
 {
     // Open the configuration file

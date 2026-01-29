@@ -4,7 +4,12 @@
 #include <string>
 #include <cstdio>
 #include <google/protobuf/util/json_util.h>
+// Descrição: Implementação das funções de script para coleta de métricas, e funções de escrita em arquivos para debug
+// Nome: Guilherme Almeida Lopes
+// Data: 2025-01-29
 
+/// @brief  Coleta informações sobre a distribuição do kernel
+/// @param kernelDistro 
 void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro){
     // Coleta a versão do kernel
     std::ifstream version_file("/proc/version");
@@ -32,6 +37,9 @@ void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro){
         kernelDistro.set_distro_name("Unknown");
     }
 };
+
+/// @brief Coleta informações sobre os programas instalados
+/// @param programList lista de programas instalados
 void collectionInstalledPrograms(ProcessMetricas::InstalledProgramList &programList){
     // Comando para listar programas instalados (Debian/Ubuntu)
     std::string cmd = "dpkg-query -W -f='${Package} ${Version}\n'";
@@ -56,46 +64,63 @@ void collectionInstalledPrograms(ProcessMetricas::InstalledProgramList &programL
 
     pclose(pipe);
 }
+
+/// @brief Escreve as métricas de processos coletadas em um arquivo JSON
+/// @param metricsList Lista de métricas de processos
+/// @param filename Nome do arquivo de saída
 void WriteProcessMetricsToFile(
     const ProcessMetricas::ProcessMetricsList& metricsList,
     const std::string& filename
 ) {
+    // Converte a mensagem Protobuf para JSON
     std::string json;
     google::protobuf::util::MessageToJsonString(metricsList, &json);
 
+    // Escreve o JSON em um arquivo
     std::ofstream out(filename, std::ios::out | std::ios::trunc);
     if (!out.is_open()) {
         throw std::runtime_error("Não foi possível abrir o arquivo: " + filename);
     }
 
+    // Write JSON string to file
     out << json;
     out.close();
 }
-
+/// @brief Escreve as informações da distribuição do kernel em um arquivo JSON
+/// @param kernelDistro Informações da distribuição do kernel
+/// @param filename Nome do arquivo de saída
 void WriteKernelDistroToFile(const ProcessMetricas::KernelDistro &kernelDistro, const std::string &filename)
 {
+    // Converte a mensagem Protobuf para JSON
     std::string json;
     google::protobuf::util::MessageToJsonString(kernelDistro, &json);
 
+    // Escreve o JSON em um arquivo
     std::ofstream out(filename, std::ios::out | std::ios::trunc);
     if (!out.is_open()) {
         throw std::runtime_error("Não foi possível abrir o arquivo: " + filename);
     }
 
+    // Write JSON string to file
     out << json;
     out.close();
 }
-
+/// @brief  Escreve as informações dos programas instalados em um arquivo JSON
+/// @param programList Lista de programas instalados
+/// @param filename file Nome do arquivo de saída
 void WriteInstalledProgramsToFile(const ProcessMetricas::InstalledProgramList &programList, const std::string &filename)
 {
+    // Converte a mensagem Protobuf para JSON
     std::string json;
     google::protobuf::util::MessageToJsonString(programList, &json);
 
+    // Write JSON string to file
     std::ofstream out(filename, std::ios::out | std::ios::trunc);
     if (!out.is_open()) {
         throw std::runtime_error("Não foi possível abrir o arquivo: " + filename);
     }
 
+    // Write JSON string to file
     out << json;
     out.close();
 }
