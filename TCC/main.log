@@ -1,0 +1,54 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.31)  31 JAN 2026 09:36
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/home/galmeidalopes/TCC-Architetures-Monitoring-Processo/TCC/main.tex
+(/home/galmeidalopes/TCC-Architetures-Monitoring-Processo/TCC/main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(./utfpr.cls
+Document Class: utfpr 2021/10/28 v2.0
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/usr/share/texlive/texmf-dist/tex/latex/substr/substr.sty
+Package: substr 2009/10/20 v1.2 Handle substrings
+\c@su@anzahl=\count187
+)
+-----> Option: pretextualoneside
+-----> Option: fontetimes
+-----> Option: semrecuonosumario
+-----> Option: usemakeindex
+-----> Option: pardeassinaturas
+
+! LaTeX Error: File `abntex2.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+./utfpr.cls:110: Emergency stop.
+<read *> 
+         
+l.110 ^^M
+         
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 442 strings out of 476080
+ 7522 string characters out of 5792744
+ 1922975 words of memory out of 5000000
+ 22531 multiletter control sequences out of 15000+600000
+ 558069 words of font info for 36 fonts, out of 8000000 for 9000
+ 59 hyphenation exceptions out of 8191
+ 57i,0n,54p,892b,22s stack positions out of 10000i,1000n,20000p,200000b,200000s
+./utfpr.cls:110:  ==> Fatal error occurred, no output PDF file produced!

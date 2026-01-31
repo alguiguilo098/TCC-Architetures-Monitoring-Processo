@@ -1,0 +1,94 @@
+%%%% CAPÍTULO 1 - INTRODUÇÃO
+%%
+%% Deve apresentar uma visão global da pesquisa, incluindo: breve histórico, importância e justificativa da escolha do tema,
+%% delimitações do assunto, formulação de hipóteses e objetivos da pesquisa e estrutura do trabalho.
+
+%% Título e rótulo de capítulo (rótulos não devem conter caracteres especiais, acentuados ou cedilha)
+\chapter{Introdução}\label{cap:introducao}
+
+Diante da crescente expansão da computação na sociedade e do acesso cada vez mais amplo à Internet e a dispositivos eletrônicos, torna-se fundamental monitorar esses equipamentos para identificar anomalias em seu funcionamento, como possíveis tentativas de ataques cibernéticos. Tais ataques, perpetrados por terceiros, visam obter benefícios indevidos ou causar prejuízos significativos. Um exemplo notório dessa ameaça, como pode ser visto na matéria \citeonline{ataquehackeraosistemadoHospitaldaCrianca}, no qual descreve que aconteceu no Hospital da Criança de Brasília em 2023, quando a instituição sofreu um ataque de \textit{ransomware}, resultando em um prejuízo estimado em  5,5 milhões reais.
+
+Para mitigar esses riscos, diversas ferramentas são utilizadas no diagnóstico do funcionamento de sistemas computacionais. O \gls{snmp} como apresentado no estudo \cite{NyczakAugust172015}, permite obter estatísticas detalhadas sobre a rede e acompanhar a comunicação entre os dispositivos.
+
+Sistemas de monitoramento são amplamente utilizados no dia a dia como apresentado na matéria escrita \citeonline{prometheus_monitorando_saude}  para verificar o funcionamento de sistemas computacionais, obtendo métricas que indicam o desempenho e a saúde do sistema. Para isso, geralmente existe um agente local que coleta essas métricas e as envia a um agente externo que as armazena e as exibe para terceiros.
+
+O principal problema que pode ser causado pelo monitoramento é o gasto excessivo de recursos como CPU, como é descutido no artigo apresentado  proposto por \citeonline{Hammad2025}. Isso ocorre, principalmente, se o agente local não possuir políticas que garantam que seu funcionamento seja o minimamente intrusivo, pode causar atrasos no tempo de resposta. A falta dessas políticas pode comprometer o desempenho geral do sistema, prejudicando a justiça na alocação de recursos computacionais, trazendo também vieses em analise nas métricas, devido ao alto consumo dos recursos pelo agente local.
+
+Além disso, softwares de monitoramento como o Nagios \cite{NagiosXI_ArchitectureOverview_2015} e o Prometheus \cite{Prometheus_documetants} não apresentam a capacidade de monitorar, métricas específicas de processos, focando em estatísticas gerais de funcionamento dos nós. Conforme observado em suas documentações, há a necessidade de informar manualmente o processo a ser monitorado, o que dificulta a obtenção de insights detalhados sobre processos rodando em um determinado host. Essa limitação compromete a realização de auditorias, uma vez que impede o acesso a dados mais granulares e específicos do ambiente. 
+
+Softwares de monitoramento como o Prometheus e o Nagios não possuem a capacidade de monitorar aspectos muito específicos como pode ser visto \citeonline{NagiosXI_ArchitectureOverview_2015} e na documentação do prometheus \citeonline{Prometheus_documetants}, em grande parte devido à falta de mecanismos que garantam uma ingestão massiva de dados. Isso ocorre porque suas arquiteturas não foram modeladas para essa finalidade, devido a falta de tecnologias . Atualmente, com a crescente necessidade de monitorar métricas granulares de recursos computacionais e um número cada vez maior de hosts, torna-se imprescindível o desenvolvimento de arquiteturas projetadas especificamente para essa propriedade, conforme apresentado nos trabalhos de \citeonline{MATOS2025} e , além disto arquitetura big data explorando métricas de processos não tem se mostrado muito explorada na litetura, focando mais em log e métricas de rede.
+
+
+
+
+
+
+\section{Objetivos}
+
+Objetiva-se neste trabalho implementar um agente de monitoramente local, que seja capaz de enviar métricas   para uma arquitetura já implementada no trabalho de \citeonline{MATOS2025}, que consiga ajudar administração da infraestrutura distribuídas monitoramento processos.
+
+
+Têm-se como objetivos específicos:
+
+\begin{itemize}
+    \item desenvolver um agente leve que consuma menos recursos locais e reduza o volume de dados transmitidos pela rede;
+
+    \item implementar um algoritmo eficiente que seja capaz de analisar uma grande quantidade de dados em curto período de tempos, para detecção de padrões atípicos relacionados a processos, no qual será implementado na arquitetura \textit{big data};
+
+    \item avaliar a funcionalidade e a escalabilidade da solução em um ambiente real, no qual será analisado a latências e escalabilidade da solução.
+    
+\end{itemize}    
+
+\section{Estrutura do trabalho}
+
+O Capítulo 2 descreve a fundamentação teórica. No Capítulo 3, é detalhada a proposta do trabalho. No Capítulo 4, são detalhados os resultados preliminares. Por fim, o Capítulo 5 apresenta as considerações finais. 
+
+
+% Segundo \citeonline{Coulouris2013}.
+
+% Segundo \citeonline[p. 40]{Coulouris2013}.
+
+% Citação no final do Parágrafo~\cite{Coulouris2013}. 
+
+% Citação no final do Parágrafo com número de página~\cite[p. 40]{Coulouris2013}.
+
+% %(Modelo de referência: pessoa jurídica)
+% Citação no final do Parágrafo~\cite{NBR6023:2018}
+
+% %(Modelo de referência: pessoa jurídica)
+% Citação no final do Parágrafo~\cite{NBR6027:2012}
+
+% %(Modelo de referência: pessoa jurídica)
+% Citação no final do Parágrafo~\cite{NBR6028:2021}
+
+% Segundo a \citeonline{NBR14724:2011}.
+
+% Citação no final do Parágrafo~\cite{NBR10520:2002}
+
+% Citação no final do Parágrafo~\cite{NBR14724:2011}.
+
+% % (Modelo de referência de trabalho acadêmico).
+% Citação no final do Parágrafo~\cite{Andrade2005}
+
+% % (Modelo de referência: capítulo de livro).
+% Citação no final do Parágrafo~\cite{Borges2014}
+
+% % (Modelo de referência: leis, decretos, portarias, etc.)
+% Citação no final do Parágrafo~\cite{BRASIL:1998}
+
+% % (Modelo de referência: livro com subtítulo). Nome com sufixo "Von" - Configuração no bib
+% Citação no final do Parágrafo~\cite[p. 66]{KROGH:2001}
+
+% Citação no final do Parágrafo~\cite{Faina2001}
+
+% % (Modelo de referência: livro com subtítulo).
+% Citação no final do Parágrafo~\cite{Davenport2012}
+
+% % (Modelo de referência: artigo de periódico).
+% Citação no final do Parágrafo~\cite{Monteiro2009}
+
+% %(Modelo de referência: artigo de periódico). Nome familiar "Junior"
+% Citação no final do Parágrafo~\cite{Sanches2024}
+
+% % (Modelo de referência: trabalho publicado em evento).
+% Citação no final do Parágrafo~\cite{Renaux2001}

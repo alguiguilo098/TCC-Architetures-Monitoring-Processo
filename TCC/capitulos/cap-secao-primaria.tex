@@ -1,0 +1,305 @@
+\chapter{Referencial Teórico}
+
+Este capítulo apresenta os principais conceitos  para o pleno entendimento deste trabalho, incluindo tópicos como: processos, segurança cibernética, detecção de anomalias e arquitetura de monitoramento.
+
+\section{Segurança cibernética}
+
+A Segurança Cibernética é a área da computação que visa garantir a proteção e o acesso restrito (somente a pessoas autorizadas) aos recursos computacionais. Essa proteção é fundamentada em três pilares, também conhecidos como Tríade CID (Confidencialidade,  Integridade e Disponibilidade) como pode ser visto no livro \citeonline{forouzan2013redes}:
+
+\begin{itemize}
+    \item Integridade: assegura que os recursos e dados computacionais permaneçam corretos, consistentes e protegidos contra alterações indevidas ao longo de todo o seu ciclo de vida.
+
+    \item Confidencialidade: garante que o acesso aos recursos e às informações computacionais seja restrito apenas a usuários, processos ou entidades devidamente autorizados.
+
+    \item Disponibilidade: assegura que os recursos computacionais estejam acessíveis e operacionais sempre que forem requisitados por usuários ou sistemas autorizados.
+\end{itemize}
+
+
+No entanto, a crescente complexidade dos sistemas computacionais atuais faz com que a garantia dessas propriedades se torne mais difícil. Por essa razão, a aplicação de algoritmos inteligentes que possuem a capacidade de reconhecer padrões àtipicos, tem crescido consideravelmente na área de cibersegurança, conforme demonstrado no livro \citeonline{simps}.
+
+Essa abordagem é justificada pelo panorama atual da computação distribuída. Com a proliferação de sistemas executando em múltiplos nós e ambientes virtualizados, a garantia das propriedades de segurança cibernética se torna significativamente mais complexa. Por essa razão, a aplicação de algoritmos de inteligência artificial em sistemas computacionais, visando a detecção proativa de anomalias, tem se tornado uma prática cada vez mais necessária.
+\section{Monitoramento Tradicional}
+
+O monitoramento tradicional de sistemas baseia-se em ferramentas que coletam métricas de desempenho, como uso de CPU, memória e tráfego de rede. Entre os principais exemplos, destacam-se soluções como \textit{Nagios} \cite{NagiosXI_ArchitectureOverview_2015}, \textit{Zabbix} \cite{Zabbix_documentation} e \textit{Prometheus} \cite{Prometheus_documetants}, amplamente utilizadas em ambientes corporativos para acompanhamento de disponibilidade e alertas. No entanto, essas abordagens dependem de limiares estáticos e regras fixas, o que reduz a eficácia diante de comportamentos dinâmicos e ambientes complexos. Trabalho como \cite{Enes2018} exploram a coleta estruturada de métricas do sistema operacional, ressaltando a importância de análises temporais e históricas para a detecção de anomalias.
+
+A seguir, são apresentadas e discutidas algumas das arquiteturas de monitoramento tradicionalmente utilizadas, na indústria:
+
+\subsection{Prometheus: Arquitetura e Componentes}
+A arquitetura prometheus é software, que permite monitorar recursos computacionais como: memória, CPU, aramazenamento,processos.Permitindo monitorar  saúde dos sistemas computacionais, sendo sua 
+arquitetura divida em 6 componentes (Figura \ref{fig:Prometheus}).
+
+
+\begin{figure}[!htb]%% Ambiente figure
+     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+    \centering
+    \caption{Arquitetura de monitoramento Prometheus}
+    \label{fig:Prometheus}
+    \includegraphics[width=0.8\linewidth]{capitulos/Arquitetura Prometheus guilherme.png}
+    \fonte{Adptada da documentação \citeonline{Prometheus_documetants}}%% Fonte
+    \addcontentsline{loge}{figure}{\protect\numberline{\thefigure} Arquitetura Prometheus}
+\end{figure} 
+
+
+\begin{itemize}
+    \item Servidor Prometheus: módulo central da arquitetura, responsável por coletar, armazenar e processar as métricas de monitoramento.
+
+    \item Alvos de monitoramento: \textit{endpoints} ou serviços a serem monitorados, a partir dos quais o Servidor Prometheus realiza o \textit{scraping} das métricas.
+
+    \item Pushgteway: componente utilizado para monitorar alvos de curta duração, como *jobs* \*batch\*. As métricas são enviadas para o \textit{Pushgteway}, que as disponibiliza para a coleta posterior pelo Servidor Prometheus.
+
+    \item Descoberta de serviços: mecanismo que identifica e registra automaticamente novos alvos, facilitando a gestão em ambientes dinâmicos.
+
+    \item Gerenciador de alertas: módulo responsável pelo tratamento e envio de notificações de alerta ao usuário sobre anomalias ou condições predefinidas nos serviços monitorados.
+
+    \item Grafana: ferramenta de visualização utilizada para apresentar os dados coletados em painéis interativos e dashboards.
+\end{itemize}
+
+A arquitetura Prometheus permite então o monitoramento eficientes de recursos computacionais, como também o armazenamento de séries temporais. Permitindo o monitoramento de qualquer sistemas computacional, sendo extremamente flexivel e moderno.Ao combinar coleta contínua, descoberta automática de serviços e mecanismos robustos de notificação, o Prometheus se destaca como uma solução amplamente adotada tanto na indústria quanto na academia, servindo como referência para o desenvolvimento de abordagens mais avançadas de monitoramento e detecção de anomalias.
+
+O Prometheus diferencia das demais arquiteturas de monitoramento tradicionais , por possuir um \textit{Pushgteway}, no qual permite monitorar processos de curta duração, diferenciando das Arquitetura como Zabbix \cite{Zabbix_documentation} e Nagios \cite{NagiosXI_ArchitectureOverview_2015}, permitindo monitoramento de atividades com período de vida curto, permitindo assim analisar scripts.Além disto, o prometheus possui a capacidade de monitoramento de processos usando o /proc
+
+\subsection{Zabbix: arquitetura e componentes}
+\label{sec:zabbix_arquitetura}
+
+O Zabbix apresenta uma arquitetura robusta dividida em cinco componentes principais. Diferentemente de outras ferramentas de monitoramento como o Prometheus, o Zabbix permite uma comunicação \textit{full-duplex} (bidirecional), onde tanto o agente quanto o servidor podem iniciar a solicitação de dados, resultando em maior flexibilidade e controle.
+
+Os componentes que compõem a arquitetura do Zabbix são, apresentados conforme a documentação oficial \cite{Zabbix_documentation}:
+
+\begin{figure}[htb]
+	\centering
+        \caption{Arquitetura de monitoramento Zabbix}
+        \label{fig:Zabbix}
+	\includegraphics[width=0.8\linewidth]{capitulos/zabixx_corretos_moderno.png}
+        \fonte{Adptada da documentação \citeonline{Zabbix_documentation}}%% Fonte
+        \addcontentsline{loge}{figure}{\protect\numberline{\thefigure} Arquitetura Zabbix}
+\end{figure}
+\begin{itemize}
+    \item Servidor: é o componente central do sistema. Ele recebe informações dos agentes e proxies, realiza o processamento dos dados coletados, gerencia as configurações e armazena as métricas no banco de dados.
+    \item Armazenamento de Dados (Banco de Dados): Este módulo   realiza a persistência de dados. Toda a informação coletada (métricas), a configuração do Zabbix e os dados de \textit{status} são armazenados em um sistema de gerenciamento de banco de dados relacional.
+    \item Interface Web (\textit{Frontend}): responsável por fornecer a visualização dos dados coletados (gráficos, \textit{dashboards}) e a configuração de todos os módulos do Zabbix, sendo o principal ponto de interação do usuário com o sistema.
+    \item \textit{Proxy}: atua como um gerenciador de carga e coletor de dados intermediário. É responsável por coletar informações de agentes em um local remoto ou em uma rede segmentada e enviá-las ao servidor. Seu uso é descentralizar o processamento e evita a sobrecarga do servidor central.
+    \item Agente: é o sensor/coletor de métricas que é instalado diretamente na máquina ou serviço que se deseja monitorar. Ele coleta dados de desempenho e disponibilidade e os reporta ao Server ou a um \textit{Proxy}.
+\end{itemize}
+
+A arquiteutra do Zabbix oferece uma solução altamente estruturada para monitoramento de sistemas, combinando uma coleta ativa e passiva, oferecendo uma solução completa e altamente escálavel. A presença de componentes como o Proxy e a comunicação bidirecional entre agentes e servidor permite ao Zabbix operar eficientemente em ambientes distribuídos, redes segmentadas e cenários de grande escala, trazendo um diferencial do prometheus.
+\newpage
+
+
+\subsection{Nagios: Arquitetura e Componentes}
+
+O Nagios é um serviço de monitoramento essencial que permite a supervisão contínua de diversos elementos críticos de infraestrutura, incluindo a rede, o uso de CPU e a memória, entre outros. Sua arquitetura modular é ilustrada na Figura \ref{fig:nagios} \cite{NagiosXI_ArchitectureOverview_2015}
+
+\begin{figure}[!htb]%% Ambiente figure
+     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+    \centering
+    \caption{Arquitetura Nagios}
+    \label{fig:nagios}
+    \includegraphics[width=0.8\linewidth]{capitulos/NagioS arquiteturaS.png}
+    \fonte{Adptado da documentação \citeonline{NagiosXI_ArchitectureOverview_2015}}%% Fonte
+     \addcontentsline{loge}{figure}{\protect\numberline{\thefigure} Arquitetura Nagios}
+\end{figure} 
+
+\begin{itemize}
+    \item Agentes: funcionam como sensores responsáveis por coletar os dados de monitoramento dos dispositivos e serviços.
+    
+    \item Núcleos Nagios: é o servidor central que processa as informações recebidas, avalia o estado dos recursos e gera os alertas necessários em caso de anomalias.
+    
+    \item Dados de Desempenho: refere-se ao armazenamento das métricas de desempenho, frequentemente visualizadas por meio de gráficos para análise histórica.
+    
+    \item NDOUtils (\textit{Nagios Data Output Utilities}): é a ferramenta que se encarrega de enviar e organizar os dados de monitoramento, geralmente direcionando-os para um banco de dados para persistência.
+    
+    \item Interface Web Nagios XI: consiste na interface gráfica utilizada para a visualização das informações monitoradas, a emissão de relatórios e a gestão do sistema.
+\end{itemize}
+
+A arquitettura do Nagios é considerado um modelo tradicional monitoramneto, baseado em agentes, processamento centralizado, com um modelo para armazenamento e visualização, mesmo com sua arquitetura rígida, o Nagios permanence amplamente utilizado devido a sua estabilidade e capacidade de adaptação a diferentes ambientes de infraestrutura. A combinação entre coleta distribuída, análise centralizada e suporte a integrações como o NDOUtils permite que ele ofereça uma solução confiável para acompanhamento contínuo do estado dos sistemas, mantendo seu papel relevante no ecossistema de monitoramento corporativo.
+
+
+
+\section{Arquitetura de Monitoramento Big Data}
+
+A garantia da consistência e disponibilidade dos recursos computacionais constitui um requisito essencial para a continuidade operacional das organizações. A ocorrência de anomalias nesses ambientes pode comprometer diretamente a execução de processos críticos e impactar a estabilidade dos serviços. Nesse contexto, torna-se imprescindível a realização de análises contínuas e sistemáticas sobre o comportamento dos sistemas computacionais. Entretanto, tal atividade apresenta elevada complexidade, decorrente tanto do aumento expressivo na quantidade de dispositivos conectados quanto da complexidade topológica das interconexões entre eles.
+
+Dessa forma, a coleta e o monitoramento de métricas e logs de desempenho assumem papel central na detecção de falhas, anomalias e degradações de serviço. Contudo, o volume massivo de dados gerados por esses sistemas exige a utilização de arquiteturas especializadas, capazes de processar, armazenar e correlacionar grandes quantidades de informações em tempo baixo de resposta.
+
+Um exemplo representativo desse tipo de abordagem é apresentado por \citeonline{Enes2018}, que propôs uma arquitetura voltada ao monitoramento de métricas de processos do sistema operacional, abrangendo parâmetros como uso de CPU, memória, operações de entrada/saída e tráfego de rede. A solução desenvolvida realiza a coleta e o armazenamento estruturado desses dados, preservando também a informação temporal de cada amostra, o que viabiliza consultas eficientes e análises históricas sobre o comportamento dos recursos monitorados.
+
+As arquiteturas de Big Data têm se tornado cada vez mais frequentes atualmente, devido à grande quantidade de dados gerados por diversas aplicações e ações empresariais. Um exemplo de arquitetura de Big Data aplicada ao monitoramento do protocolo \textit{NetFlow} é apresentado no trabalho \citeonline{MATOS2025}.
+
+Essa arquitetura possibilitou a obtenção de \textit{insights} sobre as redes, dada a sua capacidade de processar uma grande variedade e volume de dados. Isso resultou em um aumento considerável na eficácia do monitoramento e no acesso aos laboratórios do DACOM
+
+O objetivo deste trabalho é expandir a capacidade de monitoramento dessa arquitetura, tornando-a capaz de monitorar processos executando em diversas máquinas. Nesse sentido, trabalhos relacionados, como \citeonline{Liu2023} e \citeonline{DimosthenisNatsos2025}, demonstraram a capacidade de encontrar anomalias de sistema analisando múltiplas métricas de séries temporais, ideal para processos.
+
+A arquitetura apresentada no trabalho de  \citeonline{MATOS2025} pode ser vista na Figura \ref{fig:arquitetura_matos1}.
+
+
+
+\begin{figure}[!htb]%% Ambiente figure
+     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+    \centering
+    \caption{Arquitetura Big Data}
+    \label{fig:arquitetura_matos1}
+    \includegraphics[width=0.6\linewidth]{capitulos/Arquitetura do Matos.png}
+    \fonte{Monografia \citeonline{MATOS2025}}%% Fonte
+     \addcontentsline{loge}{figure}{\protect\numberline{\thefigure} Arquitetura Big Data}
+\end{figure} 
+
+\newpage
+
+
+\begin{itemize}
+    \item Fluxo 1 (Entrada para a Internet): tráfego de pacotes destinado ao roteador externo (Internet).
+
+    \item Fluxo 2 (Entrada Interna - DACOM): tráfego de pacotes destinado ao roteador da rede interna do DACOM.
+    
+    \item Fluxo 3 (Coleta Centralizada): o tráfego de rede capturado e roteado para o servidor \textbf{Charge}. Este servidor atua como o ponto de entrada e hospeda a arquitetura central de processamento de Big Data.
+    
+    \item Fluxo 4 (Processamento Inicial com Logstash): o fluxo de dados recebido pelo servidor \textbf{Charge} é encaminhado para a primeira Máquina Virtual (VM). Nesta VM, o serviço Logstash está em execução, responsável pelo processamento massivo, padronização, filtragem e enriquecimento inicial dos dados.
+    
+    \item Fluxo 5 (Fila de Mensagens - Apache Kafka): os dados pré-processados são enviados para o Apache Kafka. O Kafka atua como um message broker (agente de mensagens) distribuído, garantindo o desacoplamento e o processamento assíncrono dos dados, além de fornecer durabilidade e alta vazão para a ingestão subsequente na arquitetura.
+    
+    \item Fluxo 6 (Processamento Distribuído - Apache Spark): os dados são consumidos do Apache Kafka e enviados para o Apache Spark. O Spark realiza o processamento paralelo e massivo dos dados (análise, transformações e cálculos), extraindo insights e preparando-os para a etapa de armazenamento e visualização.
+    
+    \item Fluxo 7 (Indexação - Elasticsearch): os dados já processados pelo Apache Spark são enviados ao Elasticsearch. O Elasticsearch serve como o datastore (repositório de dados) e motor de busca distribuído, responsável por indexar os dados de forma otimizada, formando o pipeline de entrega de dados em tempo real para o Kibana.
+    
+    \item Fluxo 8 (Visualização - Kibana): o Kibana acessa e consome os dados indexados no Elasticsearch. Ele é a interface utilizada para a criação de painéis (dashboards), gráficos e relatórios, permitindo a visualização interativa dos resultados obtidos a partir do processamento do Big Data.
+\end{itemize}
+
+O objetivo deste projeto é estender a arquitetura existente, habilitando-a para a ingestão e o processamento de métricas de desempenho provenientes de sistemas \textit{Linux}. A coleta de dados será intermediada pelo \textit{Apache Kafka}, que atuará como um \textit{broker} para o \textit{pipeline} de dados, e as métricas serão então persistidas e disponibilizadas para a plataforma de arquitetura para posterior análise e visualização.
+
+
+\section{Processos}
+
+O conceito de processos é muito importante para cybersegurança, sabendo que esta sendo executado em sistemas computacionais  é fundamental para a garantia de confidencialidade, integridade e disponibilidade, por este motivo conceitos de processos são fundamentais para a segurança da informação, exisitindo diversas ferramentas para a garantia de segurança cybernética.
+
+De acordo com Tanenbaum,\cite{tanenbaum_so}, um processo é, fundamentalmente, a abstração de um programa em execução. Ele possui sua própria região de memória e executa até o término de sua ação.
+
+O sistema operacional (SO) costuma executar diversos processos simultaneamente. O SO é responsável por implementar o conceito de justiça na distribuição dos recursos computacionais entre eles. Contudo, existem processos maliciosos que podem comprometer o funcionamento do SO e ameaçar a segurança do sistema.
+
+Por esta razão, o SO possui ferramentas de monitoramento de processos por padrão, como os comandos ps e htop no Linux, entre outros recursos. No entanto, conforme apresentado em \cite{simps}, atualmente se observa a necessidade de utilizar algoritmos inteligentes para a detecção de ameaças, devido à complexidade de sistemas computacionais modernos.
+
+No contexto do Linux, cada processo é representado por uma estrutura denominada \texttt{task\_struct}, que armazena informações essenciais como identificador do processo (PID), estado de execução, prioridade, uso de CPU (Central Processing Unit) e memória, ponteiros para arquivos abertos, entre outros metadados. O sistema de arquivos virtual \texttt{/proc} fornece uma interface rica para o monitoramento desses processos, permitindo que administradores e ferramentas acessem dados em tempo real, como consumo de recursos, threads ativas e contexto de execução. Essa arquitetura baseada em arquivos faz com que  Linux altamente transparente e flexível para análise e auditoria de processos.
+
+Além disso, diversos trabalhos mostram que é possível identificar anomalias por meio de análises dinâmicas de processos, observando características como uso de CPU(Central Processing Unit), acessos à memória e operações de entrada e saída. Esse tipo de análise fornece uma visão temporal e contextual do comportamento dos processos, permitindo distinguir atividades legítimas de possíveis ameaças.
+
+Dessa forma, a integração de algoritmos inteligentes de monitoramento com os mecanismos tradicionais do SO representa um avanço crucial para a segurança e confiabilidade de sistemas modernos. 
+
+
+
+\section{Agentes de Monitoramento}
+
+O monitoramento é um tema amplamente explorado em arquiteturas distribuídas. Dada a sua complexidade  e a extensa distribuição de nós em diversos computadores, a necessidade de monitoramento para prevenir e responder a falhas é crucial, constituindo um dos tipos de  mecanismos  de tolerância a falha.
+
+O desenvolvimento de agentes de monitoramento, particularmente em contextos de microsserviços, é uma prática corrente, conforme demonstrado no estudo \citeonline{Yanhaona2015}. Adicionalmente, essa abordagem reforça os pilares de disponibilidade de recursos do sistema. 
+
+Segundo a definição proposta por \citeonline{Yanhaona2015}, um agente de monitoramento pode ser conceituado como um sensor responsável pela coleta de dados do ambiente, cuja componente inteligente processa essas informações para deliberar e executar uma ação apropriada.
+
+Diversas ferramentas foram desenvolvidas para o monitoramento de servidores, conforme exemplificado no trabalho de referência \citeonline{Wei2023}. Este estudo, especificamente, demonstra a criação de um agente dedicado a monitorar de Máquinas Virtuais (VMs) em ambientes Máquina Virtual Baseada em Kernel (KVM). Adicionalmente, softwares cruciais para a coleta e análise de métricas de CPU incluem o Prometheus \cite{Prometheus_documetants} e o Zabbix \cite{Zabbix_documentation}, evidenciando a necessidade de  desenvolvimento de agentes de monitoramento.
+
+\section{Detecção de anomalias}
+
+As técnicas de detecção representam uma evolução significativa na capacidade de processamento dos sistemas computacionais. Em contraste com as operações estritamente aritméticas executadas por máquinas tradicionais, esses modelos empregam algoritmos avançados (como \gls{ml},\textit{Deep Learning} e \textit{Unsupervised Machine Learning}),tais métodos são capazes de reconhecer padrões complexos e específicos a partir de grandes volumes de dados, permitindo, inclusive, o processamento de anomalias em tempo curto de resposta.
+
+Essa capacidade preditiva e de reconhecimento de padrões tem impulsionado uma verdadeira revolução na área de segurança computacional. Conforme apresentado em \citeonline{simps}, observa-se uma aplicação crescente e inovadora de modelos inteligentes para o reconhecimento e a mitigação de vulnerabilidades.
+
+A empregabilidade desses modelos manifesta-se em diversas frentes, como é evidenciado pelo trabalho de \citeonline{DimosthenisNatsos2025}. Os autores destacam o uso  de redes neurais, voltada à detecção de \textit{malware}, o que mostra a versatilidade e o poder preditivo dessa abordagem no campo da segurança digital.
+
+A inovação reside na eficiência e velocidade com que os modelos inteligentes conseguem identificar anomalias,sejam elas softwares maliciosos, \textit{exploits} ou falhas de hardware, superando a capacidade de análise humana em termos de volume e rapidez. Adicionalmente, \citeonline{Gupta2024} demonstra que o reconhecimento de anomalias pode ser realizado por meio de aprendizagem não supervisionada, utilizando técnicas como a clusterização (com o algoritmo K-means, por exemplo) em combinação com o One-Class SVM. Os autores ressaltam que a baixa latência é um fator fundamental para a segurança cibernética.
+
+Por esse motivo, grande parte dos estudos considerados inovadores na área de segurança tem se concentrado no desenvolvimento e na aplicação de algoritmos inteligentes para extrair insights valiosos a partir dos dados gerados continuamente pelos sistemas computacionais.
+
+\subsection{Tipos de anomalias}
+
+Como apresentado por \citeonline{Gupta2024}, tipos de anomalias pode ser divididas em três tipos:
+
+\begin{itemize}
+    \item Anomalias Pontuais (Point Anomalies): são desvios dramáticos e globais (\textit{outliers}) que se destacam muito dos dados ordinários, um exemplo disso é uma temperatura de 50$^{\circ}$C em uma região com média de 25$^{\circ}$C).
+    
+    \item Anomalias Contextuais (Contextual Anomalies): um ponto de dados que é incomum apenas em um contexto ou situação específica, mas que seria normal em outro contexto, um exemplo disto é 30$^{\circ}$C é normal nos trópicos, mas excepcional no Ártico.
+    
+    \item Anomalias Coletivas (Collective Anomalies): um aglomerado ou sequência de pontos de dados conectados que, quando vistos em conjunto, desviam-se significativamente da tendência, mesmo que os pontos individuais não o façam um exemplo disso é uma série de tentativas de  \textit{logins}  no mesmo local em pouco tempo que, juntos,  podem indicar um ataque.
+    
+\end{itemize}
+
+A análise dos diferentes tipos de anomalias é fundamental para o entendimento de potenciais problemas nos sistemas e de diferentes ataques computacionais. Um exemplo disso são os ataques de DDoS(Distributed Denial of Service), que frequentemente se caracterizam por anomalias pontuais. Por este motivos, é importante entender os diferentes tipos de anômalias para manter a segurança dos sistemas computacionais.
+
+\section{Trabalhos relacionados}
+
+Nesta seção, descrevem-se os trabalhos relacionados ao objetivo deste estudo.
+
+\subsection{Arquitetura  de monitoramento de serviços}
+
+As arquiteturas de monitoramento de serviços são amplamente exploradas na literatura, dada a crítica necessidade de se monitorar serviços para o diagnóstico da saúde de servidores e sistemas. Essa prática é fundamental para garantir a estabilidade e o desempenho das aplicações.
+
+Trabalhos como os de \citeonline{Enes2018} e \citeonline{NyczakAugust172015}, demonstram a relevância do tema ao apresentar abordagens e soluções que visam aprimorar a capacidade de observação e resposta a eventos em ambientes de TI.
+
+\subsection{Detecção de anomalias com aprendizagem não supervisionada e aprendizagem supervisionada}
+
+A detecção de anomalias utilizando \gls{ml} é um campo de pesquisa extremamente ativo e de alto impacto no monitoramento de serviços e sistemas complexos. O objetivo central é identificar desvios sutis ou significativos do comportamento considerado normal (baseline), que, quando detectados rapidamente, podem indicar falhas, vulnerabilidades de segurança ou ineficiências operacionais.
+
+Os trabalhos com aprendizagem não supervisionada , segundo \citeonline{Gupta2024}, são capaz de serem utilizados nos grandes volumes de dados, tendo um maior destaque em questão devido a não necessidade de não rótular o dado, o que tem apresentado como desafio devido ao grande volume de dados gerados.
+
+Também trabalhos como detecção de \textit{malware}, usando métricas de processo, utilizando arquiteturas transformes pode ser visto no artigo \cite{DimosthenisNatsos2025}, tendo uma taxa bem alta de acertos perante a detecção de \textit{malwares}, mostrando que tem sido bem positivo a utilização de Inteligências computacional para área de segurança.
+
+\subsection{Arquiteturas Processamento Massivo de Dados}
+
+A arquiteturas de processmaneto massivo de dados tem se tornando bastante popula, devido a grande quantidade de dados ingestão de dados produzidas por ela, mas na cybersegurança tais arquiteturas tem sido exploradas bastante devido a grande de lidar com informações.
+
+No trabalho de \citeonline{MATOS2025} é apresentada uma arquitetura big data focada na cybersegurança, nela é utilizada campos obtidos pelo protocolo \textit{NetFlow} de computadores ligados ao laboratórios DACOM (Departamento de Computação), permitindo assim obter dados sobre a rede. A diferença entre meu trabalho é as métricas recolhidas será de processos linux e será desenvolvidos um agente de montitoramento.
+
+
+% ******************************
+
+% Em relação ao assunto, o apresentado nesta seção pode estar relacionado a trabalhos de outros autores ou ao assunto que fornece a fundamentação (motivação) para o trabalho a ser desenvolvido. Se o assunto está relacionado a trabalhos de outros autores, a contribuição do trabalho é definida em relação ao que já foi pesquisado nesse assunto. Se o assunto será utilizado para embasamento do que será proposto, explicitar como o trabalho se insere nesse assunto. A contribuição pode, ainda, estar relacionada a uma necessidade de mercado ou a uma oportunidade decorrente de algum problema real para o qual se pretender propor uma solução. Nesse caso, o assunto fornece um contexto teórico de suporte para o problema e/ou a solução.
+
+% O importante nesta seção é deixar claro do que se trata o trabalho (assunto ou tema), identificar o objeto de pesquisa, como será encaminhada a solução (procedimento metodológico, tecnologias, ferramentas utilizadas) e o que se pretende ao final do trabalho, sem explicitar a solução e os resultados.
+
+% \caixa{Atenção}{As seções a seguir são sugestões, converse com o seu orientador para ver quais seções devem ter em seu trabalho!}
+
+% \begin{photograph}[!htb]%% Ambiente figure
+%     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+%     \caption{Exemplo de fotografia}%% Legenda
+%     \label{fig:exemplo1}%% Rótulo
+%     \includegraphics[scale=0.4]{foto1}%% Dimensões e localização
+%     \fonte{Autoria Própria}%% Fonte
+%     \addcontentsline{loge}{photograph}{\protect\numberline{\thephotograph}Exemplo de fotografia.} % Adiciona à lista de ilustrações
+% \end{photograph}
+
+
+% \section{Objetivos}\label{sec:objetivos}
+
+% Um texto curto\footnote{Teste de nota de rodapé 1.} apresentando a seção.
+
+
+
+% \section{Objetivos específicos (opcional)}\label{subsec:objetivosEspecificos}
+
+% Os objetivos específicos são opcionais, ou seja, somente devem ser apresentados se caracterizarem resultados parciais gerados a partir do objetivo geral, os quais sejam considerados úteis para a comunidade acadêmica, para a sociedade ou para o ambiente profissional. Uma observação importante é que os resultados sejam passíveis de comprovação, ou seja, se o objetivo for: “Oferecer agilidade e confiabilidade aos processos gerenciais da empresa”, significa que o trabalho deverá realizar testes com relação a esses atributos, cujos resultados deverão ser apresentados nas discussões do trabalho.
+
+% \begin{graph}[!htb]%% Ambiente figure
+%     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+%     \caption{Exemplo de gráfico}%% Legenda
+%     \label{graph1}%% Rótulo
+%     \includegraphics[scale=0.4]{grafico2}%% Dimensões e localização
+%     \fonte{Adaptado de \citeonline[p.~4]{UTFPR2008}}%% Fonte
+%     \addcontentsline{loge}{graph}{\protect\numberline{\thegraph}Exemplo de gráfico.}
+% \end{graph}
+
+
+% Destaca-se que os objetivos específicos não incluem as etapas do processo de desenvolvimento de software (realizar a modelagem, a análise, o projeto...) ou outras atividades necessárias para alcançar o objetivo geral, como, estudar as tecnologias necessárias para modelagem e implementação do sistema. Dentre as exceções estão a realização de estudos, procedimentos, métodos e técnicas considerados inéditos e de relevância para outros trabalhos a serem realizados na mesma área. Contudo, o resultado deste estudo deve ser documentado de forma que seja conhecimento disponibilizado para quem lê o trabalho.
+
+
+% \section{Justificativa}\label{sec:justificativa}
+
+% Justificar o objeto de pesquisa (o que será feito) e a forma de resolução do problema (como fazer). A forma de resolução pode estar centrada no método, nas tecnologias, no uso de conceitos (fundamentação teórica).
+
+% A Justificativa explicita porque desenvolver o referido trabalho, como o mesmo se insere no contexto de pesquisa, de produção científica. Pode incluir o porquê utilizar as tecnologias e ferramentas indicadas, a contribuição em termos de inovação ou mesmo de aprendizado.
+
+% O trabalho não precisa ser justificado em decorrência de ser inovador ou por ter gerado uma significativa contribuição ao conhecimento na área em que o mesmo se insere. Pode referir-se simplesmente à aplicabilidade de conhecimentos adquiridos durante o curso. Sendo assim, a justificativa não deve ser elaborada considerando um mercado a ser atingido e sim com relação ao uso de tecnologias aprendidas e/ou estudadas, o conhecimento e aprendizado do aluno e a aplicabilidade do trabalho desenvolvido.
+
+% \section{Estrutura do trabalho}\label{sec:estruturaTrabalho}
+
+% A estrutura do trabalho contém uma relação dos capítulos e uma descrição sucinta do que cada um deles contém. Esta seção fornece uma visão geral do trabalho no sentido da sua estrutura em capítulos\footnote{Teste de nota de rodapé 2.}.
+
+% \caixa{Atenção}{O OverLeaf está demorando muito para compilar o modelo com o Capítulo de Exemplos, que explica como usar o LaTeX. Assim, esse capítulo foi removido (está comentado para não compilar), mas há um arquivo chamado \texttt{exemploPDF.pdf}, na raiz do projeto, que contém esse capítulo de exemplos!}
+
+

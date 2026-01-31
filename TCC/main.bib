@@ -1,0 +1,272 @@
+%%%% REFERÊNCIAS
+%%
+%% Conjunto padronizado de elementos descritivos retirados de um documento, que permite sua identificação individual.
+%%
+%% Cada entrada no arquivo BibTeX segue um formato padrão. Este formato muda ligeiramente baseado no tipo de entrada, mas a sintaxe
+%% continua a mesma.
+%%
+%% O rótulo de cada entrada não pode conter caracteres especiais, acentuados ou cedilha.
+%%
+%% A formatação do texto no campo "AUTHOR" deve obedecer algumas regras:
+%%   - Acento agudo:        "á = {\'a}".
+%%   - Acento crase:        "à = {\`a}".
+%%   - Acento til:          "ã = {\~a}".
+%%   - Acento circunflexo:  "ê = {\^e}".
+%%   - Acento trema:        "ü = {\"u}".
+%%   - Acento na letra i:   "í = {\'\i}".
+%%   - Cedilha:             "ç = {\c{c}}".
+%%   - Sobrenome composto:  "Santos, Filho, Jos{\'e} C. S.; da Silva, Erivanildo Lopes".
+%%   - Nome de organização: "{\mbox IONA Technologies PLC}".
+%%
+%% A formatação do texto no campo "TITLE" deve obedecer algumas regras (também válidas para o texto no campo "AUTHOR"):
+%%   - MAIÚSCULAS: "REAL = {REAL}".
+%%   - Minúsculas: "real = {real}".
+%%   - CamelCase:  "Real = {R}eal".
+
+%% TIPOS DE ENTRADA
+%%
+%% Ao inserir uma referência no banco de dados, a primeira coisa a decidir é o tipo de entrada. Existem vários tipos de entrada, mas
+%% não são completas, porém são suficientes para o BibTeX fornecer entradas para lidar com praticamente qualquer tipo de referência
+%% razoavelmente bem.
+
+%% ARTICLE - Um artigo de um jornal ou revista.
+%%   - Campos requeridos: AUTHOR, TITLE, JOURNAL e YEAR.
+%%   - Campos opcionais: VOLUME, NUMBER, PAGES, MONTH e NOTE.
+
+% SEBRAE. Entenda a importância da normalização para o seu negócio. Normas técnicas. 8 jan. 2016. Disponível em: http://www.sebrae.com.br/sites/PortalSebrae/artigos/entenda-a-importancia-da-normalizacao-para-o-seu-negocio. Acesso em: 11 mar. 2025. (Modelo de referência: material disponível na Internet).
+
+@Article{DimosthenisNatsos2025,
+  author  = {Dimosthenis Natsos,Andreas L. Symeonidis},
+  journal = {Results in EngineeringVolume 25, March 2025, 104250},
+  title   = {Transformer-based malware detection using process resource utilization metrics},
+  year    = {2025},
+  doi     = {10.1016/j.rineng.2025.104250},
+  ranking = {rank3},
+}
+
+
+@Book{simps,
+  author= {Michele Nogueira},
+  publisher = {SBC},
+  title     = {Minicursos do XXIV Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais},
+  year      = {2024},
+  isbn      = {9788576696018},
+  month     = sep,
+  doi       = {10.5753/sbc.15101.8},
+  ranking   = {rank5},
+}
+@misc{ataquehackeraosistemadoHospitaldaCrianca,
+  author       = {Mirelle Pinheiro and Carlos Carone},
+  title        = {PCDF investiga ataque hacker ao sistema do Hospital da Criança},
+  year         = {2024},
+  month        = oct,
+  day          = {14},
+  howpublished = {Metr{\'o}poles},
+  url          = {https://www.metropoles.com/distrito-federal/na-mira/pcdf-investiga-ataque-hacker-ao-sistema-do-hospital-da-crianca},
+  note         = {Acesso em: 10 dez. 2025},
+}
+@misc{prometheus_monitorando_saude,
+  author       = {Gabriel Silva},
+  title        = {Prometheus: monitorando a saúde da sua aplicação},
+  year         = {2019},
+  howpublished = {\url{https://medium.com/tech-grupozap/prometheus-monitorando-a-saúde-da-sua-aplicação-bd9b3b63e7b1}},
+  note         = {Acessado em 11-12-2025}
+}
+
+
+@Article{Hammad2025,
+  author    = {Hammad, Yasmeen and Al-Said Ahmad, Amro and Andras, Peter},
+  journal   = {Journal of Systems and Software},
+  title     = {An empirical study on the performance overhead of code instrumentation in containerised microservices},
+  year      = {2025},
+  issn      = {0164-1212},
+  month     = dec,
+  pages     = {112573},
+  volume    = {230},
+  doi       = {10.1016/j.jss.2025.112573},
+  publisher = {Elsevier BV},
+}
+
+@Article{Enes2018,
+  author    = {Enes, Jonatan and Expósito, Roberto R. and Touriño, Juan},
+  journal   = {Future Generation Computer Systems},
+  title     = {BDWatchdog: Real-time monitoring and profiling of Big Data applications and frameworks},
+  year      = {2018},
+  issn      = {0167-739X},
+  month     = oct,
+  pages     = {420--437},
+  volume    = {87},
+  doi       = {10.1016/j.future.2017.12.068},
+  publisher = {Elsevier BV},
+  ranking   = {rank5},
+}
+@InProceedings{Yanhaona2015,
+  author    = {Yanhaona, Muhammad N. and Prodhan, Md Anindya T. and Grimshaw, Andrew S.},
+  booktitle = {2015 International Conference on Networking Systems and Security (NSysS)},
+  title     = {An agent-based distributed monitoring framework (Extended abstract)},
+  year      = {2015},
+  month     = jan,
+  pages     = {1--10},
+  publisher = {IEEE},
+  doi       = {10.1109/nsyss.2015.7043515},
+  ranking   = {rank2},
+}
+@Article{NyczakAugust172015,
+  author  = {Julien Nyczak},
+  journal = {MSc System and Network Engineering},
+  title   = {Zero-effort Service Monitoring},
+  year    = {August 17, 2015},
+  ranking = {rank3},
+}
+@Article{Bae2019,
+  author    = {Bae, Seong Il and Lee, Gyu Bin and Im, Eul Gyu},
+  journal   = {Concurrency and Computation: Practice and Experience},
+  title     = {Ransomware detection using machine learning algorithms},
+  year      = {2019},
+  issn      = {1532-0634},
+  month     = jun,
+  number    = {18},
+  volume    = {32},
+  doi       = {10.1002/cpe.5422},
+  publisher = {Wiley},
+  ranking   = {rank4},
+}
+
+@InProceedings{Wei2023,
+  author    = {Wei, Haohao and Yan, Hongshu},
+  booktitle = {2023 2nd International Conference on Big Data, Information and Computer Network (BDICN)},
+  title     = {Abnormal Linux process detection based on CPU usage},
+  year      = {2023},
+  month     = jan,
+  pages     = {288--291},
+  publisher = {IEEE},
+  doi       = {10.1109/bdicn58493.2023.00067},
+  ranking   = {rank4},
+}
+
+
+@book{tanenbaum_so,
+  author    = {Andrew S. Tanenbaum and Albert S. Woodhull},
+  title     = {Sistemas Operacionais: Projeto e Implementação},
+  publisher = {Pearson Prentice Hall},
+  year      = {2016},
+  edition   = {4},
+  address   = {São Paulo},
+  isbn      = {9788576052375},
+}
+
+@Article{MATOS2025,
+  author  = {GUILHERME LUIZ DE MATOS},
+  title   = {PROPOSTA E IMPLANTAÇÃO DE UMA ARQUITETURA DEPROCESSAMENTO MASSIVO DE DADOS PARA MONITORAMENTO E DETECÇÃO DE AMEAÇAS CIBERNÉTICAS},
+  year    = {2025},
+  ranking = {rank4},
+}
+@Article{Liu2023,
+  author        = {Liu, Jinyang and Yang, Tianyi and Chen, Zhuangbin and Su, Yuxin and Feng, Cong and Yang, Zengyin and Lyu, Michael R.},
+  journal       = {International Symposium on Software Reliability Engineering (ISSRE'2023)},
+  title         = {Practical Anomaly Detection over Multivariate Monitoring Metrics for Online Services},
+  year          = {2023},
+  month         = aug,
+  abstract      = {As modern software systems continue to grow in terms of complexity and volume, anomaly detection on multivariate monitoring metrics, which profile systems' health status, becomes more and more critical and challenging. In particular, the dependency between different metrics and their historical patterns plays a critical role in pursuing prompt and accurate anomaly detection. Existing approaches fall short of industrial needs for being unable to capture such information efficiently. To fill this significant gap, in this paper, we propose CMAnomaly, an anomaly detection framework on multivariate monitoring metrics based on collaborative machine. The proposed collaborative machine is a mechanism to capture the pairwise interactions along with feature and temporal dimensions with linear time complexity. Cost-effective models can then be employed to leverage both the dependency between monitoring metrics and their historical patterns for anomaly detection. The proposed framework is extensively evaluated with both public data and industrial data collected from a large-scale online service system of Huawei Cloud. The experimental results demonstrate that compared with state-of-the-art baseline models, CMAnomaly achieves an average F1 score of 0.9494, outperforming baselines by 6.77% to 10.68%, and runs 10X to 20X faster. Furthermore, we also share our experience of deploying CMAnomaly in Huawei Cloud.},
+  archiveprefix = {arXiv},
+  copyright     = {Creative Commons Attribution Non Commercial No Derivatives 4.0 International},
+  doi           = {10.48550/ARXIV.2308.09937},
+  eprint        = {2308.09937},
+  file          = {:Liu2023 - Practical Anomaly Detection Over Multivariate Monitoring Metrics for Online Services.pdf:PDF:http\://arxiv.org/pdf/2308.09937v1},
+  keywords      = {Software Engineering (cs.SE), Machine Learning (cs.LG), FOS: Computer and information sciences},
+  primaryclass  = {cs.SE},
+  publisher     = {arXiv},
+  ranking       = {rank4},
+}
+
+@misc{Prometheus_documetants,
+  title     = {Prometheus},
+  year      = {2025},
+  url       = {https://prometheus.io/docs/introduction/overview/},
+  note      = {Acessado em: 31 out. 2025}
+}
+
+@Article{ZamanzadehDarban2024,
+  author    = {Zamanzadeh Darban, Zahra and Webb, Geoffrey I. and Pan, Shirui and Aggarwal, Charu and Salehi, Mahsa},
+  journal   = {ACM Computing Surveys},
+  title     = {Deep Learning for Time Series Anomaly Detection: A Survey},
+  year      = {2024},
+  issn      = {1557-7341},
+  month     = oct,
+  number    = {1},
+  pages     = {1--42},
+  volume    = {57},
+  doi       = {10.1145/3691338},
+  publisher = {Association for Computing Machinery (ACM)},
+}
+
+@Article{Gupta2024,
+  author    = {Gupta, Pankaj and Tripathy, Prasanta},
+  journal   = {International Journal of Computer Science and Engineering},
+  title     = {Unsupervised Learning for Real-Time Data Anomaly Detection: A Comprehensive Approach},
+  year      = {2024},
+  issn      = {2348-8387},
+  month     = oct,
+  number    = {10},
+  pages     = {1--11},
+  volume    = {11},
+  doi       = {10.14445/23488387/ijcse-v11i10p101},
+  publisher = {Seventh Sense Research Group Journals},
+}
+
+@Article{Grzonka2018,
+  author    = {Grzonka, Daniel and Jakóbik, Agnieszka and Kołodziej, Joanna and Pllana, Sabri},
+  journal   = {Future Generation Computer Systems},
+  title     = {Using a multi-agent system and artificial intelligence for monitoring and improving the cloud performance and security},
+  year      = {2018},
+  issn      = {0167-739X},
+  month     = sep,
+  pages     = {1106--1117},
+  volume    = {86},
+  doi       = {10.1016/j.future.2017.05.046},
+  publisher = {Elsevier BV},
+  ranking   = {rank4},
+}
+
+@book{forouzan2013redes,
+  author       = {Forouzan, Behrouz A. and Mosharraf, Firouz},
+  title        = {Redes de Computadores: Uma Abordagem Top‐Down},
+  edition      = {1},
+  year         = {2013},
+  publisher    = {Bookman},
+  address      = {Porto Alegre, RS},
+  isbn         = {9788580551693},
+  url          = {https://integrada.minhabiblioteca.com.br/#/books/9788580551693},
+  note         = {Acesso em: 31 mar. 2024}
+}
+
+
+@misc{Zabbix_documentation,
+    title     = {Zabbix},
+    year      = {2025},
+    url       ={https://www.zabbix.com/documentation/6.0/pt/manual/introduction/overview},
+    note      = {Acessado em: 1 nov. 2025}
+}
+
+@misc{NagiosXI_ArchitectureOverview_2015,
+  author       = {Nagios Enterprises},
+  title        = {Nagios XI – Architecture Overview},
+  howpublished = {\url{https://support.nagios.com/kb/article/nagios-xi-architecture-overview-35.html}},
+  year         = {2015},
+  note         = {Acesso em: 1 nov. 2025},
+}
+
+@Article{ZamanzadehDarban2024,
+  author    = {Zamanzadeh Darban, Zahra and Webb, Geoffrey I. and Pan, Shirui and Aggarwal, Charu and Salehi, Mahsa},
+  journal   = {ACM Computing Surveys},
+  title     = {Deep Learning for Time Series Anomaly Detection: A Survey},
+  year      = {2024},
+  issn      = {1557-7341},
+  month     = oct,
+  number    = {1},
+  pages     = {1--42},
+  volume    = {57},
+  doi       = {10.1145/3691338},
+  publisher = {Association for Computing Machinery (ACM)},
+}
+    

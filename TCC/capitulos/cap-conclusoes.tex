@@ -1,0 +1,86 @@
+%%%% CAPÍTULO 5 - CONCLUSÕES E PERSPECTIVAS
+%%
+\chapter{Resultado Preliminares}\label{cap:conclusoeseperspectivas}
+
+Como resultado preliminar, foi desenvolvido um protótipo da arquitetura, utilizando um agente em Python que é capaz de coletar e visualizar métricas de processos no Kibana. A seguir, a Figura \ref{fig:arquitetura_do_Protótipo} ilustra o fluxo de dados deste protótipo.
+\begin{figure}[!htb]%% Ambiente figure
+     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+     \caption{Arquitetura do protótipo} %% Legenda
+     \label{fig:arquitetura_do_Protótipo}
+     \includegraphics[width=0.5\linewidth]{capitulos/Arquitetura do Protótipo.png}
+     \fonte{Autoria própria (2025)}%% Fonte
+     \addcontentsline{loge}{figure}{\protect\numberline{\thefigure}Arquitetura do Protótipo}
+ \end{figure}
+
+O fluxo de dados é dividido no seguinte caminho:
+
+
+\begin{enumerate}
+    \item Agente Local $\to$ Logstash: o Agente Local envia as métricas de processo para o Logstash em um intervalo de tempo predefinido.
+    \item Logstash $\to$ Elasticsearch:o Logstash processa os dados e os envia ao Elasticsearch, que é responsável pelo armazenamento e indexação das métricas.
+    \item Visualização: o Kibana acessa o Elasticsearch e exibe as métricas de forma visual, permitindo a análise dos dados.
+\end{enumerate}
+
+\section{Métricas Recolhidas pelo Prótipo}
+
+Para o protótipo, as métricas recolhidas foram definidas conforme a lista abaixo. A fim de facilitar a coleta, foi utilizada a biblioteca psutil . As métricas coletadas são as seguintes:
+
+\begin{itemize}
+    \item PID (\textit{Process Identifier}): O número de identificação único do processo.
+    \item Nome: o nome executável do processo.
+    \item Usuário (\textit{username}): O nome do usuário proprietário do processo.
+    \item Timestamp: o registro de tempo da coleta da métrica.
+    \item Status: o estado atual do processo (\textit{e.g.}, running, sleeping).
+    \item Tempo de Criação (\textit{create\_time}): o registro de tempo de inicialização do processo.
+    \item Número de Threads (\textit{num\_threads}): a contagem de \textit{threads} associadas ao processo.
+    \item Percentual de CPU (\textit{cpu\_percent}): o uso percentual de CPU pelo processo.
+    \item Número de Processos Filhos (\textit{num\_child\_processes}): a contagem de processos derivados.
+    \item Percentual de Memória (\textit{memory\_percent}): O uso percentual de memória física pelo processo.
+    \item Bytes de Leitura (\textit{read\_bytes}): o número de bytes lidos do disco (\textit{I/O}).
+    \item Bytes de Escrita (\textit{write\_bytes}): o número de bytes escritos no disco (\textit{I/O}).
+    \item Descritores de Arquivos (\textit{num\_fds}): o número de descritores de arquivos abertos (se disponível no sistema operacional).
+    \item Prioridade (\textit{nice}): o valor de prioridade \textit{nice} do processo.
+\end{itemize}
+
+\section{Desempenho do protótipo}
+
+O desempenho do protótipo revela que o consumo de recursos computacionais foi elevado para um agente local, atingindo aproximadamente $14\%$ de uso de CPU com uma janela de $1$ segundos de coleta de métricas. Essa ineficiência se deve, em grande parte, à linguagem de programação utilizada, visto que o Python é uma linguagem interpretada, o que introduz uma sobrecarga inerente ao processo.
+
+O gráfico a seguir ilustra a porcentagem de CPU utilizada em função da janela de tempo definida para a coleta periódica de métricas.
+
+\begin{figure}[!htb]
+    \centering
+    \caption{\texorpdfstring{Gráfico de cpu vs. intervalo fixo entre coletas (segundos)}%
+    {Grafico de CPU vs. Intervalo fixo entre coletas (segundos)}}
+    \label{fig:DesempenhoPrototipo}
+    \includegraphics[width=0.5\textwidth]{capitulos/DesempenhodoPrototipo.png}
+    \addcontentsline{loge}{figure}{\protect\numberline{\thefigure} Grafico de CPU vs. Intervalo fixo entre coletas (segundos)}
+    \fonte{Autoria própria (2025)}
+\end{figure}
+
+
+
+Acredita-se que, com a adoção de uma linguagem de programação mais eficiente em questão de gerenciamento de recursos, será possível otimizar o consumo de CPU. Outro ponto importante é que, ao realizar a visualização, o próprio agente apareceu consistentemente como um dos processos de maior consumo de CPU, demonstrando, assim, sua ineficiência e o alto custo de recursos inerente à implementação.
+
+Outro ponto importante a ser analisado é que a implementação de políticas de caching garante uma redução no processamento gasto, especialmente quando adotada uma janela de coleta de métricas entre $5$ a $10$ segundos.
+
+\subsection{Visualização}
+Conforme ilustrado na Figura \ref{fig:graficokibana}, foi possível coletar com sucesso diversas métricas, incluindo dados de CPU, número de threads, versão do kernel e a identificação dos processos que consumiram mais memória.
+
+\begin{figure}[!htb]%% Ambiente figure
+     %\captionsetup{width=0.55\textwidth}%% Largura da legenda
+     \caption{Gráficos do kibana}
+     \label{fig:graficokibana}
+     \includegraphics[width=0.75\linewidth]{capitulos/Visualização do Kibana.png}
+     \fonte{Autoria própria (2025)}%% Fonte
+     \addcontentsline{loge}{figure}{\protect\numberline{\thefigure}Visualizaç\~ao}
+ \end{figure}
+
+Mostrando assim a viabilidade  da  proposta deste trabalho, no qual os mesmo já conseguiu obter métricas de monitoramente, em uma arquitetura semelhante a prosta \cite{MATOS2025}, evidenciando assim que com poucas alterações é possível desenvolver o agente e integrar pipeline da mesma.
+
+
+\chapter{Considerações Finais}
+
+Acreditamos que, por meio deste agente local e do algoritmo de detecção de anomalias, seja possível obter dados de anomalias em recursos computacionais críticos, auxiliando na segurança desses recursos.no próximos passos, será desenvolvido o agente em C e integração com  a arquitetura.
+A principal dificuldade e limitação apresentada reside na necessidade de uma grande quantidade de máquinas para a execução do agente e para a definição da escalabilidade da solução. Isso representa um grande desafio para a fase de experimentação da arquitetura proposta.
+A principal ameaça à viabilidade do projeto é o desenvolvimento de um agente considerado muito pesado computacionalmente. Tal peso prejudicaria o objetivo de um monitoramento minimamente intrusivo, levando a não viabilidade em ambiente real, não consolidando a proposta do trabalho.

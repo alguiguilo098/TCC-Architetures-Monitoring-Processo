@@ -1,0 +1,97 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Enes, Expósito e Touriño 2018]{Enes2018}
+\abntrefinfo{Enes, Expósito e Touriño}{Enes; Expósito; Touriño}{2018}
+{ENES, J.; EXPóSITO, R.~R.; TOURIñO, J. Bdwatchdog: Real-time monitoring and profiling of big data applications and frameworks.
+\textbf{Future Generation Computer Systems},  Elsevier BV v.~87,, p. 420--437, out. 2018.
+ISSN 0167-739X.}
+
+\bibitem[Enterprises 2015]{NagiosXI_ArchitectureOverview_2015}
+\abntrefinfo{Enterprises}{Enterprises}{2015}
+{ENTERPRISES, N. \textbf{Nagios XI – Architecture Overview}, . 2015. \url{https://support.nagios.com/kb/article/nagios-xi-architecture-overview-35.html}.
+Acesso em: 1 nov. 2025.}
+
+\bibitem[Forouzan e Mosharraf 2013]{forouzan2013redes}
+\abntrefinfo{Forouzan e Mosharraf}{Forouzan; Mosharraf}{2013}
+{FOROUZAN, B.~A.; MOSHARRAF, F. \textbf{Redes de Computadores: Uma Abordagem Top‐Down}. 1. ed. Porto Alegre, RS: Bookman,  2013. Acesso em: 31 mar. 2024.
+ISBN 9788580551693. Dispon{\'\i}vel em: \url{https://integrada.minhabiblioteca.com.br/\#/books/9788580551693}.}
+
+\bibitem[Gupta e Tripathy 2024]{Gupta2024}
+\abntrefinfo{Gupta e Tripathy}{Gupta; Tripathy}{2024}
+{GUPTA, P.; TRIPATHY, P. Unsupervised learning for real-time data anomaly detection: A comprehensive approach.
+\textbf{International Journal of Computer Science and Engineering},  Seventh Sense Research Group Journals v.~11, n.~10, p. 1--11, out. 2024.
+ISSN 2348-8387.}
+
+\bibitem[Hammad, Ahmad e Andras 2025]{Hammad2025}
+\abntrefinfo{Hammad, Ahmad e Andras}{Hammad; Ahmad; Andras}{2025}
+{HAMMAD, Y.; AHMAD, A. A.-S.; ANDRAS, P. An empirical study on the performance overhead of code instrumentation in containerised microservices.
+\textbf{Journal of Systems and Software},  Elsevier BV v.~230,, p. 112573, dez. 2025.
+ISSN 0164-1212.}
+
+\bibitem[Liu \textit{et al.} 2023]{Liu2023}
+\abntrefinfo{Liu \textit{et al.}}{Liu \textit{et al.}}{2023}
+{LIU, J. \textit{et al.} Practical anomaly detection over multivariate monitoring metrics for online services.
+\textbf{International Symposium on Software Reliability Engineering (ISSRE'2023)},  arXiv,,, ago. 2023.}
+
+\bibitem[MATOS 2025]{MATOS2025}
+\abntrefinfo{MATOS}{Matos}{2025}
+{MATOS, G. L.~D. Proposta e implantaÇÃo de uma arquitetura deprocessamento massivo de dados para monitoramento e detecÇÃo de ameaÇas cibernÉticas, ,,,.
+2025.}
+
+\bibitem[Natsos 2025]{DimosthenisNatsos2025}
+\abntrefinfo{Natsos}{Natsos}{2025}
+{NATSOS, A. L.~S. D. Transformer-based malware detection using process resource utilization metrics.
+\textbf{Results in EngineeringVolume 25, March 2025, 104250}, ,,, 2025.}
+
+\bibitem[Nogueira 2024]{simps}
+\abntrefinfo{Nogueira}{Nogueira}{2024}
+{NOGUEIRA, M. \textbf{Minicursos do XXIV Simpósio Brasileiro de Segurança da Informação e de Sistemas Computacionais}. [\textit{S.l.}]: SBC,  2024.
+ISBN 9788576696018.}
+
+\bibitem[Nyczak August 17, 2015]{NyczakAugust172015}
+\abntrefinfo{Nyczak}{Nyczak}{August 17, 2015}
+{NYCZAK, J. Zero-effort service monitoring.
+\textbf{MSc System and Network Engineering}, ,,, August 17, 2015.}
+
+\bibitem[Pinheiro e Carone 2024]{ataquehackeraosistemadoHospitaldaCrianca}
+\abntrefinfo{Pinheiro e Carone}{Pinheiro; Carone}{2024}
+{PINHEIRO, M.; CARONE, C. \textbf{PCDF investiga ataque hacker ao sistema do Hospital da Criança}, . 2024. Metr{\'o}poles.
+Acesso em: 10 dez. 2025.
+Dispon{\'\i}vel em: \url{https://www.metropoles.com/distrito-federal/na-mira/pcdf-investiga-ataque-hacker-ao-sistema-do-hospital-da-crianca}.}
+
+\bibitem[Prometheus 2025]{Prometheus_documetants}
+\abntrefinfo{Prometheus}{PROMETHEUS}{2025}
+{PROMETHEUS, . 2025.
+Acessado em: 31 out. 2025.
+Dispon{\'\i}vel em: \url{https://prometheus.io/docs/introduction/overview/}.}
+
+\bibitem[Silva 2019]{prometheus_monitorando_saude}
+\abntrefinfo{Silva}{Silva}{2019}
+{SILVA, G. \textbf{Prometheus: monitorando a saúde da sua aplicação}, . 2019. \url{https://medium.com/tech-grupozap/prometheus-monitorando-a-saúde-da-sua-aplicação-bd9b3b63e7b1}.
+Acessado em 11-12-2025.}
+
+\bibitem[Tanenbaum e Woodhull 2016]{tanenbaum_so}
+\abntrefinfo{Tanenbaum e Woodhull}{Tanenbaum; Woodhull}{2016}
+{TANENBAUM, A.~S.; WOODHULL, A.~S. \textbf{Sistemas Operacionais: Projeto e Implementação}. 4. ed. São Paulo: Pearson Prentice Hall,  2016.
+ISBN 9788576052375.}
+
+\bibitem[Wei e Yan 2023]{Wei2023}
+\abntrefinfo{Wei e Yan}{Wei; Yan}{2023}
+{WEI, H.; YAN, H. Abnormal linux process detection based on cpu usage. \textit{In}: 2023 2ND INTERNATIONAL CONFERENCE ON BIG DATA, INFORMATION AND COMPUTER NETWORK (BDICN). 2023. \textbf{Anais [...]} [\textit{S.l.}]: IEEE, 2023. p. 288--291.}
+
+\bibitem[Yanhaona, Prodhan e Grimshaw 2015]{Yanhaona2015}
+\abntrefinfo{Yanhaona, Prodhan e Grimshaw}{Yanhaona; Prodhan; Grimshaw}{2015}
+{YANHAONA, M.~N.; PRODHAN, M. A.~T.; GRIMSHAW, A.~S. An agent-based distributed monitoring framework (extended abstract). \textit{In}: 2015 INTERNATIONAL CONFERENCE ON NETWORKING SYSTEMS AND SECURITY (NSYSS). 2015. \textbf{Anais [...]} [\textit{S.l.}]: IEEE, 2015. p. 1--10.}
+
+\bibitem[Zabbix 2025]{Zabbix_documentation}
+\abntrefinfo{Zabbix}{ZABBIX}{2025}
+{ZABBIX, . 2025.
+Acessado em: 1 nov. 2025.
+Dispon{\'\i}vel em: \url{https://www.zabbix.com/documentation/6.0/pt/manual/introduction/overview}.}
+
+\end{thebibliography}
