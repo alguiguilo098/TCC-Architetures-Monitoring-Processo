@@ -39,8 +39,10 @@ message ProcessMetricsList {
 };
 
 message KernelDistro {
-  string kernel_version = 1;              
-  string distro_name = 2;                 
+  string timestamp = 3; // Timestamp da coleta
+  string kernel_version = 1; // Versão do kernel
+  string distro_name = 2; // Nome da distribuição
+  string hostip= 17; // IP do host
 }
 
 // Mensagem que representa um programa instalado
@@ -51,6 +53,8 @@ message InstalledProgram {
 
 // Mensagem que representa a lista de todos os programas
 message InstalledProgramList {
+  string timestamp = 3; // Timestamp da coleta
+  string hostip= 2; // IP do host
   repeated InstalledProgram programs = 1;  // Lista de programas
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "../ProcessMonitoring/ProcessMetricas.pb.h"
 #include <string>
+#include "../API/ChannelComunication.hpp"
 #include "../ConfigAgent/ConfigAgent.hpp"
 #include "../Colletion/Collection.hpp"
 #include <chrono>
@@ -18,6 +19,8 @@ class AgentMonitoring {
         Collection* collection;
         std::mutex mutexBuffer;
         sem_t semaphoreBuffer;
+
+        ChannelCommunication* channelCommunication;
         std::chrono::steady_clock::time_point last_monitor_time;
         void monitor_process(int pid, ProcessMetricas::ProcessMetrics &metrics);
         void monitor_kernel_distro(ProcessMetricas::KernelDistro &kernelDistro);

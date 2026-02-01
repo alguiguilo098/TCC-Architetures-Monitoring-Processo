@@ -128,6 +128,7 @@ AgentMonitoring::AgentMonitoring(std::string config_path)
     this->programList = ProcessMetricas::InstalledProgramList();
     this->kernelDistro = ProcessMetricas::KernelDistro();
     this->last_monitor_time = std::chrono::steady_clock::now();
+    this->channelCommunication = new ChannelCommunication();
 
     sem_init(&this->semaphoreBuffer, 0, 0);
     load_config(config_path);
@@ -139,6 +140,7 @@ AgentMonitoring::~AgentMonitoring()
 {
     delete this->collection;
     sem_destroy(&this->semaphoreBuffer);
+    delete this->channelCommunication;
 }
 
 /// @brief Carrega a configuração do agente a partir de um arquivo
@@ -171,8 +173,7 @@ void AgentMonitoring::start_monitoring()
         std::time_t now_time_now = std::chrono::system_clock::to_time_t(now_sys_agent);
         if (has_time_passed(
                 this->last_monitor_time,
-                std::chrono::hours(this->configAgent.TruePeriodicScriptHours)))
-        {
+                std::chrono::hours(this->configAgent.TruePeriodicScriptHours))){
             // Executa os scripts periódicos
             monitor_kernel_distro(kernelDistro);
             // Executa a coleta de programas instalados
@@ -181,13 +182,8 @@ void AgentMonitoring::start_monitoring()
             auto now_sys = std::chrono::system_clock::now();
             std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
 
-            std::cout << "[Periodic Script] "
-                      << std::put_time(std::localtime(&now_time), "%H:%M:%S")
-                      << " Executed periodic scripts."
-                      << std::endl;
-            // Salvar os dados coletados em arquivos JSON
-            WriteKernelDistroToFile(this->kernelDistro, "kernel_distro_data.json");
-            WriteInstalledProgramsToFile(this->programList, "installed_programs_data.json");
+            WriteKernelDistroToFile(kernelDistro, "kernel_distro_metrics.json");
+            WriteInstalledProgramsToFile(programList, "installed_programs_metrics.json");
             // Atualiza o tempo do último monitoramento
             this->last_monitor_time = std::chrono::steady_clock::now();
         }
@@ -195,19 +191,13 @@ void AgentMonitoring::start_monitoring()
         if (this->BufferOutput.processes_size() < this->configAgent.BufferSize)
         {
             // Coleta dados de processos
-            std::cout << "[Agent Monitoring] "
-                      << std::put_time(std::localtime(&now_time_now), "%H:%M:%S")
-                      << " First data collection."
-                      << this->BufferOutput.processes_size() << std::endl;
             monitor_all_processes();
         }
         else
         {
             // Troca os buffers e escreve os dados coletados em arquivo
-            std::cout << "[Agent Monitoring] " << std::put_time(std::localtime(&now_time_now), "%H:%M:%S") << " Subsequent data collection." << std::endl;
             this->BufferInput.Swap(&this->BufferOutput);
             // Write BufferInput to file
-            WriteProcessMetricsToFile(this->BufferInput, "process_metrics_data.json");
             this->BufferOutput.Clear();
             sem_post(&this->semaphoreBuffer);
         }
@@ -222,8 +212,6 @@ void AgentMonitoring::strart_sending_data_server()
     while (true)
     {
         sem_wait(&this->semaphoreBuffer);
-        // Send BufferInput to server
-        std::cout << "[Agent Monitoring] Sending data to server. Number of processes: " << this->BufferInput.processes_size() << std::endl;
         // After sending, clear the BufferInput
         this->BufferInput.Clear();
     }

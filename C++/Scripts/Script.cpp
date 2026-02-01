@@ -11,6 +11,14 @@
 /// @brief  Coleta informações sobre a distribuição do kernel
 /// @param kernelDistro 
 void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro){
+    // Obtém o tempo atual.
+    auto now = std::chrono::system_clock::now();
+    auto now_c = std::chrono::system_clock::to_time_t(now);
+    // Converte para string.
+    std::string timestamp = std::ctime(&now_c);
+    // Remove espaços em branco e nova linha.
+    timestamp.erase(timestamp.find_last_not_of(" \n\r\t") + 1);
+    kernelDistro.set_timestamp(timestamp);
     // Coleta a versão do kernel
     std::ifstream version_file("/proc/version");
     if (version_file.is_open()) {
@@ -41,6 +49,16 @@ void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro){
 /// @brief Coleta informações sobre os programas instalados
 /// @param programList lista de programas instalados
 void collectionInstalledPrograms(ProcessMetricas::InstalledProgramList &programList){
+    
+    // Obtém o tempo atual.
+    auto now = std::chrono::system_clock::now();
+    auto now_c = std::chrono::system_clock::to_time_t(now);
+    // Converte para string.
+    std::string timestamp = std::ctime(&now_c);
+
+    // Remove espaços em branco e nova linha.
+    timestamp.erase(timestamp.find_last_not_of(" \n\r\t") + 1);
+    programList.set_timestamp(timestamp);
     // Comando para listar programas instalados (Debian/Ubuntu)
     std::string cmd = "dpkg-query -W -f='${Package} ${Version}\n'";
 
