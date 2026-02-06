@@ -31,11 +31,7 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_create_time(metrics, pid);
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_memory_percent(metrics, pid);
-    collection->get_mem_rss(metrics, pid);          // Coleta o RSS (Resident Set Size) do processo
-    collection->get_mem_uss(metrics, pid);          // Coleta o USS (Unique
-    collection->get_mem_shared(metrics, pid);       // Coleta a memória compartilhada do processo
-    collection->get_mem_vms(metrics, pid);          // Coleta o VMS (Virtual Memory Size) do processo
-    collection->get_mem_text(metrics, pid);         // Coleta a memória de texto do processo
+    collection->get_mem_statm(metrics, pid);
     
     // Coleta o tempo de atividade do processo
 
@@ -182,16 +178,15 @@ void AgentMonitoring::start_monitoring()
             // Atualiza o tempo do último monitoramento
             auto now_sys = std::chrono::system_clock::now();
             std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
-            
+
             // Atualiza o tempo do último monitoramento
             this->last_monitor_time = std::chrono::steady_clock::now();
         }
-        
+
         if (this->BufferOutput.processes_size() < this->configAgent.BufferSize)
         {
             monitor_all_processes();
             WriteProcessMetricsToFile(this->BufferOutput, "process_metrics_output.json");
-
         }
         else
         {
@@ -214,7 +209,7 @@ void AgentMonitoring::strart_sending_data_server()
         sem_wait(&this->semaphoreBuffer);
         std::cout << "Sending data to server..." << std::endl;
         // Envia os dados coletados para o servidor
-        
+
         this->channelCommunication->sendMessage(this->BufferInput);
         // After sending, clear the BufferInput
         this->BufferInput.Clear();

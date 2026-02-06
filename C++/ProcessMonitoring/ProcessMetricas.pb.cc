@@ -23,13 +23,14 @@ namespace _pbi = _pb::internal;
 namespace ProcessMetricas {
 PROTOBUF_CONSTEXPR ProcessMetrics::ProcessMetrics(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.user_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.timestamp_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.boottime_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.timestartprocess_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.hostip_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.pid_)*/0
   , /*decltype(_impl_.num_threads_)*/0
   , /*decltype(_impl_.cpu_percent_)*/0
@@ -42,13 +43,13 @@ PROTOBUF_CONSTEXPR ProcessMetrics::ProcessMetrics(
   , /*decltype(_impl_.kb_received_)*/0
   , /*decltype(_impl_.kb_sent_)*/0
   , /*decltype(_impl_.ionice_value_)*/0
+  , /*decltype(_impl_.mem_rss_)*/uint64_t{0u}
+  , /*decltype(_impl_.mem_uss_)*/uint64_t{0u}
   , /*decltype(_impl_.gid_effective_)*/0
-  , /*decltype(_impl_.mem_rss_)*/0
-  , /*decltype(_impl_.mem_uss_)*/0
-  , /*decltype(_impl_.mem_shared_)*/0
-  , /*decltype(_impl_.mem_vms_)*/0
-  , /*decltype(_impl_.mem_text_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+  , /*decltype(_impl_.is_sleep_)*/false
+  , /*decltype(_impl_.mem_shared_)*/uint64_t{0u}
+  , /*decltype(_impl_.mem_vms_)*/uint64_t{0u}
+  , /*decltype(_impl_.mem_text_)*/uint64_t{0u}} {}
 struct ProcessMetricsDefaultTypeInternal {
   PROTOBUF_CONSTEXPR ProcessMetricsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -122,7 +123,7 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Proce
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_ProcessMetricas_2eproto = nullptr;
 
 const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_._has_bits_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -151,8 +152,33 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.hostip_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.kb_received_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.kb_sent_),
-  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.status_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.is_sleep_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.gid_effective_),
+  ~0u,
+  ~0u,
+  ~0u,
+  0,
+  2,
+  1,
+  3,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
+  ~0u,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetricsList, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -189,11 +215,11 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.programs_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
-  { 31, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
-  { 38, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
-  { 48, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
-  { 56, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
+  { 0, 31, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
+  { 56, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
+  { 63, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
+  { 73, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
+  { 81, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -206,31 +232,34 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\025ProcessMetricas.proto\022\017ProcessMetricas"
-  "\"\353\003\n\016ProcessMetrics\022\013\n\003pid\030\001 \001(\005\022\014\n\004name"
-  "\030\002 \001(\t\022\014\n\004user\030\003 \001(\t\022\023\n\013num_threads\030\007 \001("
-  "\005\022\033\n\023num_child_processes\030\t \001(\005\022\023\n\013cpu_pe"
-  "rcent\030\010 \001(\002\022\026\n\016memory_percent\030\n \001(\002\022\017\n\007m"
-  "em_rss\030\027 \001(\002\022\017\n\007mem_uss\030\030 \001(\002\022\022\n\nmem_sha"
-  "red\030\031 \001(\002\022\017\n\007mem_vms\030\032 \001(\002\022\020\n\010mem_text\030\033"
-  " \001(\002\022\022\n\nread_bytes\030\013 \001(\004\022\023\n\013write_bytes\030"
-  "\014 \001(\004\022\017\n\007num_fds\030\r \001(\005\022\014\n\004nice\030\016 \001(\005\022\024\n\014"
-  "ionice_value\030\024 \001(\005\022\021\n\ttimestamp\030\004 \001(\t\022\020\n"
-  "\010boottime\030\017 \001(\t\022\030\n\020timestartprocess\030\020 \001("
-  "\t\022\016\n\006hostip\030\021 \001(\t\022\023\n\013kb_received\030\022 \001(\002\022\017"
-  "\n\007kb_sent\030\023 \001(\002\022\016\n\006status\030\034 \001(\t\022\025\n\rgid_e"
-  "ffective\030\025 \001(\005\"H\n\022ProcessMetricsList\0222\n\t"
-  "processes\030\001 \003(\0132\037.ProcessMetricas.Proces"
-  "sMetrics\"^\n\014KernelDistro\022\021\n\ttimestamp\030\003 "
-  "\001(\t\022\026\n\016kernel_version\030\001 \001(\t\022\023\n\013distro_na"
-  "me\030\002 \001(\t\022\016\n\006hostip\030\021 \001(\t\"1\n\020InstalledPro"
-  "gram\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"n\n\024I"
-  "nstalledProgramList\022\021\n\ttimestamp\030\003 \001(\t\022\016"
-  "\n\006hostip\030\002 \001(\t\0223\n\010programs\030\001 \003(\0132!.Proce"
-  "ssMetricas.InstalledProgramb\006proto3"
+  "\"\314\004\n\016ProcessMetrics\022\013\n\003pid\030\001 \001(\005\022\014\n\004name"
+  "\030\002 \001(\t\022\014\n\004user\030\003 \001(\t\022\030\n\013num_threads\030\007 \001("
+  "\005H\000\210\001\001\022 \n\023num_child_processes\030\t \001(\005H\001\210\001\001"
+  "\022\030\n\013cpu_percent\030\010 \001(\002H\002\210\001\001\022\033\n\016memory_per"
+  "cent\030\n \001(\002H\003\210\001\001\022\017\n\007mem_rss\030\027 \001(\004\022\017\n\007mem_"
+  "uss\030\030 \001(\004\022\022\n\nmem_shared\030\031 \001(\004\022\017\n\007mem_vms"
+  "\030\032 \001(\004\022\020\n\010mem_text\030\033 \001(\004\022\022\n\nread_bytes\030\013"
+  " \001(\004\022\023\n\013write_bytes\030\014 \001(\004\022\017\n\007num_fds\030\r \001"
+  "(\005\022\014\n\004nice\030\016 \001(\005\022\024\n\014ionice_value\030\024 \001(\005\022\021"
+  "\n\ttimestamp\030\004 \001(\t\022\020\n\010boottime\030\017 \001(\t\022\030\n\020t"
+  "imestartprocess\030\020 \001(\t\022\016\n\006hostip\030\021 \001(\t\022\023\n"
+  "\013kb_received\030\022 \001(\002\022\017\n\007kb_sent\030\023 \001(\002\022\020\n\010i"
+  "s_sleep\030\034 \001(\010\022\025\n\rgid_effective\030\025 \001(\005B\016\n\014"
+  "_num_threadsB\026\n\024_num_child_processesB\016\n\014"
+  "_cpu_percentB\021\n\017_memory_percent\"H\n\022Proce"
+  "ssMetricsList\0222\n\tprocesses\030\001 \003(\0132\037.Proce"
+  "ssMetricas.ProcessMetrics\"^\n\014KernelDistr"
+  "o\022\021\n\ttimestamp\030\003 \001(\t\022\026\n\016kernel_version\030\001"
+  " \001(\t\022\023\n\013distro_name\030\002 \001(\t\022\016\n\006hostip\030\021 \001("
+  "\t\"1\n\020InstalledProgram\022\014\n\004name\030\001 \001(\t\022\017\n\007v"
+  "ersion\030\002 \001(\t\"n\n\024InstalledProgramList\022\021\n\t"
+  "timestamp\030\003 \001(\t\022\016\n\006hostip\030\002 \001(\t\0223\n\010progr"
+  "ams\030\001 \003(\0132!.ProcessMetricas.InstalledPro"
+  "gramb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProcessMetricas_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProcessMetricas_2eproto = {
-    false, false, 875, descriptor_table_protodef_ProcessMetricas_2eproto,
+    false, false, 972, descriptor_table_protodef_ProcessMetricas_2eproto,
     "ProcessMetricas.proto",
     &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 5,
     schemas, file_default_instances, TableStruct_ProcessMetricas_2eproto::offsets,
@@ -249,6 +278,19 @@ namespace ProcessMetricas {
 
 class ProcessMetrics::_Internal {
  public:
+  using HasBits = decltype(std::declval<ProcessMetrics>()._impl_._has_bits_);
+  static void set_has_num_threads(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static void set_has_num_child_processes(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static void set_has_cpu_percent(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static void set_has_memory_percent(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
+  }
 };
 
 ProcessMetrics::ProcessMetrics(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -261,13 +303,14 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   ProcessMetrics* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.name_){}
     , decltype(_impl_.user_){}
     , decltype(_impl_.timestamp_){}
     , decltype(_impl_.boottime_){}
     , decltype(_impl_.timestartprocess_){}
     , decltype(_impl_.hostip_){}
-    , decltype(_impl_.status_){}
     , decltype(_impl_.pid_){}
     , decltype(_impl_.num_threads_){}
     , decltype(_impl_.cpu_percent_){}
@@ -280,13 +323,13 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
     , decltype(_impl_.kb_received_){}
     , decltype(_impl_.kb_sent_){}
     , decltype(_impl_.ionice_value_){}
-    , decltype(_impl_.gid_effective_){}
     , decltype(_impl_.mem_rss_){}
     , decltype(_impl_.mem_uss_){}
+    , decltype(_impl_.gid_effective_){}
+    , decltype(_impl_.is_sleep_){}
     , decltype(_impl_.mem_shared_){}
     , decltype(_impl_.mem_vms_){}
-    , decltype(_impl_.mem_text_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+    , decltype(_impl_.mem_text_){}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
@@ -337,14 +380,6 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
     _this->_impl_.hostip_.Set(from._internal_hostip(), 
       _this->GetArenaForAllocation());
   }
-  _impl_.status_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.status_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_status().empty()) {
-    _this->_impl_.status_.Set(from._internal_status(), 
-      _this->GetArenaForAllocation());
-  }
   ::memcpy(&_impl_.pid_, &from._impl_.pid_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.mem_text_) -
     reinterpret_cast<char*>(&_impl_.pid_)) + sizeof(_impl_.mem_text_));
@@ -356,13 +391,14 @@ inline void ProcessMetrics::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_._has_bits_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.name_){}
     , decltype(_impl_.user_){}
     , decltype(_impl_.timestamp_){}
     , decltype(_impl_.boottime_){}
     , decltype(_impl_.timestartprocess_){}
     , decltype(_impl_.hostip_){}
-    , decltype(_impl_.status_){}
     , decltype(_impl_.pid_){0}
     , decltype(_impl_.num_threads_){0}
     , decltype(_impl_.cpu_percent_){0}
@@ -375,13 +411,13 @@ inline void ProcessMetrics::SharedCtor(
     , decltype(_impl_.kb_received_){0}
     , decltype(_impl_.kb_sent_){0}
     , decltype(_impl_.ionice_value_){0}
+    , decltype(_impl_.mem_rss_){uint64_t{0u}}
+    , decltype(_impl_.mem_uss_){uint64_t{0u}}
     , decltype(_impl_.gid_effective_){0}
-    , decltype(_impl_.mem_rss_){0}
-    , decltype(_impl_.mem_uss_){0}
-    , decltype(_impl_.mem_shared_){0}
-    , decltype(_impl_.mem_vms_){0}
-    , decltype(_impl_.mem_text_){0}
-    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.is_sleep_){false}
+    , decltype(_impl_.mem_shared_){uint64_t{0u}}
+    , decltype(_impl_.mem_vms_){uint64_t{0u}}
+    , decltype(_impl_.mem_text_){uint64_t{0u}}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -407,10 +443,6 @@ inline void ProcessMetrics::SharedCtor(
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.hostip_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.status_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.status_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 ProcessMetrics::~ProcessMetrics() {
@@ -430,7 +462,6 @@ inline void ProcessMetrics::SharedDtor() {
   _impl_.boottime_.Destroy();
   _impl_.timestartprocess_.Destroy();
   _impl_.hostip_.Destroy();
-  _impl_.status_.Destroy();
 }
 
 void ProcessMetrics::SetCachedSize(int size) const {
@@ -449,15 +480,25 @@ void ProcessMetrics::Clear() {
   _impl_.boottime_.ClearToEmpty();
   _impl_.timestartprocess_.ClearToEmpty();
   _impl_.hostip_.ClearToEmpty();
-  _impl_.status_.ClearToEmpty();
-  ::memset(&_impl_.pid_, 0, static_cast<size_t>(
+  _impl_.pid_ = 0;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    ::memset(&_impl_.num_threads_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&_impl_.num_child_processes_) -
+        reinterpret_cast<char*>(&_impl_.num_threads_)) + sizeof(_impl_.num_child_processes_));
+  }
+  _impl_.read_bytes_ = uint64_t{0u};
+  _impl_.memory_percent_ = 0;
+  ::memset(&_impl_.num_fds_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.mem_text_) -
-      reinterpret_cast<char*>(&_impl_.pid_)) + sizeof(_impl_.mem_text_));
+      reinterpret_cast<char*>(&_impl_.num_fds_)) + sizeof(_impl_.mem_text_));
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -500,33 +541,37 @@ const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // int32 num_threads = 7;
+      // optional int32 num_threads = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          _Internal::set_has_num_threads(&has_bits);
           _impl_.num_threads_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // float cpu_percent = 8;
+      // optional float cpu_percent = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 69)) {
+          _Internal::set_has_cpu_percent(&has_bits);
           _impl_.cpu_percent_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // int32 num_child_processes = 9;
+      // optional int32 num_child_processes = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
+          _Internal::set_has_num_child_processes(&has_bits);
           _impl_.num_child_processes_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // float memory_percent = 10;
+      // optional float memory_percent = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 85)) {
+          _Internal::set_has_memory_percent(&has_bits);
           _impl_.memory_percent_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -626,53 +671,51 @@ const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // float mem_rss = 23;
+      // uint64 mem_rss = 23;
       case 23:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 189)) {
-          _impl_.mem_rss_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float mem_uss = 24;
-      case 24:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 197)) {
-          _impl_.mem_uss_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float mem_shared = 25;
-      case 25:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 205)) {
-          _impl_.mem_shared_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float mem_vms = 26;
-      case 26:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 213)) {
-          _impl_.mem_vms_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float mem_text = 27;
-      case 27:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 221)) {
-          _impl_.mem_text_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // string status = 28;
-      case 28:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
-          auto str = _internal_mutable_status();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 184)) {
+          _impl_.mem_rss_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.ProcessMetrics.status"));
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 mem_uss = 24;
+      case 24:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 192)) {
+          _impl_.mem_uss_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 mem_shared = 25;
+      case 25:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 200)) {
+          _impl_.mem_shared_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 mem_vms = 26;
+      case 26:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 208)) {
+          _impl_.mem_vms_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 mem_text = 27;
+      case 27:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 216)) {
+          _impl_.mem_text_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // bool is_sleep = 28;
+      case 28:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 224)) {
+          _impl_.is_sleep_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -692,6 +735,7 @@ const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -741,34 +785,26 @@ uint8_t* ProcessMetrics::_InternalSerialize(
         4, this->_internal_timestamp(), target);
   }
 
-  // int32 num_threads = 7;
-  if (this->_internal_num_threads() != 0) {
+  // optional int32 num_threads = 7;
+  if (_internal_has_num_threads()) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(7, this->_internal_num_threads(), target);
   }
 
-  // float cpu_percent = 8;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_cpu_percent = this->_internal_cpu_percent();
-  uint32_t raw_cpu_percent;
-  memcpy(&raw_cpu_percent, &tmp_cpu_percent, sizeof(tmp_cpu_percent));
-  if (raw_cpu_percent != 0) {
+  // optional float cpu_percent = 8;
+  if (_internal_has_cpu_percent()) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteFloatToArray(8, this->_internal_cpu_percent(), target);
   }
 
-  // int32 num_child_processes = 9;
-  if (this->_internal_num_child_processes() != 0) {
+  // optional int32 num_child_processes = 9;
+  if (_internal_has_num_child_processes()) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(9, this->_internal_num_child_processes(), target);
   }
 
-  // float memory_percent = 10;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_memory_percent = this->_internal_memory_percent();
-  uint32_t raw_memory_percent;
-  memcpy(&raw_memory_percent, &tmp_memory_percent, sizeof(tmp_memory_percent));
-  if (raw_memory_percent != 0) {
+  // optional float memory_percent = 10;
+  if (_internal_has_memory_percent()) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteFloatToArray(10, this->_internal_memory_percent(), target);
   }
@@ -859,64 +895,40 @@ uint8_t* ProcessMetrics::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(21, this->_internal_gid_effective(), target);
   }
 
-  // float mem_rss = 23;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_rss = this->_internal_mem_rss();
-  uint32_t raw_mem_rss;
-  memcpy(&raw_mem_rss, &tmp_mem_rss, sizeof(tmp_mem_rss));
-  if (raw_mem_rss != 0) {
+  // uint64 mem_rss = 23;
+  if (this->_internal_mem_rss() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(23, this->_internal_mem_rss(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(23, this->_internal_mem_rss(), target);
   }
 
-  // float mem_uss = 24;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_uss = this->_internal_mem_uss();
-  uint32_t raw_mem_uss;
-  memcpy(&raw_mem_uss, &tmp_mem_uss, sizeof(tmp_mem_uss));
-  if (raw_mem_uss != 0) {
+  // uint64 mem_uss = 24;
+  if (this->_internal_mem_uss() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(24, this->_internal_mem_uss(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(24, this->_internal_mem_uss(), target);
   }
 
-  // float mem_shared = 25;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_shared = this->_internal_mem_shared();
-  uint32_t raw_mem_shared;
-  memcpy(&raw_mem_shared, &tmp_mem_shared, sizeof(tmp_mem_shared));
-  if (raw_mem_shared != 0) {
+  // uint64 mem_shared = 25;
+  if (this->_internal_mem_shared() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(25, this->_internal_mem_shared(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(25, this->_internal_mem_shared(), target);
   }
 
-  // float mem_vms = 26;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_vms = this->_internal_mem_vms();
-  uint32_t raw_mem_vms;
-  memcpy(&raw_mem_vms, &tmp_mem_vms, sizeof(tmp_mem_vms));
-  if (raw_mem_vms != 0) {
+  // uint64 mem_vms = 26;
+  if (this->_internal_mem_vms() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(26, this->_internal_mem_vms(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(26, this->_internal_mem_vms(), target);
   }
 
-  // float mem_text = 27;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_text = this->_internal_mem_text();
-  uint32_t raw_mem_text;
-  memcpy(&raw_mem_text, &tmp_mem_text, sizeof(tmp_mem_text));
-  if (raw_mem_text != 0) {
+  // uint64 mem_text = 27;
+  if (this->_internal_mem_text() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(27, this->_internal_mem_text(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(27, this->_internal_mem_text(), target);
   }
 
-  // string status = 28;
-  if (!this->_internal_status().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "ProcessMetricas.ProcessMetrics.status");
-    target = stream->WriteStringMaybeAliased(
-        28, this->_internal_status(), target);
+  // bool is_sleep = 28;
+  if (this->_internal_is_sleep() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(28, this->_internal_is_sleep(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -977,48 +989,36 @@ size_t ProcessMetrics::ByteSizeLong() const {
         this->_internal_hostip());
   }
 
-  // string status = 28;
-  if (!this->_internal_status().empty()) {
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_status());
-  }
-
   // int32 pid = 1;
   if (this->_internal_pid() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_pid());
   }
 
-  // int32 num_threads = 7;
-  if (this->_internal_num_threads() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_threads());
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    // optional int32 num_threads = 7;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_threads());
+    }
 
-  // float cpu_percent = 8;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_cpu_percent = this->_internal_cpu_percent();
-  uint32_t raw_cpu_percent;
-  memcpy(&raw_cpu_percent, &tmp_cpu_percent, sizeof(tmp_cpu_percent));
-  if (raw_cpu_percent != 0) {
-    total_size += 1 + 4;
-  }
+    // optional float cpu_percent = 8;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 + 4;
+    }
 
-  // int32 num_child_processes = 9;
-  if (this->_internal_num_child_processes() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_child_processes());
-  }
+    // optional int32 num_child_processes = 9;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_child_processes());
+    }
 
+  }
   // uint64 read_bytes = 11;
   if (this->_internal_read_bytes() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_read_bytes());
   }
 
-  // float memory_percent = 10;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_memory_percent = this->_internal_memory_percent();
-  uint32_t raw_memory_percent;
-  memcpy(&raw_memory_percent, &tmp_memory_percent, sizeof(tmp_memory_percent));
-  if (raw_memory_percent != 0) {
+  // optional float memory_percent = 10;
+  if (cached_has_bits & 0x00000008u) {
     total_size += 1 + 4;
   }
 
@@ -1062,6 +1062,20 @@ size_t ProcessMetrics::ByteSizeLong() const {
         this->_internal_ionice_value());
   }
 
+  // uint64 mem_rss = 23;
+  if (this->_internal_mem_rss() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::UInt64Size(
+        this->_internal_mem_rss());
+  }
+
+  // uint64 mem_uss = 24;
+  if (this->_internal_mem_uss() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::UInt64Size(
+        this->_internal_mem_uss());
+  }
+
   // int32 gid_effective = 21;
   if (this->_internal_gid_effective() != 0) {
     total_size += 2 +
@@ -1069,49 +1083,30 @@ size_t ProcessMetrics::ByteSizeLong() const {
         this->_internal_gid_effective());
   }
 
-  // float mem_rss = 23;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_rss = this->_internal_mem_rss();
-  uint32_t raw_mem_rss;
-  memcpy(&raw_mem_rss, &tmp_mem_rss, sizeof(tmp_mem_rss));
-  if (raw_mem_rss != 0) {
-    total_size += 2 + 4;
+  // bool is_sleep = 28;
+  if (this->_internal_is_sleep() != 0) {
+    total_size += 2 + 1;
   }
 
-  // float mem_uss = 24;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_uss = this->_internal_mem_uss();
-  uint32_t raw_mem_uss;
-  memcpy(&raw_mem_uss, &tmp_mem_uss, sizeof(tmp_mem_uss));
-  if (raw_mem_uss != 0) {
-    total_size += 2 + 4;
+  // uint64 mem_shared = 25;
+  if (this->_internal_mem_shared() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::UInt64Size(
+        this->_internal_mem_shared());
   }
 
-  // float mem_shared = 25;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_shared = this->_internal_mem_shared();
-  uint32_t raw_mem_shared;
-  memcpy(&raw_mem_shared, &tmp_mem_shared, sizeof(tmp_mem_shared));
-  if (raw_mem_shared != 0) {
-    total_size += 2 + 4;
+  // uint64 mem_vms = 26;
+  if (this->_internal_mem_vms() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::UInt64Size(
+        this->_internal_mem_vms());
   }
 
-  // float mem_vms = 26;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_vms = this->_internal_mem_vms();
-  uint32_t raw_mem_vms;
-  memcpy(&raw_mem_vms, &tmp_mem_vms, sizeof(tmp_mem_vms));
-  if (raw_mem_vms != 0) {
-    total_size += 2 + 4;
-  }
-
-  // float mem_text = 27;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_text = this->_internal_mem_text();
-  uint32_t raw_mem_text;
-  memcpy(&raw_mem_text, &tmp_mem_text, sizeof(tmp_mem_text));
-  if (raw_mem_text != 0) {
-    total_size += 2 + 4;
+  // uint64 mem_text = 27;
+  if (this->_internal_mem_text() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::UInt64Size(
+        this->_internal_mem_text());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1150,33 +1145,26 @@ void ProcessMetrics::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   if (!from._internal_hostip().empty()) {
     _this->_internal_set_hostip(from._internal_hostip());
   }
-  if (!from._internal_status().empty()) {
-    _this->_internal_set_status(from._internal_status());
-  }
   if (from._internal_pid() != 0) {
     _this->_internal_set_pid(from._internal_pid());
   }
-  if (from._internal_num_threads() != 0) {
-    _this->_internal_set_num_threads(from._internal_num_threads());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_cpu_percent = from._internal_cpu_percent();
-  uint32_t raw_cpu_percent;
-  memcpy(&raw_cpu_percent, &tmp_cpu_percent, sizeof(tmp_cpu_percent));
-  if (raw_cpu_percent != 0) {
-    _this->_internal_set_cpu_percent(from._internal_cpu_percent());
-  }
-  if (from._internal_num_child_processes() != 0) {
-    _this->_internal_set_num_child_processes(from._internal_num_child_processes());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_impl_.num_threads_ = from._impl_.num_threads_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_impl_.cpu_percent_ = from._impl_.cpu_percent_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_impl_.num_child_processes_ = from._impl_.num_child_processes_;
+    }
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
   if (from._internal_read_bytes() != 0) {
     _this->_internal_set_read_bytes(from._internal_read_bytes());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_memory_percent = from._internal_memory_percent();
-  uint32_t raw_memory_percent;
-  memcpy(&raw_memory_percent, &tmp_memory_percent, sizeof(tmp_memory_percent));
-  if (raw_memory_percent != 0) {
+  if (cached_has_bits & 0x00000008u) {
     _this->_internal_set_memory_percent(from._internal_memory_percent());
   }
   if (from._internal_num_fds() != 0) {
@@ -1205,42 +1193,25 @@ void ProcessMetrics::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   if (from._internal_ionice_value() != 0) {
     _this->_internal_set_ionice_value(from._internal_ionice_value());
   }
+  if (from._internal_mem_rss() != 0) {
+    _this->_internal_set_mem_rss(from._internal_mem_rss());
+  }
+  if (from._internal_mem_uss() != 0) {
+    _this->_internal_set_mem_uss(from._internal_mem_uss());
+  }
   if (from._internal_gid_effective() != 0) {
     _this->_internal_set_gid_effective(from._internal_gid_effective());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_rss = from._internal_mem_rss();
-  uint32_t raw_mem_rss;
-  memcpy(&raw_mem_rss, &tmp_mem_rss, sizeof(tmp_mem_rss));
-  if (raw_mem_rss != 0) {
-    _this->_internal_set_mem_rss(from._internal_mem_rss());
+  if (from._internal_is_sleep() != 0) {
+    _this->_internal_set_is_sleep(from._internal_is_sleep());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_uss = from._internal_mem_uss();
-  uint32_t raw_mem_uss;
-  memcpy(&raw_mem_uss, &tmp_mem_uss, sizeof(tmp_mem_uss));
-  if (raw_mem_uss != 0) {
-    _this->_internal_set_mem_uss(from._internal_mem_uss());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_shared = from._internal_mem_shared();
-  uint32_t raw_mem_shared;
-  memcpy(&raw_mem_shared, &tmp_mem_shared, sizeof(tmp_mem_shared));
-  if (raw_mem_shared != 0) {
+  if (from._internal_mem_shared() != 0) {
     _this->_internal_set_mem_shared(from._internal_mem_shared());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_vms = from._internal_mem_vms();
-  uint32_t raw_mem_vms;
-  memcpy(&raw_mem_vms, &tmp_mem_vms, sizeof(tmp_mem_vms));
-  if (raw_mem_vms != 0) {
+  if (from._internal_mem_vms() != 0) {
     _this->_internal_set_mem_vms(from._internal_mem_vms());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_mem_text = from._internal_mem_text();
-  uint32_t raw_mem_text;
-  memcpy(&raw_mem_text, &tmp_mem_text, sizeof(tmp_mem_text));
-  if (raw_mem_text != 0) {
+  if (from._internal_mem_text() != 0) {
     _this->_internal_set_mem_text(from._internal_mem_text());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1262,6 +1233,7 @@ void ProcessMetrics::InternalSwap(ProcessMetrics* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
@@ -1285,10 +1257,6 @@ void ProcessMetrics::InternalSwap(ProcessMetrics* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.hostip_, lhs_arena,
       &other->_impl_.hostip_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.status_, lhs_arena,
-      &other->_impl_.status_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(ProcessMetrics, _impl_.mem_text_)

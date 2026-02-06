@@ -34,14 +34,7 @@ class Collection {
         void get_kb_network_received(ProcessMetricas::ProcessMetrics& metrics, int pid);
         void get_gid_effective(ProcessMetricas::ProcessMetrics& metrics, int pid);
         void get_status_sleeping(ProcessMetricas::ProcessMetrics& metrics, int pid);
-        void get_mem_uss(ProcessMetricas::ProcessMetrics& metrics, int pid);
-        void get_mem_rss(ProcessMetricas::ProcessMetrics& metrics, int pid);
-        void get_mem_shared(ProcessMetricas::ProcessMetrics& metrics, int pid);
-        void get_mem_vms(ProcessMetricas::ProcessMetrics& metrics, int pid);
-        void get_mem_text(ProcessMetricas::ProcessMetrics& metrics, int pid);
-        
+        void get_mem_statm(ProcessMetricas::ProcessMetrics &metrics, int pid);
+        void get_mem_uss(ProcessMetricas::ProcessMetrics &metrics, int pid);
+        void get_io_nice(ProcessMetricas::ProcessMetrics &metrics, int pid);
 };
-
-
-
-

@@ -126,7 +126,7 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, in
     if (!stat_file.is_open())
     {
         // Caso não consiga abrir o arquivo, definir status como "Unknown"
-        metrics.set_status("");
+        metrics.set_is_sleep(false);
         return;
     }
 
@@ -139,7 +139,7 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, in
     std::string token;
     int field = 1;
     std::string status;
-    
+
     while (iss >> token)
     {
         // O campo do status pode estar entre parênteses, então precisamos lidar com isso
@@ -149,26 +149,9 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, in
             break;
         }
         field++;
+    }
 
-    }
-    if (status =="Z")
-    {
-        // Zombie
-        metrics.set_status("Zombie");
-        return;
-    }else if (status == "S")
-    {
-        // Sleeping
-        metrics.set_status("Sleeping");
-        return;
-    }else if (status == "R")
-    {
-        // Running
-        metrics.set_status("Running");
-        return;
-    }
-    // Definir o status no objeto metrics
-    metrics.set_status(status);
+    metrics.set_is_sleep(status == "S");
 }
 
 /**
