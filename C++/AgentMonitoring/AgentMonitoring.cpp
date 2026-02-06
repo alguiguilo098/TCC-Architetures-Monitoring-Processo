@@ -9,7 +9,6 @@
 // Nome: Guilherme Almeida Lopes
 // Data: 2025-01-29
 
-
 /// @brief Monitora um processo específico coletando suas métricas
 /// @param pid Identificador do processo a ser monitorado
 /// @param metrics Estrutura onde as métricas coletadas serão armazenadas
@@ -32,9 +31,12 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_create_time(metrics, pid);
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_memory_percent(metrics, pid);
-
+    collection->get_mem_rss(metrics, pid);          // Coleta o RSS (Resident Set Size) do processo
+    collection->get_mem_uss(metrics, pid);          // Coleta o USS (Unique
+    collection->get_mem_shared(metrics, pid);       // Coleta a memória compartilhada do processo
+    collection->get_mem_vms(metrics, pid);          // Coleta o VMS (Virtual Memory Size) do processo
+    collection->get_mem_text(metrics, pid);         // Coleta a memória de texto do processo
     
-
     // Coleta o tempo de atividade do processo
 
     this->mutexBuffer.lock();
@@ -171,9 +173,8 @@ void AgentMonitoring::start_monitoring()
         // Verifica se é hora de executar os scripts periódicos
         auto now_sys_agent = std::chrono::system_clock::now();
         std::time_t now_time_now = std::chrono::system_clock::to_time_t(now_sys_agent);
-        if (has_time_passed(
-                this->last_monitor_time,
-                std::chrono::hours(this->configAgent.TruePeriodicScriptHours))){
+        if (has_time_passed(this->last_monitor_time, std::chrono::hours(this->configAgent.TruePeriodicScriptHours)) || true)
+        {
             // Executa os scripts periódicos
             monitor_kernel_distro(kernelDistro);
             // Executa a coleta de programas instalados
@@ -181,17 +182,16 @@ void AgentMonitoring::start_monitoring()
             // Atualiza o tempo do último monitoramento
             auto now_sys = std::chrono::system_clock::now();
             std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
-
-            WriteKernelDistroToFile(kernelDistro, "kernel_distro_metrics.json");
-            WriteInstalledProgramsToFile(programList, "installed_programs_metrics.json");
+            
             // Atualiza o tempo do último monitoramento
             this->last_monitor_time = std::chrono::steady_clock::now();
         }
-
+        
         if (this->BufferOutput.processes_size() < this->configAgent.BufferSize)
         {
-            // Coleta dados de processos
             monitor_all_processes();
+            WriteProcessMetricsToFile(this->BufferOutput, "process_metrics_output.json");
+
         }
         else
         {
@@ -212,6 +212,10 @@ void AgentMonitoring::strart_sending_data_server()
     while (true)
     {
         sem_wait(&this->semaphoreBuffer);
+        std::cout << "Sending data to server..." << std::endl;
+        // Envia os dados coletados para o servidor
+        
+        this->channelCommunication->sendMessage(this->BufferInput);
         // After sending, clear the BufferInput
         this->BufferInput.Clear();
     }

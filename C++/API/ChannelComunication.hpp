@@ -4,7 +4,7 @@
 
 class ChannelCommunication{
     public:
-        
+        void sendMessage(ProcessMetricas::InstalledProgramList &message);
         void sendMessage(ProcessMetricas::KernelDistro &message);
-        void sendMessage(ProcessMetricas::InstalledProgram &message); 
+        void sendMessage(ProcessMetricas::ProcessMetricsList &message); 
 };

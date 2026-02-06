@@ -7,32 +7,48 @@ package ProcessMetricas;
 
 message ProcessMetrics {
   // Campos básicos do processo
-  int32 pid = 1;                          
-  string name = 2;                        
-  string user = 3;                        
-  string status = 5;
+  int32 pid = 1; // IMPLEMENTADO                          
+  string name = 2; // IMPLEMENTADO          
+  string user = 3; // IMPLEMENTADO        
+  int32 num_threads = 7; // IMPLEMENTADO      
+  int32 num_child_processes = 9; // IMPLEMENTADO   
   
-  // Campos adicionais do processo                 
-  int32 num_threads = 7;                  
-  float cpu_percent = 8;                  
-  int32 num_child_processes = 9;           
-  float memory_percent = 10;
-  
-  // Campos de I/O e FDs
-  uint64 read_bytes = 11;                
-  uint64 write_bytes = 12;                
-  int32 num_fds = 13;                     
-  int32 nice = 14;
+  // CPU                 
+  float cpu_percent = 8; // IMPLEMENTADO
+  // Memória
+  float memory_percent = 10; // IMPLEMENTADO
+  float mem_rss = 23;
+  float mem_uss = 24;
+  float mem_shared = 25;
+  float mem_vms = 26;
+  float mem_text = 27;
 
-  // Campos de timestamp, boottime, timestartprocess
-  string timestamp = 4;
-  string boottime = 15;
-  string timestartprocess = 16;
-   
-  // Campo para o IP do host                  
-  string hostip= 17;
+  // Campos de I/O
+  uint64 read_bytes = 11;  // IMPLEMENTADO
+  uint64 write_bytes = 12; // IMPLEMENTADO 
+  int32 num_fds = 13; // IMPLEMENTADO                    
+  int32 nice = 14; // IMPLEMENTADO
+  int32 ionice_value = 20;
+
+  // Campos de timestamp
+  string timestamp = 4; // IMPLEMENTADO
+  string boottime = 15; // IMPLEMENTADO
+  string timestartprocess = 16; // IMPLEMENTADO
   
-};
+  // Network                 
+  string hostip = 17; // IMPLEMENTADO
+  float kb_received = 18;
+  float kb_sent = 19;
+  
+  // Status
+   string status = 28;
+  // Rede
+
+  // Identidade e permissões
+  int32 gid_effective = 21; 
+
+  
+}
 
 message ProcessMetricsList {
   repeated ProcessMetrics processes = 1;  
@@ -57,9 +73,6 @@ message InstalledProgramList {
   string hostip= 2; // IP do host
   repeated InstalledProgram programs = 1;  // Lista de programas
 }
-
-
-
 
 
 

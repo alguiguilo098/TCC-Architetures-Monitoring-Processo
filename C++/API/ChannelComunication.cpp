@@ -4,10 +4,22 @@
 #include <unistd.h>
 #include <string>
 #include <iostream>
+#include <google/protobuf/util/json_util.h>
 
-void sendTcpJson(const std::string& jsonStr, const std::string& host, int port) {
+std::string protobufToJson(const google::protobuf::Message& msg)
+{
+    std::string json;
+    google::protobuf::util::MessageToJsonString(msg, &json);
+    json.push_back('\n'); // IMPORTANTÍSSIMO: 1 evento por linha
+    return json;
+}
+
+void sendTcpJson(const std::string& json,
+                 const std::string& host,
+                 int port)
+{
     int sock = socket(AF_INET, SOCK_STREAM, 0);
-    if(sock < 0) {
+    if (sock < 0) {
         perror("socket");
         return;
     }
@@ -17,24 +29,29 @@ void sendTcpJson(const std::string& jsonStr, const std::string& host, int port) 
     server_addr.sin_port = htons(port);
     inet_pton(AF_INET, host.c_str(), &server_addr.sin_addr);
 
-    if(connect(sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
+    if (connect(sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         perror("connect");
         close(sock);
         return;
     }
 
-    // Adiciona quebra de linha no final para o Logstash interpretar cada JSON como um evento
-    std::string message = jsonStr + "\n";
-    send(sock, message.c_str(), message.size(), 0);
-
+    send(sock, json.data(), json.size(), 0);
     close(sock);
 }
 
 
-void ChannelCommunication::sendMessage(ProcessMetricas::KernelDistro &message){
-    sendTcpJson(message.SerializeAsString(), "0.0.0.0", 9995);
+
+void ChannelCommunication::sendMessage(ProcessMetricas::InstalledProgramList &message)
+{
+    sendTcpJson(protobufToJson(message), "0.0.0.0", 9995);
+}
+
+void ChannelCommunication::sendMessage(ProcessMetricas::KernelDistro &message)
+{
+    sendTcpJson(protobufToJson(message), "0.0.0.0", 9995);
 };
 
-void ChannelCommunication::sendMessage(ProcessMetricas::InstalledProgram &message){
-
-}; 
+void ChannelCommunication::sendMessage(ProcessMetricas::ProcessMetricsList &message)
+{
+    sendTcpJson(protobufToJson(message), "0.0.0.0", 9995);
+};

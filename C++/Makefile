@@ -9,6 +9,7 @@ compile:
 	./Colletion/CollectionNumThreadsNice.cpp \
 	./Scripts/Script.cpp \
 	./API/ChannelComunication.cpp \
+	./Colletion/CollectionMemory.cpp \
 	./Colletion/CollectionMetricsMemoryWriteReadBytes.cpp \
 	./Colletion/CollectionHostIPCreateTimeBootime.cpp \
 	./AgentMonitoring/AgentMonitoring.cpp \

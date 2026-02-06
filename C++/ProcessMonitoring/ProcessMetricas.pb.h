@@ -196,10 +196,10 @@ class ProcessMetrics final :
     kNameFieldNumber = 2,
     kUserFieldNumber = 3,
     kTimestampFieldNumber = 4,
-    kStatusFieldNumber = 5,
     kBoottimeFieldNumber = 15,
     kTimestartprocessFieldNumber = 16,
     kHostipFieldNumber = 17,
+    kStatusFieldNumber = 28,
     kPidFieldNumber = 1,
     kNumThreadsFieldNumber = 7,
     kCpuPercentFieldNumber = 8,
@@ -209,6 +209,15 @@ class ProcessMetrics final :
     kNumFdsFieldNumber = 13,
     kWriteBytesFieldNumber = 12,
     kNiceFieldNumber = 14,
+    kKbReceivedFieldNumber = 18,
+    kKbSentFieldNumber = 19,
+    kIoniceValueFieldNumber = 20,
+    kGidEffectiveFieldNumber = 21,
+    kMemRssFieldNumber = 23,
+    kMemUssFieldNumber = 24,
+    kMemSharedFieldNumber = 25,
+    kMemVmsFieldNumber = 26,
+    kMemTextFieldNumber = 27,
   };
   // string name = 2;
   void clear_name();
@@ -252,20 +261,6 @@ class ProcessMetrics final :
   std::string* _internal_mutable_timestamp();
   public:
 
-  // string status = 5;
-  void clear_status();
-  const std::string& status() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_status(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_status();
-  PROTOBUF_NODISCARD std::string* release_status();
-  void set_allocated_status(std::string* status);
-  private:
-  const std::string& _internal_status() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(const std::string& value);
-  std::string* _internal_mutable_status();
-  public:
-
   // string boottime = 15;
   void clear_boottime();
   const std::string& boottime() const;
@@ -306,6 +301,20 @@ class ProcessMetrics final :
   const std::string& _internal_hostip() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_hostip(const std::string& value);
   std::string* _internal_mutable_hostip();
+  public:
+
+  // string status = 28;
+  void clear_status();
+  const std::string& status() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_status(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_status();
+  PROTOBUF_NODISCARD std::string* release_status();
+  void set_allocated_status(std::string* status);
+  private:
+  const std::string& _internal_status() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(const std::string& value);
+  std::string* _internal_mutable_status();
   public:
 
   // int32 pid = 1;
@@ -389,6 +398,87 @@ class ProcessMetrics final :
   void _internal_set_nice(int32_t value);
   public:
 
+  // float kb_received = 18;
+  void clear_kb_received();
+  float kb_received() const;
+  void set_kb_received(float value);
+  private:
+  float _internal_kb_received() const;
+  void _internal_set_kb_received(float value);
+  public:
+
+  // float kb_sent = 19;
+  void clear_kb_sent();
+  float kb_sent() const;
+  void set_kb_sent(float value);
+  private:
+  float _internal_kb_sent() const;
+  void _internal_set_kb_sent(float value);
+  public:
+
+  // int32 ionice_value = 20;
+  void clear_ionice_value();
+  int32_t ionice_value() const;
+  void set_ionice_value(int32_t value);
+  private:
+  int32_t _internal_ionice_value() const;
+  void _internal_set_ionice_value(int32_t value);
+  public:
+
+  // int32 gid_effective = 21;
+  void clear_gid_effective();
+  int32_t gid_effective() const;
+  void set_gid_effective(int32_t value);
+  private:
+  int32_t _internal_gid_effective() const;
+  void _internal_set_gid_effective(int32_t value);
+  public:
+
+  // float mem_rss = 23;
+  void clear_mem_rss();
+  float mem_rss() const;
+  void set_mem_rss(float value);
+  private:
+  float _internal_mem_rss() const;
+  void _internal_set_mem_rss(float value);
+  public:
+
+  // float mem_uss = 24;
+  void clear_mem_uss();
+  float mem_uss() const;
+  void set_mem_uss(float value);
+  private:
+  float _internal_mem_uss() const;
+  void _internal_set_mem_uss(float value);
+  public:
+
+  // float mem_shared = 25;
+  void clear_mem_shared();
+  float mem_shared() const;
+  void set_mem_shared(float value);
+  private:
+  float _internal_mem_shared() const;
+  void _internal_set_mem_shared(float value);
+  public:
+
+  // float mem_vms = 26;
+  void clear_mem_vms();
+  float mem_vms() const;
+  void set_mem_vms(float value);
+  private:
+  float _internal_mem_vms() const;
+  void _internal_set_mem_vms(float value);
+  public:
+
+  // float mem_text = 27;
+  void clear_mem_text();
+  float mem_text() const;
+  void set_mem_text(float value);
+  private:
+  float _internal_mem_text() const;
+  void _internal_set_mem_text(float value);
+  public:
+
   // @@protoc_insertion_point(class_scope:ProcessMetricas.ProcessMetrics)
  private:
   class _Internal;
@@ -400,10 +490,10 @@ class ProcessMetrics final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr boottime_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestartprocess_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
     int32_t pid_;
     int32_t num_threads_;
     float cpu_percent_;
@@ -413,6 +503,15 @@ class ProcessMetrics final :
     int32_t num_fds_;
     uint64_t write_bytes_;
     int32_t nice_;
+    float kb_received_;
+    float kb_sent_;
+    int32_t ionice_value_;
+    int32_t gid_effective_;
+    float mem_rss_;
+    float mem_uss_;
+    float mem_shared_;
+    float mem_vms_;
+    float mem_text_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1265,56 +1364,6 @@ inline void ProcessMetrics::set_allocated_user(std::string* user) {
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.user)
 }
 
-// string status = 5;
-inline void ProcessMetrics::clear_status() {
-  _impl_.status_.ClearToEmpty();
-}
-inline const std::string& ProcessMetrics::status() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.status)
-  return _internal_status();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void ProcessMetrics::set_status(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.status_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.status)
-}
-inline std::string* ProcessMetrics::mutable_status() {
-  std::string* _s = _internal_mutable_status();
-  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.status)
-  return _s;
-}
-inline const std::string& ProcessMetrics::_internal_status() const {
-  return _impl_.status_.Get();
-}
-inline void ProcessMetrics::_internal_set_status(const std::string& value) {
-  
-  _impl_.status_.Set(value, GetArenaForAllocation());
-}
-inline std::string* ProcessMetrics::_internal_mutable_status() {
-  
-  return _impl_.status_.Mutable(GetArenaForAllocation());
-}
-inline std::string* ProcessMetrics::release_status() {
-  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.status)
-  return _impl_.status_.Release();
-}
-inline void ProcessMetrics::set_allocated_status(std::string* status) {
-  if (status != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.status_.SetAllocated(status, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.status_.IsDefault()) {
-    _impl_.status_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.status)
-}
-
 // int32 num_threads = 7;
 inline void ProcessMetrics::clear_num_threads() {
   _impl_.num_threads_ = 0;
@@ -1333,26 +1382,6 @@ inline void ProcessMetrics::_internal_set_num_threads(int32_t value) {
 inline void ProcessMetrics::set_num_threads(int32_t value) {
   _internal_set_num_threads(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.num_threads)
-}
-
-// float cpu_percent = 8;
-inline void ProcessMetrics::clear_cpu_percent() {
-  _impl_.cpu_percent_ = 0;
-}
-inline float ProcessMetrics::_internal_cpu_percent() const {
-  return _impl_.cpu_percent_;
-}
-inline float ProcessMetrics::cpu_percent() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.cpu_percent)
-  return _internal_cpu_percent();
-}
-inline void ProcessMetrics::_internal_set_cpu_percent(float value) {
-  
-  _impl_.cpu_percent_ = value;
-}
-inline void ProcessMetrics::set_cpu_percent(float value) {
-  _internal_set_cpu_percent(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.cpu_percent)
 }
 
 // int32 num_child_processes = 9;
@@ -1375,6 +1404,26 @@ inline void ProcessMetrics::set_num_child_processes(int32_t value) {
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.num_child_processes)
 }
 
+// float cpu_percent = 8;
+inline void ProcessMetrics::clear_cpu_percent() {
+  _impl_.cpu_percent_ = 0;
+}
+inline float ProcessMetrics::_internal_cpu_percent() const {
+  return _impl_.cpu_percent_;
+}
+inline float ProcessMetrics::cpu_percent() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.cpu_percent)
+  return _internal_cpu_percent();
+}
+inline void ProcessMetrics::_internal_set_cpu_percent(float value) {
+  
+  _impl_.cpu_percent_ = value;
+}
+inline void ProcessMetrics::set_cpu_percent(float value) {
+  _internal_set_cpu_percent(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.cpu_percent)
+}
+
 // float memory_percent = 10;
 inline void ProcessMetrics::clear_memory_percent() {
   _impl_.memory_percent_ = 0;
@@ -1393,6 +1442,106 @@ inline void ProcessMetrics::_internal_set_memory_percent(float value) {
 inline void ProcessMetrics::set_memory_percent(float value) {
   _internal_set_memory_percent(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.memory_percent)
+}
+
+// float mem_rss = 23;
+inline void ProcessMetrics::clear_mem_rss() {
+  _impl_.mem_rss_ = 0;
+}
+inline float ProcessMetrics::_internal_mem_rss() const {
+  return _impl_.mem_rss_;
+}
+inline float ProcessMetrics::mem_rss() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_rss)
+  return _internal_mem_rss();
+}
+inline void ProcessMetrics::_internal_set_mem_rss(float value) {
+  
+  _impl_.mem_rss_ = value;
+}
+inline void ProcessMetrics::set_mem_rss(float value) {
+  _internal_set_mem_rss(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_rss)
+}
+
+// float mem_uss = 24;
+inline void ProcessMetrics::clear_mem_uss() {
+  _impl_.mem_uss_ = 0;
+}
+inline float ProcessMetrics::_internal_mem_uss() const {
+  return _impl_.mem_uss_;
+}
+inline float ProcessMetrics::mem_uss() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_uss)
+  return _internal_mem_uss();
+}
+inline void ProcessMetrics::_internal_set_mem_uss(float value) {
+  
+  _impl_.mem_uss_ = value;
+}
+inline void ProcessMetrics::set_mem_uss(float value) {
+  _internal_set_mem_uss(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_uss)
+}
+
+// float mem_shared = 25;
+inline void ProcessMetrics::clear_mem_shared() {
+  _impl_.mem_shared_ = 0;
+}
+inline float ProcessMetrics::_internal_mem_shared() const {
+  return _impl_.mem_shared_;
+}
+inline float ProcessMetrics::mem_shared() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_shared)
+  return _internal_mem_shared();
+}
+inline void ProcessMetrics::_internal_set_mem_shared(float value) {
+  
+  _impl_.mem_shared_ = value;
+}
+inline void ProcessMetrics::set_mem_shared(float value) {
+  _internal_set_mem_shared(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_shared)
+}
+
+// float mem_vms = 26;
+inline void ProcessMetrics::clear_mem_vms() {
+  _impl_.mem_vms_ = 0;
+}
+inline float ProcessMetrics::_internal_mem_vms() const {
+  return _impl_.mem_vms_;
+}
+inline float ProcessMetrics::mem_vms() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_vms)
+  return _internal_mem_vms();
+}
+inline void ProcessMetrics::_internal_set_mem_vms(float value) {
+  
+  _impl_.mem_vms_ = value;
+}
+inline void ProcessMetrics::set_mem_vms(float value) {
+  _internal_set_mem_vms(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_vms)
+}
+
+// float mem_text = 27;
+inline void ProcessMetrics::clear_mem_text() {
+  _impl_.mem_text_ = 0;
+}
+inline float ProcessMetrics::_internal_mem_text() const {
+  return _impl_.mem_text_;
+}
+inline float ProcessMetrics::mem_text() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_text)
+  return _internal_mem_text();
+}
+inline void ProcessMetrics::_internal_set_mem_text(float value) {
+  
+  _impl_.mem_text_ = value;
+}
+inline void ProcessMetrics::set_mem_text(float value) {
+  _internal_set_mem_text(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_text)
 }
 
 // uint64 read_bytes = 11;
@@ -1473,6 +1622,26 @@ inline void ProcessMetrics::_internal_set_nice(int32_t value) {
 inline void ProcessMetrics::set_nice(int32_t value) {
   _internal_set_nice(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.nice)
+}
+
+// int32 ionice_value = 20;
+inline void ProcessMetrics::clear_ionice_value() {
+  _impl_.ionice_value_ = 0;
+}
+inline int32_t ProcessMetrics::_internal_ionice_value() const {
+  return _impl_.ionice_value_;
+}
+inline int32_t ProcessMetrics::ionice_value() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.ionice_value)
+  return _internal_ionice_value();
+}
+inline void ProcessMetrics::_internal_set_ionice_value(int32_t value) {
+  
+  _impl_.ionice_value_ = value;
+}
+inline void ProcessMetrics::set_ionice_value(int32_t value) {
+  _internal_set_ionice_value(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.ionice_value)
 }
 
 // string timestamp = 4;
@@ -1673,6 +1842,116 @@ inline void ProcessMetrics::set_allocated_hostip(std::string* hostip) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.hostip)
+}
+
+// float kb_received = 18;
+inline void ProcessMetrics::clear_kb_received() {
+  _impl_.kb_received_ = 0;
+}
+inline float ProcessMetrics::_internal_kb_received() const {
+  return _impl_.kb_received_;
+}
+inline float ProcessMetrics::kb_received() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.kb_received)
+  return _internal_kb_received();
+}
+inline void ProcessMetrics::_internal_set_kb_received(float value) {
+  
+  _impl_.kb_received_ = value;
+}
+inline void ProcessMetrics::set_kb_received(float value) {
+  _internal_set_kb_received(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.kb_received)
+}
+
+// float kb_sent = 19;
+inline void ProcessMetrics::clear_kb_sent() {
+  _impl_.kb_sent_ = 0;
+}
+inline float ProcessMetrics::_internal_kb_sent() const {
+  return _impl_.kb_sent_;
+}
+inline float ProcessMetrics::kb_sent() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.kb_sent)
+  return _internal_kb_sent();
+}
+inline void ProcessMetrics::_internal_set_kb_sent(float value) {
+  
+  _impl_.kb_sent_ = value;
+}
+inline void ProcessMetrics::set_kb_sent(float value) {
+  _internal_set_kb_sent(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.kb_sent)
+}
+
+// string status = 28;
+inline void ProcessMetrics::clear_status() {
+  _impl_.status_.ClearToEmpty();
+}
+inline const std::string& ProcessMetrics::status() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.status)
+  return _internal_status();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProcessMetrics::set_status(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.status_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.status)
+}
+inline std::string* ProcessMetrics::mutable_status() {
+  std::string* _s = _internal_mutable_status();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.status)
+  return _s;
+}
+inline const std::string& ProcessMetrics::_internal_status() const {
+  return _impl_.status_.Get();
+}
+inline void ProcessMetrics::_internal_set_status(const std::string& value) {
+  
+  _impl_.status_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::_internal_mutable_status() {
+  
+  return _impl_.status_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::release_status() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.status)
+  return _impl_.status_.Release();
+}
+inline void ProcessMetrics::set_allocated_status(std::string* status) {
+  if (status != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.status_.SetAllocated(status, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.status_.IsDefault()) {
+    _impl_.status_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.status)
+}
+
+// int32 gid_effective = 21;
+inline void ProcessMetrics::clear_gid_effective() {
+  _impl_.gid_effective_ = 0;
+}
+inline int32_t ProcessMetrics::_internal_gid_effective() const {
+  return _impl_.gid_effective_;
+}
+inline int32_t ProcessMetrics::gid_effective() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.gid_effective)
+  return _internal_gid_effective();
+}
+inline void ProcessMetrics::_internal_set_gid_effective(int32_t value) {
+  
+  _impl_.gid_effective_ = value;
+}
+inline void ProcessMetrics::set_gid_effective(int32_t value) {
+  _internal_set_gid_effective(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.gid_effective)
 }
 
 // -------------------------------------------------------------------
