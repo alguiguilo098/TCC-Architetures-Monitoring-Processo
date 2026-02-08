@@ -9,7 +9,10 @@
 std::string protobufToJson(const google::protobuf::Message& msg)
 {
     std::string json;
-    google::protobuf::util::MessageToJsonString(msg, &json);
+    google::protobuf::util::JsonPrintOptions options;
+    options.always_print_primitive_fields = true;
+    options.preserve_proto_field_names = true;
+    google::protobuf::util::MessageToJsonString(msg, &json, options);
     json.push_back('\n'); // IMPORTANTÍSSIMO: 1 evento por linha
     return json;
 }

@@ -1,6 +1,5 @@
 #include "Collection.hpp"
 #include <array>
-#include <pwd.h>
 #include <sstream>
 #include <string>
 #include <pwd.h>
@@ -54,14 +53,17 @@ void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int 
  */
 void Collection::get_metrics_timestamp(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
-    // Obtém o tempo atual.
+
     auto now = std::chrono::system_clock::now();
-    auto now_c = std::chrono::system_clock::to_time_t(now);
-    // Converte para string.
-    std::string timestamp = std::ctime(&now_c);
-    // Remove espaços em branco e nova linha.
-    timestamp.erase(timestamp.find_last_not_of(" \n\r\t") + 1);
-    metrics.set_timestamp(timestamp);
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+    std::tm tm{};
+    localtime_r(&now_c, &tm); // thread-safe no Linux
+
+    std::ostringstream oss;
+    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
+
+    metrics.set_timestamp(oss.str());
 }
 
 /**
@@ -119,39 +121,9 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
  * @param metrics Referência ao objeto ProcessMetrics onde o status será armazenado
  * @param pid ID do processo cujo status será coletado
  */
-void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, int pid)
-{
-    // Abrir o arquivo /proc/<pid>/stat
-    std::ifstream stat_file("/proc/" + std::to_string(pid) + "/stat");
-    if (!stat_file.is_open())
-    {
-        // Caso não consiga abrir o arquivo, definir status como "Unknown"
-        metrics.set_is_sleep(false);
-        return;
-    }
-
-    // Ler o conteúdo do arquivo
-    std::string line;
-    std::getline(stat_file, line);
-
-    // Analisar a linha para extrair o status (3º campo)
-    std::istringstream iss(line);
-    std::string token;
-    int field = 1;
-    std::string status;
-
-    while (iss >> token)
-    {
-        // O campo do status pode estar entre parênteses, então precisamos lidar com isso
-        if (field == 3)
-        { // 3º campo é o estado
-            status = token;
-            break;
-        }
-        field++;
-    }
-
-    metrics.set_is_sleep(status == "S");
+void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, int pid){
+    
+   
 }
 
 /**
@@ -215,7 +187,7 @@ void Collection::get_metrics_create_time(ProcessMetricas::ProcessMetrics &metric
     // Formata exatamente:
     // Tue Jan 27 18:27:56 2026
     std::ostringstream oss;
-    oss << std::put_time(&tm, "%a %b %d %H:%M:%S %Y");
+    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S%z");
 
     metrics.set_timestartprocess(oss.str());
 }

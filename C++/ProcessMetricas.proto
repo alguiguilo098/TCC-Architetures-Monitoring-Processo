@@ -10,7 +10,7 @@ message ProcessMetrics {
   int32 pid = 1; // IMPLEMENTADO                          
   string name = 2; // IMPLEMENTADO          
   string user = 3; // IMPLEMENTADO        
-  optional int32 num_threads = 7; // IMPLEMENTADO      
+  int32 num_threads = 7; // IMPLEMENTADO      
   optional int32 num_child_processes = 9; // IMPLEMENTADO   
   
   // CPU                 
@@ -18,17 +18,17 @@ message ProcessMetrics {
   // Memória
   optional float memory_percent = 10; // IMPLEMENTADO
   uint64 mem_rss_kb = 23; // IMPLEMENTADO
-  uint64 mem_uss_kb = 24; 
   uint64 mem_shared_kb = 25; // IMPLEMENTADO
   uint64 mem_vms_kb = 26; // IMPLEMENTADO
   uint64 mem_text_kb = 27; // IMPLEMENTADO
-  uint64 read_bytes_kb = 11;  // IMPLEMENTADO
-  uint64 write_bytes_kb = 12; // IMPLEMENTADO 
+  
+  optional uint64 read_bytes_kb = 11;  // IMPLEMENTADO
+  optional uint64 write_bytes_kb = 12; // IMPLEMENTADO 
 
   // Campos de I/O
   optional int32 num_fds = 13; // IMPLEMENTADO                    
   int32 nice = 14; // IMPLEMENTADO
-  int32 ionice_value = 20;
+  int32 ionice_value = 20; // IMPLEMENTADO
 
   // Campos de timestamp
   string timestamp = 4; // IMPLEMENTADO
@@ -36,10 +36,9 @@ message ProcessMetrics {
   string timestartprocess = 16; // IMPLEMENTADO
   
   // Network                 
+  string hostip = 17;   // IMPLEMENTADO
   
-  // Status
-  bool is_sleep = 28;
-  // Rede
+
   
   // Identidade e permissões
   int32 gid_effective = 21; 
@@ -48,9 +47,6 @@ message ProcessMetrics {
 }
 
 message ProcessMetricsList {
-  string hostip = 17; 
-  float kb_received = 18;
-  float kb_sent = 19;
   repeated ProcessMetrics processes = 1;  
 };
 

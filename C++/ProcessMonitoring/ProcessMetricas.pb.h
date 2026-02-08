@@ -203,21 +203,19 @@ class ProcessMetrics final :
     kNumThreadsFieldNumber = 7,
     kCpuPercentFieldNumber = 8,
     kNumChildProcessesFieldNumber = 9,
-    kReadBytesFieldNumber = 11,
+    kReadBytesKbFieldNumber = 11,
     kMemoryPercentFieldNumber = 10,
     kNumFdsFieldNumber = 13,
-    kWriteBytesFieldNumber = 12,
+    kWriteBytesKbFieldNumber = 12,
     kNiceFieldNumber = 14,
     kKbReceivedFieldNumber = 18,
     kKbSentFieldNumber = 19,
     kIoniceValueFieldNumber = 20,
-    kMemRssFieldNumber = 23,
-    kMemUssFieldNumber = 24,
+    kMemRssKbFieldNumber = 23,
+    kMemSharedKbFieldNumber = 25,
+    kMemVmsKbFieldNumber = 26,
+    kMemTextKbFieldNumber = 27,
     kGidEffectiveFieldNumber = 21,
-    kIsSleepFieldNumber = 28,
-    kMemSharedFieldNumber = 25,
-    kMemVmsFieldNumber = 26,
-    kMemTextFieldNumber = 27,
   };
   // string name = 2;
   void clear_name();
@@ -312,11 +310,7 @@ class ProcessMetrics final :
   void _internal_set_pid(int32_t value);
   public:
 
-  // optional int32 num_threads = 7;
-  bool has_num_threads() const;
-  private:
-  bool _internal_has_num_threads() const;
-  public:
+  // int32 num_threads = 7;
   void clear_num_threads();
   int32_t num_threads() const;
   void set_num_threads(int32_t value);
@@ -351,13 +345,17 @@ class ProcessMetrics final :
   void _internal_set_num_child_processes(int32_t value);
   public:
 
-  // uint64 read_bytes = 11;
-  void clear_read_bytes();
-  uint64_t read_bytes() const;
-  void set_read_bytes(uint64_t value);
+  // optional uint64 read_bytes_kb = 11;
+  bool has_read_bytes_kb() const;
   private:
-  uint64_t _internal_read_bytes() const;
-  void _internal_set_read_bytes(uint64_t value);
+  bool _internal_has_read_bytes_kb() const;
+  public:
+  void clear_read_bytes_kb();
+  uint64_t read_bytes_kb() const;
+  void set_read_bytes_kb(uint64_t value);
+  private:
+  uint64_t _internal_read_bytes_kb() const;
+  void _internal_set_read_bytes_kb(uint64_t value);
   public:
 
   // optional float memory_percent = 10;
@@ -373,7 +371,11 @@ class ProcessMetrics final :
   void _internal_set_memory_percent(float value);
   public:
 
-  // int32 num_fds = 13;
+  // optional int32 num_fds = 13;
+  bool has_num_fds() const;
+  private:
+  bool _internal_has_num_fds() const;
+  public:
   void clear_num_fds();
   int32_t num_fds() const;
   void set_num_fds(int32_t value);
@@ -382,13 +384,17 @@ class ProcessMetrics final :
   void _internal_set_num_fds(int32_t value);
   public:
 
-  // uint64 write_bytes = 12;
-  void clear_write_bytes();
-  uint64_t write_bytes() const;
-  void set_write_bytes(uint64_t value);
+  // optional uint64 write_bytes_kb = 12;
+  bool has_write_bytes_kb() const;
   private:
-  uint64_t _internal_write_bytes() const;
-  void _internal_set_write_bytes(uint64_t value);
+  bool _internal_has_write_bytes_kb() const;
+  public:
+  void clear_write_bytes_kb();
+  uint64_t write_bytes_kb() const;
+  void set_write_bytes_kb(uint64_t value);
+  private:
+  uint64_t _internal_write_bytes_kb() const;
+  void _internal_set_write_bytes_kb(uint64_t value);
   public:
 
   // int32 nice = 14;
@@ -427,22 +433,40 @@ class ProcessMetrics final :
   void _internal_set_ionice_value(int32_t value);
   public:
 
-  // uint64 mem_rss = 23;
-  void clear_mem_rss();
-  uint64_t mem_rss() const;
-  void set_mem_rss(uint64_t value);
+  // uint64 mem_rss_kb = 23;
+  void clear_mem_rss_kb();
+  uint64_t mem_rss_kb() const;
+  void set_mem_rss_kb(uint64_t value);
   private:
-  uint64_t _internal_mem_rss() const;
-  void _internal_set_mem_rss(uint64_t value);
+  uint64_t _internal_mem_rss_kb() const;
+  void _internal_set_mem_rss_kb(uint64_t value);
   public:
 
-  // uint64 mem_uss = 24;
-  void clear_mem_uss();
-  uint64_t mem_uss() const;
-  void set_mem_uss(uint64_t value);
+  // uint64 mem_shared_kb = 25;
+  void clear_mem_shared_kb();
+  uint64_t mem_shared_kb() const;
+  void set_mem_shared_kb(uint64_t value);
   private:
-  uint64_t _internal_mem_uss() const;
-  void _internal_set_mem_uss(uint64_t value);
+  uint64_t _internal_mem_shared_kb() const;
+  void _internal_set_mem_shared_kb(uint64_t value);
+  public:
+
+  // uint64 mem_vms_kb = 26;
+  void clear_mem_vms_kb();
+  uint64_t mem_vms_kb() const;
+  void set_mem_vms_kb(uint64_t value);
+  private:
+  uint64_t _internal_mem_vms_kb() const;
+  void _internal_set_mem_vms_kb(uint64_t value);
+  public:
+
+  // uint64 mem_text_kb = 27;
+  void clear_mem_text_kb();
+  uint64_t mem_text_kb() const;
+  void set_mem_text_kb(uint64_t value);
+  private:
+  uint64_t _internal_mem_text_kb() const;
+  void _internal_set_mem_text_kb(uint64_t value);
   public:
 
   // int32 gid_effective = 21;
@@ -452,42 +476,6 @@ class ProcessMetrics final :
   private:
   int32_t _internal_gid_effective() const;
   void _internal_set_gid_effective(int32_t value);
-  public:
-
-  // bool is_sleep = 28;
-  void clear_is_sleep();
-  bool is_sleep() const;
-  void set_is_sleep(bool value);
-  private:
-  bool _internal_is_sleep() const;
-  void _internal_set_is_sleep(bool value);
-  public:
-
-  // uint64 mem_shared = 25;
-  void clear_mem_shared();
-  uint64_t mem_shared() const;
-  void set_mem_shared(uint64_t value);
-  private:
-  uint64_t _internal_mem_shared() const;
-  void _internal_set_mem_shared(uint64_t value);
-  public:
-
-  // uint64 mem_vms = 26;
-  void clear_mem_vms();
-  uint64_t mem_vms() const;
-  void set_mem_vms(uint64_t value);
-  private:
-  uint64_t _internal_mem_vms() const;
-  void _internal_set_mem_vms(uint64_t value);
-  public:
-
-  // uint64 mem_text = 27;
-  void clear_mem_text();
-  uint64_t mem_text() const;
-  void set_mem_text(uint64_t value);
-  private:
-  uint64_t _internal_mem_text() const;
-  void _internal_set_mem_text(uint64_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:ProcessMetricas.ProcessMetrics)
@@ -510,21 +498,19 @@ class ProcessMetrics final :
     int32_t num_threads_;
     float cpu_percent_;
     int32_t num_child_processes_;
-    uint64_t read_bytes_;
+    uint64_t read_bytes_kb_;
     float memory_percent_;
     int32_t num_fds_;
-    uint64_t write_bytes_;
+    uint64_t write_bytes_kb_;
     int32_t nice_;
     float kb_received_;
     float kb_sent_;
     int32_t ionice_value_;
-    uint64_t mem_rss_;
-    uint64_t mem_uss_;
+    uint64_t mem_rss_kb_;
+    uint64_t mem_shared_kb_;
+    uint64_t mem_vms_kb_;
+    uint64_t mem_text_kb_;
     int32_t gid_effective_;
-    bool is_sleep_;
-    uint64_t mem_shared_;
-    uint64_t mem_vms_;
-    uint64_t mem_text_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_ProcessMetricas_2eproto;
@@ -1376,17 +1362,9 @@ inline void ProcessMetrics::set_allocated_user(std::string* user) {
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.user)
 }
 
-// optional int32 num_threads = 7;
-inline bool ProcessMetrics::_internal_has_num_threads() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool ProcessMetrics::has_num_threads() const {
-  return _internal_has_num_threads();
-}
+// int32 num_threads = 7;
 inline void ProcessMetrics::clear_num_threads() {
   _impl_.num_threads_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline int32_t ProcessMetrics::_internal_num_threads() const {
   return _impl_.num_threads_;
@@ -1396,7 +1374,7 @@ inline int32_t ProcessMetrics::num_threads() const {
   return _internal_num_threads();
 }
 inline void ProcessMetrics::_internal_set_num_threads(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
+  
   _impl_.num_threads_ = value;
 }
 inline void ProcessMetrics::set_num_threads(int32_t value) {
@@ -1406,7 +1384,7 @@ inline void ProcessMetrics::set_num_threads(int32_t value) {
 
 // optional int32 num_child_processes = 9;
 inline bool ProcessMetrics::_internal_has_num_child_processes() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool ProcessMetrics::has_num_child_processes() const {
@@ -1414,7 +1392,7 @@ inline bool ProcessMetrics::has_num_child_processes() const {
 }
 inline void ProcessMetrics::clear_num_child_processes() {
   _impl_.num_child_processes_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t ProcessMetrics::_internal_num_child_processes() const {
   return _impl_.num_child_processes_;
@@ -1424,7 +1402,7 @@ inline int32_t ProcessMetrics::num_child_processes() const {
   return _internal_num_child_processes();
 }
 inline void ProcessMetrics::_internal_set_num_child_processes(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.num_child_processes_ = value;
 }
 inline void ProcessMetrics::set_num_child_processes(int32_t value) {
@@ -1434,7 +1412,7 @@ inline void ProcessMetrics::set_num_child_processes(int32_t value) {
 
 // optional float cpu_percent = 8;
 inline bool ProcessMetrics::_internal_has_cpu_percent() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool ProcessMetrics::has_cpu_percent() const {
@@ -1442,7 +1420,7 @@ inline bool ProcessMetrics::has_cpu_percent() const {
 }
 inline void ProcessMetrics::clear_cpu_percent() {
   _impl_.cpu_percent_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline float ProcessMetrics::_internal_cpu_percent() const {
   return _impl_.cpu_percent_;
@@ -1452,7 +1430,7 @@ inline float ProcessMetrics::cpu_percent() const {
   return _internal_cpu_percent();
 }
 inline void ProcessMetrics::_internal_set_cpu_percent(float value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.cpu_percent_ = value;
 }
 inline void ProcessMetrics::set_cpu_percent(float value) {
@@ -1488,149 +1466,153 @@ inline void ProcessMetrics::set_memory_percent(float value) {
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.memory_percent)
 }
 
-// uint64 mem_rss = 23;
-inline void ProcessMetrics::clear_mem_rss() {
-  _impl_.mem_rss_ = uint64_t{0u};
+// uint64 mem_rss_kb = 23;
+inline void ProcessMetrics::clear_mem_rss_kb() {
+  _impl_.mem_rss_kb_ = uint64_t{0u};
 }
-inline uint64_t ProcessMetrics::_internal_mem_rss() const {
-  return _impl_.mem_rss_;
+inline uint64_t ProcessMetrics::_internal_mem_rss_kb() const {
+  return _impl_.mem_rss_kb_;
 }
-inline uint64_t ProcessMetrics::mem_rss() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_rss)
-  return _internal_mem_rss();
+inline uint64_t ProcessMetrics::mem_rss_kb() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_rss_kb)
+  return _internal_mem_rss_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_rss(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_rss_kb(uint64_t value) {
   
-  _impl_.mem_rss_ = value;
+  _impl_.mem_rss_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_rss(uint64_t value) {
-  _internal_set_mem_rss(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_rss)
+inline void ProcessMetrics::set_mem_rss_kb(uint64_t value) {
+  _internal_set_mem_rss_kb(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_rss_kb)
 }
 
-// uint64 mem_uss = 24;
-inline void ProcessMetrics::clear_mem_uss() {
-  _impl_.mem_uss_ = uint64_t{0u};
+// uint64 mem_shared_kb = 25;
+inline void ProcessMetrics::clear_mem_shared_kb() {
+  _impl_.mem_shared_kb_ = uint64_t{0u};
 }
-inline uint64_t ProcessMetrics::_internal_mem_uss() const {
-  return _impl_.mem_uss_;
+inline uint64_t ProcessMetrics::_internal_mem_shared_kb() const {
+  return _impl_.mem_shared_kb_;
 }
-inline uint64_t ProcessMetrics::mem_uss() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_uss)
-  return _internal_mem_uss();
+inline uint64_t ProcessMetrics::mem_shared_kb() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_shared_kb)
+  return _internal_mem_shared_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_uss(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_shared_kb(uint64_t value) {
   
-  _impl_.mem_uss_ = value;
+  _impl_.mem_shared_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_uss(uint64_t value) {
-  _internal_set_mem_uss(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_uss)
+inline void ProcessMetrics::set_mem_shared_kb(uint64_t value) {
+  _internal_set_mem_shared_kb(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_shared_kb)
 }
 
-// uint64 mem_shared = 25;
-inline void ProcessMetrics::clear_mem_shared() {
-  _impl_.mem_shared_ = uint64_t{0u};
+// uint64 mem_vms_kb = 26;
+inline void ProcessMetrics::clear_mem_vms_kb() {
+  _impl_.mem_vms_kb_ = uint64_t{0u};
 }
-inline uint64_t ProcessMetrics::_internal_mem_shared() const {
-  return _impl_.mem_shared_;
+inline uint64_t ProcessMetrics::_internal_mem_vms_kb() const {
+  return _impl_.mem_vms_kb_;
 }
-inline uint64_t ProcessMetrics::mem_shared() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_shared)
-  return _internal_mem_shared();
+inline uint64_t ProcessMetrics::mem_vms_kb() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_vms_kb)
+  return _internal_mem_vms_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_shared(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_vms_kb(uint64_t value) {
   
-  _impl_.mem_shared_ = value;
+  _impl_.mem_vms_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_shared(uint64_t value) {
-  _internal_set_mem_shared(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_shared)
+inline void ProcessMetrics::set_mem_vms_kb(uint64_t value) {
+  _internal_set_mem_vms_kb(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_vms_kb)
 }
 
-// uint64 mem_vms = 26;
-inline void ProcessMetrics::clear_mem_vms() {
-  _impl_.mem_vms_ = uint64_t{0u};
+// uint64 mem_text_kb = 27;
+inline void ProcessMetrics::clear_mem_text_kb() {
+  _impl_.mem_text_kb_ = uint64_t{0u};
 }
-inline uint64_t ProcessMetrics::_internal_mem_vms() const {
-  return _impl_.mem_vms_;
+inline uint64_t ProcessMetrics::_internal_mem_text_kb() const {
+  return _impl_.mem_text_kb_;
 }
-inline uint64_t ProcessMetrics::mem_vms() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_vms)
-  return _internal_mem_vms();
+inline uint64_t ProcessMetrics::mem_text_kb() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_text_kb)
+  return _internal_mem_text_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_vms(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_text_kb(uint64_t value) {
   
-  _impl_.mem_vms_ = value;
+  _impl_.mem_text_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_vms(uint64_t value) {
-  _internal_set_mem_vms(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_vms)
+inline void ProcessMetrics::set_mem_text_kb(uint64_t value) {
+  _internal_set_mem_text_kb(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_text_kb)
 }
 
-// uint64 mem_text = 27;
-inline void ProcessMetrics::clear_mem_text() {
-  _impl_.mem_text_ = uint64_t{0u};
+// optional uint64 read_bytes_kb = 11;
+inline bool ProcessMetrics::_internal_has_read_bytes_kb() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
 }
-inline uint64_t ProcessMetrics::_internal_mem_text() const {
-  return _impl_.mem_text_;
+inline bool ProcessMetrics::has_read_bytes_kb() const {
+  return _internal_has_read_bytes_kb();
 }
-inline uint64_t ProcessMetrics::mem_text() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_text)
-  return _internal_mem_text();
+inline void ProcessMetrics::clear_read_bytes_kb() {
+  _impl_.read_bytes_kb_ = uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
-inline void ProcessMetrics::_internal_set_mem_text(uint64_t value) {
-  
-  _impl_.mem_text_ = value;
+inline uint64_t ProcessMetrics::_internal_read_bytes_kb() const {
+  return _impl_.read_bytes_kb_;
 }
-inline void ProcessMetrics::set_mem_text(uint64_t value) {
-  _internal_set_mem_text(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_text)
+inline uint64_t ProcessMetrics::read_bytes_kb() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.read_bytes_kb)
+  return _internal_read_bytes_kb();
 }
-
-// uint64 read_bytes = 11;
-inline void ProcessMetrics::clear_read_bytes() {
-  _impl_.read_bytes_ = uint64_t{0u};
+inline void ProcessMetrics::_internal_set_read_bytes_kb(uint64_t value) {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_.read_bytes_kb_ = value;
 }
-inline uint64_t ProcessMetrics::_internal_read_bytes() const {
-  return _impl_.read_bytes_;
-}
-inline uint64_t ProcessMetrics::read_bytes() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.read_bytes)
-  return _internal_read_bytes();
-}
-inline void ProcessMetrics::_internal_set_read_bytes(uint64_t value) {
-  
-  _impl_.read_bytes_ = value;
-}
-inline void ProcessMetrics::set_read_bytes(uint64_t value) {
-  _internal_set_read_bytes(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.read_bytes)
+inline void ProcessMetrics::set_read_bytes_kb(uint64_t value) {
+  _internal_set_read_bytes_kb(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.read_bytes_kb)
 }
 
-// uint64 write_bytes = 12;
-inline void ProcessMetrics::clear_write_bytes() {
-  _impl_.write_bytes_ = uint64_t{0u};
+// optional uint64 write_bytes_kb = 12;
+inline bool ProcessMetrics::_internal_has_write_bytes_kb() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
+  return value;
 }
-inline uint64_t ProcessMetrics::_internal_write_bytes() const {
-  return _impl_.write_bytes_;
+inline bool ProcessMetrics::has_write_bytes_kb() const {
+  return _internal_has_write_bytes_kb();
 }
-inline uint64_t ProcessMetrics::write_bytes() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.write_bytes)
-  return _internal_write_bytes();
+inline void ProcessMetrics::clear_write_bytes_kb() {
+  _impl_.write_bytes_kb_ = uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000020u;
 }
-inline void ProcessMetrics::_internal_set_write_bytes(uint64_t value) {
-  
-  _impl_.write_bytes_ = value;
+inline uint64_t ProcessMetrics::_internal_write_bytes_kb() const {
+  return _impl_.write_bytes_kb_;
 }
-inline void ProcessMetrics::set_write_bytes(uint64_t value) {
-  _internal_set_write_bytes(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.write_bytes)
+inline uint64_t ProcessMetrics::write_bytes_kb() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.write_bytes_kb)
+  return _internal_write_bytes_kb();
+}
+inline void ProcessMetrics::_internal_set_write_bytes_kb(uint64_t value) {
+  _impl_._has_bits_[0] |= 0x00000020u;
+  _impl_.write_bytes_kb_ = value;
+}
+inline void ProcessMetrics::set_write_bytes_kb(uint64_t value) {
+  _internal_set_write_bytes_kb(value);
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.write_bytes_kb)
 }
 
-// int32 num_fds = 13;
+// optional int32 num_fds = 13;
+inline bool ProcessMetrics::_internal_has_num_fds() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool ProcessMetrics::has_num_fds() const {
+  return _internal_has_num_fds();
+}
 inline void ProcessMetrics::clear_num_fds() {
   _impl_.num_fds_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline int32_t ProcessMetrics::_internal_num_fds() const {
   return _impl_.num_fds_;
@@ -1640,7 +1622,7 @@ inline int32_t ProcessMetrics::num_fds() const {
   return _internal_num_fds();
 }
 inline void ProcessMetrics::_internal_set_num_fds(int32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000010u;
   _impl_.num_fds_ = value;
 }
 inline void ProcessMetrics::set_num_fds(int32_t value) {
@@ -1926,26 +1908,6 @@ inline void ProcessMetrics::_internal_set_kb_sent(float value) {
 inline void ProcessMetrics::set_kb_sent(float value) {
   _internal_set_kb_sent(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.kb_sent)
-}
-
-// bool is_sleep = 28;
-inline void ProcessMetrics::clear_is_sleep() {
-  _impl_.is_sleep_ = false;
-}
-inline bool ProcessMetrics::_internal_is_sleep() const {
-  return _impl_.is_sleep_;
-}
-inline bool ProcessMetrics::is_sleep() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.is_sleep)
-  return _internal_is_sleep();
-}
-inline void ProcessMetrics::_internal_set_is_sleep(bool value) {
-  
-  _impl_.is_sleep_ = value;
-}
-inline void ProcessMetrics::set_is_sleep(bool value) {
-  _internal_set_is_sleep(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.is_sleep)
 }
 
 // int32 gid_effective = 21;

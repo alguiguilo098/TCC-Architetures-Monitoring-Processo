@@ -72,9 +72,10 @@ void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro)
     timestamp.erase(timestamp.find_last_not_of(" \n\r\t") + 1);
     kernelDistro.set_timestamp(timestamp);
 
-    // Kernel version 
+    // Kernel version
     std::ifstream kernel_file("/proc/sys/kernel/osrelease");
-    if (kernel_file.is_open()){
+    if (kernel_file.is_open())
+    {
 
         std::string kernel_version;
         std::getline(kernel_file, kernel_version);
@@ -84,7 +85,9 @@ void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro)
             kernel_version = kernel_version.substr(0, pos);
 
         kernelDistro.set_kernel_version(kernel_version);
-    }else{
+    }
+    else
+    {
         kernelDistro.set_kernel_version("Unknown");
     }
 
@@ -111,12 +114,12 @@ void collectionKernelDistro(ProcessMetricas::KernelDistro &kernelDistro)
 /// @param programList lista de programas instalados
 void collectionInstalledPrograms(ProcessMetricas::InstalledProgramList &programList)
 {
-    
+
     // hostip
     std::string host;
     get_host_ip(host);
     programList.set_hostip(host);
-    
+
     // Obtém o tempo atual.
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
@@ -161,8 +164,12 @@ void WriteProcessMetricsToFile(
     const std::string &filename)
 {
     // Converte a mensagem Protobuf para JSON
+    google::protobuf::util::JsonPrintOptions options;
+    options.always_print_primitive_fields = true;
+    options.preserve_proto_field_names = true;
     std::string json;
-    google::protobuf::util::MessageToJsonString(metricsList, &json);
+    
+    google::protobuf::util::MessageToJsonString(metricsList, &json, options);
 
     // Escreve o JSON em um arquivo
     std::ofstream out(filename, std::ios::out | std::ios::trunc);

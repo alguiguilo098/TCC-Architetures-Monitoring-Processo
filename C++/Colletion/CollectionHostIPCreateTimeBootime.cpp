@@ -36,6 +36,7 @@ void Collection::get_metrics_num_threads(ProcessMetricas::ProcessMetrics &metric
             int threads = std::stoi(line.substr(8));
             metrics.set_num_threads(threads);
             break;
+
         }
     }
 }
@@ -93,14 +94,12 @@ void Collection::get_metrics_boottime(ProcessMetricas::ProcessMetrics &metrics)
         {
             if (key == "btime") // encontrou btime!
             {
-                // Converte o tempo de boot para um formato legível
+                // Converte o tempo de boot para um formato ISO 8601
                 std::time_t t = static_cast<std::time_t>(btime);
-                std::tm tm = *std::localtime(&t); // converte para horário local
+                std::tm tm = *std::localtime(&t);
 
-                // Formata a data e hora
                 std::ostringstream oss;
-                oss << std::put_time(&tm, "%a  %b %d  %H:%M:%S %Y");
-                // Exemplo de saída: "Saturday, 25 January 2026 23:45:12"
+                oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S%z");
 
                 metrics.set_boottime(oss.str());
 

@@ -67,7 +67,7 @@ void Collection::get_metrics_read_bytes(ProcessMetricas::ProcessMetrics &metrics
     if (!io_file.is_open())
     {
         // Se não for possível abrir o arquivo, define read_bytes como 0.
-        metrics.set_read_bytes(0);
+        metrics.set_read_bytes_kb(0);
         return;
     }
 
@@ -82,12 +82,12 @@ void Collection::get_metrics_read_bytes(ProcessMetricas::ProcessMetrics &metrics
             std::string label;
             uint64_t read_bytes;
             iss >> label >> read_bytes;
-            metrics.set_read_bytes(read_bytes);
+            metrics.set_read_bytes_kb(read_bytes);
             return;
         }
     }
 
-    metrics.set_read_bytes(0);
+    metrics.set_read_bytes_kb(0);
 }
 
 /**
@@ -102,7 +102,7 @@ void Collection::get_metrics_write_bytes(ProcessMetricas::ProcessMetrics &metric
     if (!io_file.is_open())
     {
         // Se não for possível abrir o arquivo, define write_bytes como 0.
-        metrics.set_write_bytes(0);
+        metrics.set_write_bytes_kb(0);
         return;
     }
 
@@ -118,11 +118,11 @@ void Collection::get_metrics_write_bytes(ProcessMetricas::ProcessMetrics &metric
             uint64_t write_bytes;
             // Extrai o valor de write_bytes e o define no objeto metrics.
             iss >> label >> write_bytes;
-            metrics.set_write_bytes(write_bytes);
+            metrics.set_write_bytes_kb(write_bytes);
             return;
         }
     }
 
     // Se não encontrar a linha, define write_bytes como 0.
-    metrics.set_write_bytes(0);
+    metrics.set_write_bytes_kb(0);
 }

@@ -14,5 +14,11 @@ compile:
 	./Colletion/CollectionHostIPCreateTimeBootime.cpp \
 	./AgentMonitoring/AgentMonitoring.cpp \
 	-O3 -lprotobuf -std=c++17 -o monitor_process
+
+script:
+	@g++ ./AgentMonitoring/ScriptKernel.cpp ./Scripts/Script.cpp \
+	./API/ChannelComunication.cpp \
+	./ProcessMonitoring/ProcessMetricas.pb.cc \
+	-O3 -lprotobuf -std=c++17 -o script_kernel
 clean:
 	rm -f *.o ProcessMetricas.pb.cc ProcessMetricas.pb.h

@@ -32,7 +32,7 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_memory_percent(metrics, pid);
     collection->get_mem_statm(metrics, pid);
-    
+    collection->get_io_nice(metrics, pid);
     // Coleta o tempo de atividade do processo
 
     this->mutexBuffer.lock();
@@ -169,27 +169,12 @@ void AgentMonitoring::start_monitoring()
         // Verifica se é hora de executar os scripts periódicos
         auto now_sys_agent = std::chrono::system_clock::now();
         std::time_t now_time_now = std::chrono::system_clock::to_time_t(now_sys_agent);
-        if (has_time_passed(this->last_monitor_time, std::chrono::hours(this->configAgent.TruePeriodicScriptHours)) || true)
-        {
-            // Executa os scripts periódicos
-            monitor_kernel_distro(kernelDistro);
-            // Executa a coleta de programas instalados
-            monitor_installed_programs(programList);
-            // Atualiza o tempo do último monitoramento
-            auto now_sys = std::chrono::system_clock::now();
-            std::time_t now_time = std::chrono::system_clock::to_time_t(now_sys);
-
-            // Atualiza o tempo do último monitoramento
-            this->last_monitor_time = std::chrono::steady_clock::now();
-        }
 
         if (this->BufferOutput.processes_size() < this->configAgent.BufferSize)
         {
             monitor_all_processes();
             WriteProcessMetricsToFile(this->BufferOutput, "process_metrics_output.json");
-        }
-        else
-        {
+        }else{
             // Troca os buffers e escreve os dados coletados em arquivo
             this->BufferInput.Swap(&this->BufferOutput);
             // Write BufferInput to file
