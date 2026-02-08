@@ -17,10 +17,10 @@ message ProcessMetrics {
   optional float cpu_percent = 8; // IMPLEMENTADO
   // Memória
   optional float memory_percent = 10; // IMPLEMENTADO
-  uint64 mem_rss_kb = 23; // IMPLEMENTADO
-  uint64 mem_shared_kb = 25; // IMPLEMENTADO
-  uint64 mem_vms_kb = 26; // IMPLEMENTADO
-  uint64 mem_text_kb = 27; // IMPLEMENTADO
+  int32 mem_rss_kb = 23; // IMPLEMENTADO
+  int32 mem_shared_kb = 25; // IMPLEMENTADO
+  int32 mem_vms_kb = 26; // IMPLEMENTADO
+  int32 mem_text_kb = 27; // IMPLEMENTADO
   
   optional uint64 read_bytes_kb = 11;  // IMPLEMENTADO
   optional uint64 write_bytes_kb = 12; // IMPLEMENTADO 

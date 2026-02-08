@@ -208,14 +208,12 @@ class ProcessMetrics final :
     kNumFdsFieldNumber = 13,
     kWriteBytesKbFieldNumber = 12,
     kNiceFieldNumber = 14,
-    kKbReceivedFieldNumber = 18,
-    kKbSentFieldNumber = 19,
     kIoniceValueFieldNumber = 20,
+    kGidEffectiveFieldNumber = 21,
     kMemRssKbFieldNumber = 23,
     kMemSharedKbFieldNumber = 25,
     kMemVmsKbFieldNumber = 26,
     kMemTextKbFieldNumber = 27,
-    kGidEffectiveFieldNumber = 21,
   };
   // string name = 2;
   void clear_name();
@@ -406,24 +404,6 @@ class ProcessMetrics final :
   void _internal_set_nice(int32_t value);
   public:
 
-  // float kb_received = 18;
-  void clear_kb_received();
-  float kb_received() const;
-  void set_kb_received(float value);
-  private:
-  float _internal_kb_received() const;
-  void _internal_set_kb_received(float value);
-  public:
-
-  // float kb_sent = 19;
-  void clear_kb_sent();
-  float kb_sent() const;
-  void set_kb_sent(float value);
-  private:
-  float _internal_kb_sent() const;
-  void _internal_set_kb_sent(float value);
-  public:
-
   // int32 ionice_value = 20;
   void clear_ionice_value();
   int32_t ionice_value() const;
@@ -433,42 +413,6 @@ class ProcessMetrics final :
   void _internal_set_ionice_value(int32_t value);
   public:
 
-  // uint64 mem_rss_kb = 23;
-  void clear_mem_rss_kb();
-  uint64_t mem_rss_kb() const;
-  void set_mem_rss_kb(uint64_t value);
-  private:
-  uint64_t _internal_mem_rss_kb() const;
-  void _internal_set_mem_rss_kb(uint64_t value);
-  public:
-
-  // uint64 mem_shared_kb = 25;
-  void clear_mem_shared_kb();
-  uint64_t mem_shared_kb() const;
-  void set_mem_shared_kb(uint64_t value);
-  private:
-  uint64_t _internal_mem_shared_kb() const;
-  void _internal_set_mem_shared_kb(uint64_t value);
-  public:
-
-  // uint64 mem_vms_kb = 26;
-  void clear_mem_vms_kb();
-  uint64_t mem_vms_kb() const;
-  void set_mem_vms_kb(uint64_t value);
-  private:
-  uint64_t _internal_mem_vms_kb() const;
-  void _internal_set_mem_vms_kb(uint64_t value);
-  public:
-
-  // uint64 mem_text_kb = 27;
-  void clear_mem_text_kb();
-  uint64_t mem_text_kb() const;
-  void set_mem_text_kb(uint64_t value);
-  private:
-  uint64_t _internal_mem_text_kb() const;
-  void _internal_set_mem_text_kb(uint64_t value);
-  public:
-
   // int32 gid_effective = 21;
   void clear_gid_effective();
   int32_t gid_effective() const;
@@ -476,6 +420,42 @@ class ProcessMetrics final :
   private:
   int32_t _internal_gid_effective() const;
   void _internal_set_gid_effective(int32_t value);
+  public:
+
+  // int32 mem_rss_kb = 23;
+  void clear_mem_rss_kb();
+  int32_t mem_rss_kb() const;
+  void set_mem_rss_kb(int32_t value);
+  private:
+  int32_t _internal_mem_rss_kb() const;
+  void _internal_set_mem_rss_kb(int32_t value);
+  public:
+
+  // int32 mem_shared_kb = 25;
+  void clear_mem_shared_kb();
+  int32_t mem_shared_kb() const;
+  void set_mem_shared_kb(int32_t value);
+  private:
+  int32_t _internal_mem_shared_kb() const;
+  void _internal_set_mem_shared_kb(int32_t value);
+  public:
+
+  // int32 mem_vms_kb = 26;
+  void clear_mem_vms_kb();
+  int32_t mem_vms_kb() const;
+  void set_mem_vms_kb(int32_t value);
+  private:
+  int32_t _internal_mem_vms_kb() const;
+  void _internal_set_mem_vms_kb(int32_t value);
+  public:
+
+  // int32 mem_text_kb = 27;
+  void clear_mem_text_kb();
+  int32_t mem_text_kb() const;
+  void set_mem_text_kb(int32_t value);
+  private:
+  int32_t _internal_mem_text_kb() const;
+  void _internal_set_mem_text_kb(int32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:ProcessMetricas.ProcessMetrics)
@@ -503,14 +483,12 @@ class ProcessMetrics final :
     int32_t num_fds_;
     uint64_t write_bytes_kb_;
     int32_t nice_;
-    float kb_received_;
-    float kb_sent_;
     int32_t ionice_value_;
-    uint64_t mem_rss_kb_;
-    uint64_t mem_shared_kb_;
-    uint64_t mem_vms_kb_;
-    uint64_t mem_text_kb_;
     int32_t gid_effective_;
+    int32_t mem_rss_kb_;
+    int32_t mem_shared_kb_;
+    int32_t mem_vms_kb_;
+    int32_t mem_text_kb_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_ProcessMetricas_2eproto;
@@ -1466,82 +1444,82 @@ inline void ProcessMetrics::set_memory_percent(float value) {
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.memory_percent)
 }
 
-// uint64 mem_rss_kb = 23;
+// int32 mem_rss_kb = 23;
 inline void ProcessMetrics::clear_mem_rss_kb() {
-  _impl_.mem_rss_kb_ = uint64_t{0u};
+  _impl_.mem_rss_kb_ = 0;
 }
-inline uint64_t ProcessMetrics::_internal_mem_rss_kb() const {
+inline int32_t ProcessMetrics::_internal_mem_rss_kb() const {
   return _impl_.mem_rss_kb_;
 }
-inline uint64_t ProcessMetrics::mem_rss_kb() const {
+inline int32_t ProcessMetrics::mem_rss_kb() const {
   // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_rss_kb)
   return _internal_mem_rss_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_rss_kb(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_rss_kb(int32_t value) {
   
   _impl_.mem_rss_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_rss_kb(uint64_t value) {
+inline void ProcessMetrics::set_mem_rss_kb(int32_t value) {
   _internal_set_mem_rss_kb(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_rss_kb)
 }
 
-// uint64 mem_shared_kb = 25;
+// int32 mem_shared_kb = 25;
 inline void ProcessMetrics::clear_mem_shared_kb() {
-  _impl_.mem_shared_kb_ = uint64_t{0u};
+  _impl_.mem_shared_kb_ = 0;
 }
-inline uint64_t ProcessMetrics::_internal_mem_shared_kb() const {
+inline int32_t ProcessMetrics::_internal_mem_shared_kb() const {
   return _impl_.mem_shared_kb_;
 }
-inline uint64_t ProcessMetrics::mem_shared_kb() const {
+inline int32_t ProcessMetrics::mem_shared_kb() const {
   // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_shared_kb)
   return _internal_mem_shared_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_shared_kb(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_shared_kb(int32_t value) {
   
   _impl_.mem_shared_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_shared_kb(uint64_t value) {
+inline void ProcessMetrics::set_mem_shared_kb(int32_t value) {
   _internal_set_mem_shared_kb(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_shared_kb)
 }
 
-// uint64 mem_vms_kb = 26;
+// int32 mem_vms_kb = 26;
 inline void ProcessMetrics::clear_mem_vms_kb() {
-  _impl_.mem_vms_kb_ = uint64_t{0u};
+  _impl_.mem_vms_kb_ = 0;
 }
-inline uint64_t ProcessMetrics::_internal_mem_vms_kb() const {
+inline int32_t ProcessMetrics::_internal_mem_vms_kb() const {
   return _impl_.mem_vms_kb_;
 }
-inline uint64_t ProcessMetrics::mem_vms_kb() const {
+inline int32_t ProcessMetrics::mem_vms_kb() const {
   // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_vms_kb)
   return _internal_mem_vms_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_vms_kb(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_vms_kb(int32_t value) {
   
   _impl_.mem_vms_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_vms_kb(uint64_t value) {
+inline void ProcessMetrics::set_mem_vms_kb(int32_t value) {
   _internal_set_mem_vms_kb(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_vms_kb)
 }
 
-// uint64 mem_text_kb = 27;
+// int32 mem_text_kb = 27;
 inline void ProcessMetrics::clear_mem_text_kb() {
-  _impl_.mem_text_kb_ = uint64_t{0u};
+  _impl_.mem_text_kb_ = 0;
 }
-inline uint64_t ProcessMetrics::_internal_mem_text_kb() const {
+inline int32_t ProcessMetrics::_internal_mem_text_kb() const {
   return _impl_.mem_text_kb_;
 }
-inline uint64_t ProcessMetrics::mem_text_kb() const {
+inline int32_t ProcessMetrics::mem_text_kb() const {
   // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.mem_text_kb)
   return _internal_mem_text_kb();
 }
-inline void ProcessMetrics::_internal_set_mem_text_kb(uint64_t value) {
+inline void ProcessMetrics::_internal_set_mem_text_kb(int32_t value) {
   
   _impl_.mem_text_kb_ = value;
 }
-inline void ProcessMetrics::set_mem_text_kb(uint64_t value) {
+inline void ProcessMetrics::set_mem_text_kb(int32_t value) {
   _internal_set_mem_text_kb(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.mem_text_kb)
 }
@@ -1868,46 +1846,6 @@ inline void ProcessMetrics::set_allocated_hostip(std::string* hostip) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.hostip)
-}
-
-// float kb_received = 18;
-inline void ProcessMetrics::clear_kb_received() {
-  _impl_.kb_received_ = 0;
-}
-inline float ProcessMetrics::_internal_kb_received() const {
-  return _impl_.kb_received_;
-}
-inline float ProcessMetrics::kb_received() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.kb_received)
-  return _internal_kb_received();
-}
-inline void ProcessMetrics::_internal_set_kb_received(float value) {
-  
-  _impl_.kb_received_ = value;
-}
-inline void ProcessMetrics::set_kb_received(float value) {
-  _internal_set_kb_received(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.kb_received)
-}
-
-// float kb_sent = 19;
-inline void ProcessMetrics::clear_kb_sent() {
-  _impl_.kb_sent_ = 0;
-}
-inline float ProcessMetrics::_internal_kb_sent() const {
-  return _impl_.kb_sent_;
-}
-inline float ProcessMetrics::kb_sent() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.kb_sent)
-  return _internal_kb_sent();
-}
-inline void ProcessMetrics::_internal_set_kb_sent(float value) {
-  
-  _impl_.kb_sent_ = value;
-}
-inline void ProcessMetrics::set_kb_sent(float value) {
-  _internal_set_kb_sent(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.kb_sent)
 }
 
 // int32 gid_effective = 21;

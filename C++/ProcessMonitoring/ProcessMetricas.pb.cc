@@ -40,14 +40,12 @@ PROTOBUF_CONSTEXPR ProcessMetrics::ProcessMetrics(
   , /*decltype(_impl_.num_fds_)*/0
   , /*decltype(_impl_.write_bytes_kb_)*/uint64_t{0u}
   , /*decltype(_impl_.nice_)*/0
-  , /*decltype(_impl_.kb_received_)*/0
-  , /*decltype(_impl_.kb_sent_)*/0
   , /*decltype(_impl_.ionice_value_)*/0
-  , /*decltype(_impl_.mem_rss_kb_)*/uint64_t{0u}
-  , /*decltype(_impl_.mem_shared_kb_)*/uint64_t{0u}
-  , /*decltype(_impl_.mem_vms_kb_)*/uint64_t{0u}
-  , /*decltype(_impl_.mem_text_kb_)*/uint64_t{0u}
-  , /*decltype(_impl_.gid_effective_)*/0} {}
+  , /*decltype(_impl_.gid_effective_)*/0
+  , /*decltype(_impl_.mem_rss_kb_)*/0
+  , /*decltype(_impl_.mem_shared_kb_)*/0
+  , /*decltype(_impl_.mem_vms_kb_)*/0
+  , /*decltype(_impl_.mem_text_kb_)*/0} {}
 struct ProcessMetricsDefaultTypeInternal {
   PROTOBUF_CONSTEXPR ProcessMetricsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -147,8 +145,6 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.boottime_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.timestartprocess_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.hostip_),
-  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.kb_received_),
-  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.kb_sent_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.gid_effective_),
   ~0u,
   ~0u,
@@ -164,8 +160,6 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   2,
   5,
   4,
-  ~0u,
-  ~0u,
   ~0u,
   ~0u,
   ~0u,
@@ -209,11 +203,11 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.programs_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 29, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
-  { 52, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
-  { 59, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
-  { 69, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
-  { 77, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
+  { 0, 27, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
+  { 48, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
+  { 55, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
+  { 65, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
+  { 73, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -226,34 +220,33 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\025ProcessMetricas.proto\022\017ProcessMetricas"
-  "\"\346\004\n\016ProcessMetrics\022\013\n\003pid\030\001 \001(\005\022\014\n\004name"
+  "\"\300\004\n\016ProcessMetrics\022\013\n\003pid\030\001 \001(\005\022\014\n\004name"
   "\030\002 \001(\t\022\014\n\004user\030\003 \001(\t\022\023\n\013num_threads\030\007 \001("
   "\005\022 \n\023num_child_processes\030\t \001(\005H\000\210\001\001\022\030\n\013c"
   "pu_percent\030\010 \001(\002H\001\210\001\001\022\033\n\016memory_percent\030"
-  "\n \001(\002H\002\210\001\001\022\022\n\nmem_rss_kb\030\027 \001(\004\022\025\n\rmem_sh"
-  "ared_kb\030\031 \001(\004\022\022\n\nmem_vms_kb\030\032 \001(\004\022\023\n\013mem"
-  "_text_kb\030\033 \001(\004\022\032\n\rread_bytes_kb\030\013 \001(\004H\003\210"
+  "\n \001(\002H\002\210\001\001\022\022\n\nmem_rss_kb\030\027 \001(\005\022\025\n\rmem_sh"
+  "ared_kb\030\031 \001(\005\022\022\n\nmem_vms_kb\030\032 \001(\005\022\023\n\013mem"
+  "_text_kb\030\033 \001(\005\022\032\n\rread_bytes_kb\030\013 \001(\004H\003\210"
   "\001\001\022\033\n\016write_bytes_kb\030\014 \001(\004H\004\210\001\001\022\024\n\007num_f"
   "ds\030\r \001(\005H\005\210\001\001\022\014\n\004nice\030\016 \001(\005\022\024\n\014ionice_va"
   "lue\030\024 \001(\005\022\021\n\ttimestamp\030\004 \001(\t\022\020\n\010boottime"
   "\030\017 \001(\t\022\030\n\020timestartprocess\030\020 \001(\t\022\016\n\006host"
-  "ip\030\021 \001(\t\022\023\n\013kb_received\030\022 \001(\002\022\017\n\007kb_sent"
-  "\030\023 \001(\002\022\025\n\rgid_effective\030\025 \001(\005B\026\n\024_num_ch"
-  "ild_processesB\016\n\014_cpu_percentB\021\n\017_memory"
-  "_percentB\020\n\016_read_bytes_kbB\021\n\017_write_byt"
-  "es_kbB\n\n\010_num_fds\"H\n\022ProcessMetricsList\022"
-  "2\n\tprocesses\030\001 \003(\0132\037.ProcessMetricas.Pro"
-  "cessMetrics\"^\n\014KernelDistro\022\021\n\ttimestamp"
-  "\030\003 \001(\t\022\026\n\016kernel_version\030\001 \001(\t\022\023\n\013distro"
-  "_name\030\002 \001(\t\022\016\n\006hostip\030\021 \001(\t\"1\n\020Installed"
-  "Program\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"n"
-  "\n\024InstalledProgramList\022\021\n\ttimestamp\030\003 \001("
-  "\t\022\016\n\006hostip\030\002 \001(\t\0223\n\010programs\030\001 \003(\0132!.Pr"
-  "ocessMetricas.InstalledProgramb\006proto3"
+  "ip\030\021 \001(\t\022\025\n\rgid_effective\030\025 \001(\005B\026\n\024_num_"
+  "child_processesB\016\n\014_cpu_percentB\021\n\017_memo"
+  "ry_percentB\020\n\016_read_bytes_kbB\021\n\017_write_b"
+  "ytes_kbB\n\n\010_num_fds\"H\n\022ProcessMetricsLis"
+  "t\0222\n\tprocesses\030\001 \003(\0132\037.ProcessMetricas.P"
+  "rocessMetrics\"^\n\014KernelDistro\022\021\n\ttimesta"
+  "mp\030\003 \001(\t\022\026\n\016kernel_version\030\001 \001(\t\022\023\n\013dist"
+  "ro_name\030\002 \001(\t\022\016\n\006hostip\030\021 \001(\t\"1\n\020Install"
+  "edProgram\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t"
+  "\"n\n\024InstalledProgramList\022\021\n\ttimestamp\030\003 "
+  "\001(\t\022\016\n\006hostip\030\002 \001(\t\0223\n\010programs\030\001 \003(\0132!."
+  "ProcessMetricas.InstalledProgramb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProcessMetricas_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProcessMetricas_2eproto = {
-    false, false, 998, descriptor_table_protodef_ProcessMetricas_2eproto,
+    false, false, 960, descriptor_table_protodef_ProcessMetricas_2eproto,
     "ProcessMetricas.proto",
     &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 5,
     schemas, file_default_instances, TableStruct_ProcessMetricas_2eproto::offsets,
@@ -320,14 +313,12 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
     , decltype(_impl_.num_fds_){}
     , decltype(_impl_.write_bytes_kb_){}
     , decltype(_impl_.nice_){}
-    , decltype(_impl_.kb_received_){}
-    , decltype(_impl_.kb_sent_){}
     , decltype(_impl_.ionice_value_){}
+    , decltype(_impl_.gid_effective_){}
     , decltype(_impl_.mem_rss_kb_){}
     , decltype(_impl_.mem_shared_kb_){}
     , decltype(_impl_.mem_vms_kb_){}
-    , decltype(_impl_.mem_text_kb_){}
-    , decltype(_impl_.gid_effective_){}};
+    , decltype(_impl_.mem_text_kb_){}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
@@ -379,8 +370,8 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
       _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.pid_, &from._impl_.pid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.gid_effective_) -
-    reinterpret_cast<char*>(&_impl_.pid_)) + sizeof(_impl_.gid_effective_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.mem_text_kb_) -
+    reinterpret_cast<char*>(&_impl_.pid_)) + sizeof(_impl_.mem_text_kb_));
   // @@protoc_insertion_point(copy_constructor:ProcessMetricas.ProcessMetrics)
 }
 
@@ -406,14 +397,12 @@ inline void ProcessMetrics::SharedCtor(
     , decltype(_impl_.num_fds_){0}
     , decltype(_impl_.write_bytes_kb_){uint64_t{0u}}
     , decltype(_impl_.nice_){0}
-    , decltype(_impl_.kb_received_){0}
-    , decltype(_impl_.kb_sent_){0}
     , decltype(_impl_.ionice_value_){0}
-    , decltype(_impl_.mem_rss_kb_){uint64_t{0u}}
-    , decltype(_impl_.mem_shared_kb_){uint64_t{0u}}
-    , decltype(_impl_.mem_vms_kb_){uint64_t{0u}}
-    , decltype(_impl_.mem_text_kb_){uint64_t{0u}}
     , decltype(_impl_.gid_effective_){0}
+    , decltype(_impl_.mem_rss_kb_){0}
+    , decltype(_impl_.mem_shared_kb_){0}
+    , decltype(_impl_.mem_vms_kb_){0}
+    , decltype(_impl_.mem_text_kb_){0}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -486,8 +475,8 @@ void ProcessMetrics::Clear() {
         reinterpret_cast<char*>(&_impl_.cpu_percent_)) + sizeof(_impl_.write_bytes_kb_));
   }
   ::memset(&_impl_.nice_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.gid_effective_) -
-      reinterpret_cast<char*>(&_impl_.nice_)) + sizeof(_impl_.gid_effective_));
+      reinterpret_cast<char*>(&_impl_.mem_text_kb_) -
+      reinterpret_cast<char*>(&_impl_.nice_)) + sizeof(_impl_.mem_text_kb_));
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -637,22 +626,6 @@ const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // float kb_received = 18;
-      case 18:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 149)) {
-          _impl_.kb_received_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float kb_sent = 19;
-      case 19:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 157)) {
-          _impl_.kb_sent_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
       // int32 ionice_value = 20;
       case 20:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 160)) {
@@ -669,34 +642,34 @@ const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // uint64 mem_rss_kb = 23;
+      // int32 mem_rss_kb = 23;
       case 23:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 184)) {
-          _impl_.mem_rss_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          _impl_.mem_rss_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint64 mem_shared_kb = 25;
+      // int32 mem_shared_kb = 25;
       case 25:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 200)) {
-          _impl_.mem_shared_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          _impl_.mem_shared_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint64 mem_vms_kb = 26;
+      // int32 mem_vms_kb = 26;
       case 26:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 208)) {
-          _impl_.mem_vms_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          _impl_.mem_vms_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // uint64 mem_text_kb = 27;
+      // int32 mem_text_kb = 27;
       case 27:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 216)) {
-          _impl_.mem_text_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          _impl_.mem_text_kb_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -845,26 +818,6 @@ uint8_t* ProcessMetrics::_InternalSerialize(
         17, this->_internal_hostip(), target);
   }
 
-  // float kb_received = 18;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_kb_received = this->_internal_kb_received();
-  uint32_t raw_kb_received;
-  memcpy(&raw_kb_received, &tmp_kb_received, sizeof(tmp_kb_received));
-  if (raw_kb_received != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(18, this->_internal_kb_received(), target);
-  }
-
-  // float kb_sent = 19;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_kb_sent = this->_internal_kb_sent();
-  uint32_t raw_kb_sent;
-  memcpy(&raw_kb_sent, &tmp_kb_sent, sizeof(tmp_kb_sent));
-  if (raw_kb_sent != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(19, this->_internal_kb_sent(), target);
-  }
-
   // int32 ionice_value = 20;
   if (this->_internal_ionice_value() != 0) {
     target = stream->EnsureSpace(target);
@@ -877,28 +830,28 @@ uint8_t* ProcessMetrics::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(21, this->_internal_gid_effective(), target);
   }
 
-  // uint64 mem_rss_kb = 23;
+  // int32 mem_rss_kb = 23;
   if (this->_internal_mem_rss_kb() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(23, this->_internal_mem_rss_kb(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(23, this->_internal_mem_rss_kb(), target);
   }
 
-  // uint64 mem_shared_kb = 25;
+  // int32 mem_shared_kb = 25;
   if (this->_internal_mem_shared_kb() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(25, this->_internal_mem_shared_kb(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(25, this->_internal_mem_shared_kb(), target);
   }
 
-  // uint64 mem_vms_kb = 26;
+  // int32 mem_vms_kb = 26;
   if (this->_internal_mem_vms_kb() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(26, this->_internal_mem_vms_kb(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(26, this->_internal_mem_vms_kb(), target);
   }
 
-  // uint64 mem_text_kb = 27;
+  // int32 mem_text_kb = 27;
   if (this->_internal_mem_text_kb() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(27, this->_internal_mem_text_kb(), target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(27, this->_internal_mem_text_kb(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1007,24 +960,6 @@ size_t ProcessMetrics::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_nice());
   }
 
-  // float kb_received = 18;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_kb_received = this->_internal_kb_received();
-  uint32_t raw_kb_received;
-  memcpy(&raw_kb_received, &tmp_kb_received, sizeof(tmp_kb_received));
-  if (raw_kb_received != 0) {
-    total_size += 2 + 4;
-  }
-
-  // float kb_sent = 19;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_kb_sent = this->_internal_kb_sent();
-  uint32_t raw_kb_sent;
-  memcpy(&raw_kb_sent, &tmp_kb_sent, sizeof(tmp_kb_sent));
-  if (raw_kb_sent != 0) {
-    total_size += 2 + 4;
-  }
-
   // int32 ionice_value = 20;
   if (this->_internal_ionice_value() != 0) {
     total_size += 2 +
@@ -1032,39 +967,39 @@ size_t ProcessMetrics::ByteSizeLong() const {
         this->_internal_ionice_value());
   }
 
-  // uint64 mem_rss_kb = 23;
-  if (this->_internal_mem_rss_kb() != 0) {
-    total_size += 2 +
-      ::_pbi::WireFormatLite::UInt64Size(
-        this->_internal_mem_rss_kb());
-  }
-
-  // uint64 mem_shared_kb = 25;
-  if (this->_internal_mem_shared_kb() != 0) {
-    total_size += 2 +
-      ::_pbi::WireFormatLite::UInt64Size(
-        this->_internal_mem_shared_kb());
-  }
-
-  // uint64 mem_vms_kb = 26;
-  if (this->_internal_mem_vms_kb() != 0) {
-    total_size += 2 +
-      ::_pbi::WireFormatLite::UInt64Size(
-        this->_internal_mem_vms_kb());
-  }
-
-  // uint64 mem_text_kb = 27;
-  if (this->_internal_mem_text_kb() != 0) {
-    total_size += 2 +
-      ::_pbi::WireFormatLite::UInt64Size(
-        this->_internal_mem_text_kb());
-  }
-
   // int32 gid_effective = 21;
   if (this->_internal_gid_effective() != 0) {
     total_size += 2 +
       ::_pbi::WireFormatLite::Int32Size(
         this->_internal_gid_effective());
+  }
+
+  // int32 mem_rss_kb = 23;
+  if (this->_internal_mem_rss_kb() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_mem_rss_kb());
+  }
+
+  // int32 mem_shared_kb = 25;
+  if (this->_internal_mem_shared_kb() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_mem_shared_kb());
+  }
+
+  // int32 mem_vms_kb = 26;
+  if (this->_internal_mem_vms_kb() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_mem_vms_kb());
+  }
+
+  // int32 mem_text_kb = 27;
+  if (this->_internal_mem_text_kb() != 0) {
+    total_size += 2 +
+      ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_mem_text_kb());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1134,22 +1069,11 @@ void ProcessMetrics::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   if (from._internal_nice() != 0) {
     _this->_internal_set_nice(from._internal_nice());
   }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_kb_received = from._internal_kb_received();
-  uint32_t raw_kb_received;
-  memcpy(&raw_kb_received, &tmp_kb_received, sizeof(tmp_kb_received));
-  if (raw_kb_received != 0) {
-    _this->_internal_set_kb_received(from._internal_kb_received());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_kb_sent = from._internal_kb_sent();
-  uint32_t raw_kb_sent;
-  memcpy(&raw_kb_sent, &tmp_kb_sent, sizeof(tmp_kb_sent));
-  if (raw_kb_sent != 0) {
-    _this->_internal_set_kb_sent(from._internal_kb_sent());
-  }
   if (from._internal_ionice_value() != 0) {
     _this->_internal_set_ionice_value(from._internal_ionice_value());
+  }
+  if (from._internal_gid_effective() != 0) {
+    _this->_internal_set_gid_effective(from._internal_gid_effective());
   }
   if (from._internal_mem_rss_kb() != 0) {
     _this->_internal_set_mem_rss_kb(from._internal_mem_rss_kb());
@@ -1162,9 +1086,6 @@ void ProcessMetrics::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   }
   if (from._internal_mem_text_kb() != 0) {
     _this->_internal_set_mem_text_kb(from._internal_mem_text_kb());
-  }
-  if (from._internal_gid_effective() != 0) {
-    _this->_internal_set_gid_effective(from._internal_gid_effective());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1211,8 +1132,8 @@ void ProcessMetrics::InternalSwap(ProcessMetrics* other) {
       &other->_impl_.hostip_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ProcessMetrics, _impl_.gid_effective_)
-      + sizeof(ProcessMetrics::_impl_.gid_effective_)
+      PROTOBUF_FIELD_OFFSET(ProcessMetrics, _impl_.mem_text_kb_)
+      + sizeof(ProcessMetrics::_impl_.mem_text_kb_)
       - PROTOBUF_FIELD_OFFSET(ProcessMetrics, _impl_.pid_)>(
           reinterpret_cast<char*>(&_impl_.pid_),
           reinterpret_cast<char*>(&other->_impl_.pid_));
