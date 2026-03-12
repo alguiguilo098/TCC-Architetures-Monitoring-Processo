@@ -60,8 +60,14 @@ void LoadConfig(const std::string& filename, Config& config)
                 config.TruePeriodicScriptHours = std::stoi(value);
             else if (key == "TimeSpleepBetweenReads")
                 config.TimeSpleepBetweenReads = std::stoi(value);
-            else
+            else if (key == "server_host"){
+                config.ServerHost = value;
+            }else if (key == "server_port"){
+                config.ServerPort = std::stoi(value);
+            }else{
                 std::cerr << "Unknown config key: " << key << '\n';
+
+            }
         }
         catch (const std::exception& e)
         {

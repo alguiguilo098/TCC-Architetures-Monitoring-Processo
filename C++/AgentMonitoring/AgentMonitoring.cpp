@@ -126,10 +126,9 @@ AgentMonitoring::AgentMonitoring(std::string config_path)
     this->programList = ProcessMetricas::InstalledProgramList();
     this->kernelDistro = ProcessMetricas::KernelDistro();
     this->last_monitor_time = std::chrono::steady_clock::now();
-    this->channelCommunication = new ChannelCommunication();
-
     sem_init(&this->semaphoreBuffer, 0, 0);
     load_config(config_path);
+    this->channelCommunication = new ChannelCommunication(this->configAgent.ServerHost, this->configAgent.ServerPort);
 }
 /// @brief Destrutor da classe AgentMonitoring
 /// @note Libera a memória alocada para a coleção de métricas e destrói o semáforo
