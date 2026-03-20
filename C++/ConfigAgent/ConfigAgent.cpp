@@ -56,8 +56,6 @@ void LoadConfig(const std::string& filename, Config& config)
                 config.BufferSize = std::stoi(value);
             else if (key == "NumberOfThreads")
                 config.NumberOfThreads = std::stoi(value);
-            else if (key == "TruePeriodicScriptHours")
-                config.TruePeriodicScriptHours = std::stoi(value);
             else if (key == "TimeSpleepBetweenReads")
                 config.TimeSpleepBetweenReads = std::stoi(value);
             else if (key == "server_host"){

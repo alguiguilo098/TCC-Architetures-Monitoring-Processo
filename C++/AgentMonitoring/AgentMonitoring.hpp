@@ -15,7 +15,7 @@ class AgentMonitoring {
     private:
         ProcessMetricas::ProcessMetricsList BufferOutput;
         ProcessMetricas::ProcessMetricsList BufferInput;
-        Config configAgent;
+        
         Collection* collection;
         std::mutex mutexBuffer;
         sem_t semaphoreBuffer;
@@ -33,6 +33,7 @@ class AgentMonitoring {
 
 
     public:
+        Config configAgent;
         AgentMonitoring(std::string config_path);
         ~AgentMonitoring();
         void start_monitoring();

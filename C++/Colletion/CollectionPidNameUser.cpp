@@ -26,18 +26,21 @@ void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics &metrics, int p
     metrics.set_pid(pid);
 }
 /**
- * @brief Coleta o nome do processo a partir do arquivo /proc/[pid]/comm
+ * @brief Coleta o nome do processo a partir do arquivo /proc/[pid]/cmdline
  * @param metrics Referência ao objeto ProcessMetrics onde o nome será armazenado
  * @param pid ID do processo cujo nome será coletado
  */
 void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
-    std::ifstream status_file("/proc/" + std::to_string(pid) + "/comm");
+    std::ifstream status_file("/proc/" + std::to_string(pid) + "/cmdline");
     if (status_file.is_open())
     {
         // Lê o nome do processo
         std::string name;
         std::getline(status_file, name);
+        
+        std::replace(name.begin(), name.end(), '\0', ' ');
+        
         metrics.set_name(name);
     }
     else
