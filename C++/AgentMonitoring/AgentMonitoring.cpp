@@ -3,7 +3,6 @@
 #include <filesystem>
 #include <iostream>
 #include <iomanip>
-#define DEBUG_AGENT_MONITORING true
 
 // Descrição: Implementação das funções de monitoramento do agente
 // Nome: Guilherme Almeida Lopes

@@ -1,16 +1,19 @@
 #include "AgentMonitoring/AgentMonitoring.hpp"
 #include <thread>
-#define PATH_CONFIG "./confagent.conf"
 
 // Descrição: Ponto de entrada principal do programa de monitoramento de processos
 // Nome: Guilherme Almeida Lopes
 // Data: 2025-01-29
 
-int main(){
+int main(int argc, char* argv[]){
     try
     {
+        if (argc < 2) {
+            std::cerr << "Usage: " << argv[0] << " <config_path>" << std::endl;
+            return 1;
+        }
         // Inicia o monitoramento do agente
-        AgentMonitoring* agent = new AgentMonitoring(PATH_CONFIG);
+        AgentMonitoring* agent = new AgentMonitoring(argv[1]);
         std::cout << agent->configAgent.BufferSize << std::endl;
         std::cout << agent->configAgent.NumberOfThreads << std::endl;
         std::cout << agent->configAgent.TimeSpleepBetweenReads << std::endl;
