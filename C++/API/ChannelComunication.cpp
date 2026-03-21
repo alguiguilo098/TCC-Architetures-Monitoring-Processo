@@ -21,14 +21,6 @@ void ChannelCommunication::sendTcpJson(const std::string &json,
                                        const std::string &host,
                                        int port)
 {
-    if (this->sock < 0)
-        return;
-
-    send(this->sock, json.data(), json.size(), 0);
-}
-
-ChannelCommunication::ChannelCommunication(const std::string &host, int port)
-{
     this->sock = socket(AF_INET, SOCK_STREAM, 0);
     if (this->sock < 0)
     {
@@ -41,15 +33,20 @@ ChannelCommunication::ChannelCommunication(const std::string &host, int port)
     server_addr.sin_port = htons(port);
     inet_pton(AF_INET, host.c_str(), &server_addr.sin_addr);
 
+    if(connect(this->sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
+    {
+        perror("connect");
+        return;
+    }
+    send(this->sock, json.data(), json.size(), 0);
+    close(this->sock);
+}
+
+ChannelCommunication::ChannelCommunication(const std::string &host, int port)
+{
     this->host = host;
     this->port = port;
 
-    if (connect(this->sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
-    {
-        perror("connect");
-        close(this->sock);
-        this->sock = -1;
-    }
 }
 
 void ChannelCommunication::sendMessage(ProcessMetricas::InstalledProgramList &message)
