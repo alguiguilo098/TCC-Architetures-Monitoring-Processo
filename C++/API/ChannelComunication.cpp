@@ -62,5 +62,4 @@ void ChannelCommunication::sendMessage(ProcessMetricas::KernelDistro &message)
 void ChannelCommunication::sendMessage(ProcessMetricas::ProcessMetricsList &message)
 {
     sendTcpJson(protobufToJson(message), this->host, this->port);
-    std::cout << "Connecting to server at " << host << ":" << port << "..." << std::endl;
 };

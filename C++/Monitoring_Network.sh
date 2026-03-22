@@ -1,7 +1,8 @@
 #!/bin/bash
 
+file="network_benchmark_$(date +%Y%m%d_%H%M%S).log"
 INTERFACE=${1:-lo}
-DURATION=${60:-10000}
+DURATION=${2:-60}
 
 if ! ip link show $INTERFACE &>/dev/null; then
     echo "Interface $INTERFACE não encontrada"
@@ -10,11 +11,11 @@ if ! ip link show $INTERFACE &>/dev/null; then
     exit 1
 fi
 
-echo "==============================="
-echo " BENCHMARK DE REDE"
-echo " Interface : $INTERFACE"
-echo " Duração   : ${DURATION}s"
-echo "==============================="
+echo "===============================" | tee -a $file
+echo " BENCHMARK DE REDE" | tee -a $file
+echo " Interface : $INTERFACE" | tee -a $file
+echo " Duração   : ${DURATION}s" | tee -a $file
+echo "===============================" | tee -a $file
 
 MAX_RX=0
 MAX_TX=0
@@ -51,7 +52,7 @@ for i in $(seq 1 $DURATION); do
     RX_KB=$(echo "scale=2; $RX_RATE/1024" | bc)
     TX_KB=$(echo "scale=2; $TX_RATE/1024" | bc)
 
-    echo "[${i}s] RX: ${RX_KB} KB/s | TX: ${TX_KB} KB/s"
+    echo "[${i}s] RX: ${RX_KB} KB/s | TX: ${TX_KB} KB/s" | tee -a $file
 
     RX1=$RX2
     TX1=$TX2
@@ -64,16 +65,16 @@ TOTAL_TX=$((TX1 - START_TX))
 AVG_RX=$((SUM_RX / SAMPLES))
 AVG_TX=$((SUM_TX / SAMPLES))
 
-echo ""
-echo "==============================="
-echo " RESULTADOS"
-echo "==============================="
-echo " Total RX    : $((TOTAL_RX / 1024)) KB  ($TOTAL_RX bytes)"
-echo " Total TX    : $((TOTAL_TX / 1024)) KB  ($TOTAL_TX bytes)"
-echo "-------------------------------"
-echo " Média RX    : $((AVG_RX / 1024)) KB/s"
-echo " Média TX    : $((AVG_TX / 1024)) KB/s"
-echo "-------------------------------"
-echo " Pico RX     : $((MAX_RX / 1024)) KB/s"
-echo " Pico TX     : $((MAX_TX / 1024)) KB/s"
-echo "==============================="
+echo "" | tee -a $file
+echo "========= RESULTADO FINAL =========" | tee -a $file
+
+echo "Total RX: $(echo "scale=2; $TOTAL_RX/1024/1024" | bc) MB" | tee -a $file
+echo "Total TX: $(echo "scale=2; $TOTAL_TX/1024/1024" | bc) MB" | tee -a $file
+
+echo "Média RX: $(echo "scale=2; $AVG_RX/1024" | bc) KB/s" | tee -a $file
+echo "Média TX: $(echo "scale=2; $AVG_TX/1024" | bc) KB/s" | tee -a $file
+
+echo "Pico RX : $(echo "scale=2; $MAX_RX/1024" | bc) KB/s" | tee -a $file
+echo "Pico TX : $(echo "scale=2; $MAX_TX/1024" | bc) KB/s" | tee -a $file
+
+echo "Arquivo salvo em: $file"

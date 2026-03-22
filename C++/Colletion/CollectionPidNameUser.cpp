@@ -25,6 +25,19 @@ void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics &metrics, int p
 {
     metrics.set_pid(pid);
 }
+std::vector<std::string> split(const std::string &str, char separador)
+{
+    std::vector<std::string> resultado;
+    std::stringstream ss(str);
+    std::string item;
+
+    while (std::getline(ss, item, separador))
+    {
+        resultado.push_back(item);
+    }
+
+    return resultado;
+}
 /**
  * @brief Coleta o nome do processo a partir do arquivo /proc/[pid]/cmdline
  * @param metrics Referência ao objeto ProcessMetrics onde o nome será armazenado
@@ -32,22 +45,34 @@ void Collection::get_metrics_pid(ProcessMetricas::ProcessMetrics &metrics, int p
  */
 void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
-    std::ifstream status_file("/proc/" + std::to_string(pid) + "/cmdline");
-    if (status_file.is_open())
+    std::ifstream cmd_file("/proc/" + std::to_string(pid) + "/cmdline", std::ios::binary);
+
+    if (cmd_file.is_open())
     {
-        // Lê o nome do processo
         std::string name;
-        std::getline(status_file, name);
-        
-        std::replace(name.begin(), name.end(), '\0', ' ');
-        
-        metrics.set_name(name);
+        std::getline(cmd_file, name);
+
+        // Se não está vazio
+        if (!name.empty())
+        {
+            std::replace(name.begin(), name.end(), '\0', ' ');
+            metrics.set_name(name);
+            return;
+        }
     }
-    else
+
+    // fallback -> comm
+    std::ifstream comm_file("/proc/" + std::to_string(pid) + "/comm");
+
+    if (comm_file.is_open())
     {
-        // Caso não consiga abrir o arquivo, definir nome como "Unknown"
-        metrics.set_name("Unknown");
+        std::string comm_name;
+        std::getline(comm_file, comm_name);
+        metrics.set_name(comm_name);
+        return;
     }
+
+    metrics.set_name("unknown");
 }
 /**
  * @brief Coleta o timestamp atual e o define no objeto ProcessMetrics.
@@ -114,9 +139,6 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
             return;
         }
     }
-
-    // Caso a linha "Uid:" não seja encontrada
-    metrics.set_user("");
 }
 
 /**
@@ -124,9 +146,8 @@ void Collection::get_metrics_user(ProcessMetricas::ProcessMetrics &metrics, int 
  * @param metrics Referência ao objeto ProcessMetrics onde o status será armazenado
  * @param pid ID do processo cujo status será coletado
  */
-void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, int pid){
-    
-   
+void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, int pid)
+{
 }
 
 /**
@@ -137,6 +158,7 @@ void Collection::get_metrics_status(ProcessMetricas::ProcessMetrics &metrics, in
 void Collection::get_metrics_create_time(ProcessMetricas::ProcessMetrics &metrics, int pid)
 {
     std::ifstream stat_file("/proc/" + std::to_string(pid) + "/stat");
+
     if (!stat_file.is_open())
     {
         metrics.set_timestartprocess("");
@@ -145,52 +167,46 @@ void Collection::get_metrics_create_time(ProcessMetricas::ProcessMetrics &metric
 
     std::string line;
     std::getline(stat_file, line);
-    std::istringstream iss(line);
 
-    std::string token;
-    int field = 1;
-    long long starttime_jiffies = 0;
-
-    while (iss >> token)
+    // Encontra o final do nome do processo ')'
+    auto pos = line.rfind(')');
+    if (pos == std::string::npos)
     {
-        if (field == 22)
-        { // starttime
-            starttime_jiffies = std::stoll(token);
-            break;
-        }
-        field++;
+        metrics.set_timestartprocess("");
+        return;
     }
 
-    // Jiffies por segundo
+    // Pega só a parte depois do nome do processo
+    std::istringstream iss(line.substr(pos + 2));
+
+    std::string token;
+    long long starttime_jiffies = 0;
+
+    // O starttime agora é o campo 20 (porque pulamos os dois primeiros)
+    for (int i = 1; i <= 20; i++)
+    {
+        iss >> token;
+        if (i == 20)
+            starttime_jiffies = std::stoll(token);
+    }
+
     long hertz = sysconf(_SC_CLK_TCK);
+    double seconds_after_boot = (double)starttime_jiffies / hertz;
 
-    // Converte jiffies → segundos desde o boot
-    double seconds_after_boot =
-        static_cast<double>(starttime_jiffies) / hertz;
-
-    // Lê uptime
     std::ifstream uptime_file("/proc/uptime");
     double uptime = 0.0;
     uptime_file >> uptime;
 
-    // Tempo atual
     std::time_t now = std::time(nullptr);
+    std::time_t boot_time = now - (std::time_t)uptime;
 
-    // Calcula boot time real
-    std::time_t boot_time =
-        now - static_cast<std::time_t>(uptime);
-
-    // Tempo real de criação do processo
     std::time_t process_start_time =
-        boot_time + static_cast<std::time_t>(seconds_after_boot);
+        boot_time + (std::time_t)seconds_after_boot;
 
-    // Converte para tm
     std::tm tm = *std::localtime(&process_start_time);
 
-    // Formata exatamente:
-    // Tue Jan 27 18:27:56 2026
     std::ostringstream oss;
-    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S%z");
+    oss << std::put_time(&tm, "%Y-%m-%dT%H:%M:%S");
 
     metrics.set_timestartprocess(oss.str());
 }
