@@ -9,7 +9,7 @@ message ProcessMetrics {
   // Campos básicos do processo
   int32 pid = 1; // IMPLEMENTADO                          
   string name = 2; // IMPLEMENTADO          
-  string user = 3; // IMPLEMENTADO        
+  string cmdline = 3; // IMPLEMENTADO        
   int32 num_threads = 7; // IMPLEMENTADO      
   optional int32 num_child_processes = 9; // IMPLEMENTADO   
   
@@ -37,11 +37,7 @@ message ProcessMetrics {
   
   // Network                 
   string hostip = 17;   // IMPLEMENTADO
-  
-
-  
-  // Identidade e permissões
-  int32 gid_effective = 21; 
+   
   
   
 }

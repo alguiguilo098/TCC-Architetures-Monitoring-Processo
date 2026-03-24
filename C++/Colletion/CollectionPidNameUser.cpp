@@ -53,26 +53,12 @@ void Collection::get_metrics_name(ProcessMetricas::ProcessMetrics &metrics, int 
         std::getline(cmd_file, name);
 
         // Se não está vazio
-        if (!name.empty())
-        {
+        if (!name.empty()){
             std::replace(name.begin(), name.end(), '\0', ' ');
-            metrics.set_name(name);
-            return;
+            std::vector<std::string> name_parts = split(name, ' ');
+            metrics.set_name(name_parts[0]);
         }
     }
-
-    // fallback -> comm
-    std::ifstream comm_file("/proc/" + std::to_string(pid) + "/comm");
-
-    if (comm_file.is_open())
-    {
-        std::string comm_name;
-        std::getline(comm_file, comm_name);
-        metrics.set_name(comm_name);
-        return;
-    }
-
-    metrics.set_name("unknown");
 }
 /**
  * @brief Coleta o timestamp atual e o define no objeto ProcessMetrics.

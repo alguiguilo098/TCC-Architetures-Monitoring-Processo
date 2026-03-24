@@ -14,12 +14,7 @@ int main(int argc, char* argv[]){
         }
         // Inicia o monitoramento do agente
         AgentMonitoring* agent = new AgentMonitoring(argv[1]);
-        std::cout << agent->configAgent.BufferSize << std::endl;
-        std::cout << agent->configAgent.NumberOfThreads << std::endl;
-        std::cout << agent->configAgent.TimeSpleepBetweenReads << std::endl;
-        std::cout << agent->configAgent.ServerHost << std::endl;
-        std::cout << agent->configAgent.ServerPort << std::endl;
-
+        
         // Start monitoring
         std::thread monitoring_thread(&AgentMonitoring::start_monitoring, agent);
         // Start server sending data thread
