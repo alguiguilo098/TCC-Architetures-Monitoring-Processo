@@ -194,8 +194,9 @@ class ProcessMetrics final :
 
   enum : int {
     kNameFieldNumber = 2,
-    kUserFieldNumber = 3,
+    kCmdlineFieldNumber = 3,
     kTimestampFieldNumber = 4,
+    kUserFieldNumber = 6,
     kBoottimeFieldNumber = 15,
     kTimestartprocessFieldNumber = 16,
     kHostipFieldNumber = 17,
@@ -209,7 +210,6 @@ class ProcessMetrics final :
     kWriteBytesKbFieldNumber = 12,
     kNiceFieldNumber = 14,
     kIoniceValueFieldNumber = 20,
-    kGidEffectiveFieldNumber = 21,
     kMemRssKbFieldNumber = 23,
     kMemSharedKbFieldNumber = 25,
     kMemVmsKbFieldNumber = 26,
@@ -229,18 +229,18 @@ class ProcessMetrics final :
   std::string* _internal_mutable_name();
   public:
 
-  // string user = 3;
-  void clear_user();
-  const std::string& user() const;
+  // string cmdline = 3;
+  void clear_cmdline();
+  const std::string& cmdline() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_user(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_user();
-  PROTOBUF_NODISCARD std::string* release_user();
-  void set_allocated_user(std::string* user);
+  void set_cmdline(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_cmdline();
+  PROTOBUF_NODISCARD std::string* release_cmdline();
+  void set_allocated_cmdline(std::string* cmdline);
   private:
-  const std::string& _internal_user() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_user(const std::string& value);
-  std::string* _internal_mutable_user();
+  const std::string& _internal_cmdline() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_cmdline(const std::string& value);
+  std::string* _internal_mutable_cmdline();
   public:
 
   // string timestamp = 4;
@@ -255,6 +255,20 @@ class ProcessMetrics final :
   const std::string& _internal_timestamp() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_timestamp(const std::string& value);
   std::string* _internal_mutable_timestamp();
+  public:
+
+  // string user = 6;
+  void clear_user();
+  const std::string& user() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_user(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_user();
+  PROTOBUF_NODISCARD std::string* release_user();
+  void set_allocated_user(std::string* user);
+  private:
+  const std::string& _internal_user() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_user(const std::string& value);
+  std::string* _internal_mutable_user();
   public:
 
   // string boottime = 15;
@@ -413,15 +427,6 @@ class ProcessMetrics final :
   void _internal_set_ionice_value(int32_t value);
   public:
 
-  // int32 gid_effective = 21;
-  void clear_gid_effective();
-  int32_t gid_effective() const;
-  void set_gid_effective(int32_t value);
-  private:
-  int32_t _internal_gid_effective() const;
-  void _internal_set_gid_effective(int32_t value);
-  public:
-
   // int32 mem_rss_kb = 23;
   void clear_mem_rss_kb();
   int32_t mem_rss_kb() const;
@@ -469,8 +474,9 @@ class ProcessMetrics final :
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cmdline_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr boottime_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestartprocess_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
@@ -484,7 +490,6 @@ class ProcessMetrics final :
     uint64_t write_bytes_kb_;
     int32_t nice_;
     int32_t ionice_value_;
-    int32_t gid_effective_;
     int32_t mem_rss_kb_;
     int32_t mem_shared_kb_;
     int32_t mem_vms_kb_;
@@ -1290,7 +1295,7 @@ inline void ProcessMetrics::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.name)
 }
 
-// string user = 3;
+// string user = 6;
 inline void ProcessMetrics::clear_user() {
   _impl_.user_.ClearToEmpty();
 }
@@ -1338,6 +1343,56 @@ inline void ProcessMetrics::set_allocated_user(std::string* user) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.user)
+}
+
+// string cmdline = 3;
+inline void ProcessMetrics::clear_cmdline() {
+  _impl_.cmdline_.ClearToEmpty();
+}
+inline const std::string& ProcessMetrics::cmdline() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.cmdline)
+  return _internal_cmdline();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProcessMetrics::set_cmdline(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.cmdline_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.cmdline)
+}
+inline std::string* ProcessMetrics::mutable_cmdline() {
+  std::string* _s = _internal_mutable_cmdline();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.cmdline)
+  return _s;
+}
+inline const std::string& ProcessMetrics::_internal_cmdline() const {
+  return _impl_.cmdline_.Get();
+}
+inline void ProcessMetrics::_internal_set_cmdline(const std::string& value) {
+  
+  _impl_.cmdline_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::_internal_mutable_cmdline() {
+  
+  return _impl_.cmdline_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::release_cmdline() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.cmdline)
+  return _impl_.cmdline_.Release();
+}
+inline void ProcessMetrics::set_allocated_cmdline(std::string* cmdline) {
+  if (cmdline != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.cmdline_.SetAllocated(cmdline, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.cmdline_.IsDefault()) {
+    _impl_.cmdline_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.cmdline)
 }
 
 // int32 num_threads = 7;
@@ -1846,26 +1901,6 @@ inline void ProcessMetrics::set_allocated_hostip(std::string* hostip) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.hostip)
-}
-
-// int32 gid_effective = 21;
-inline void ProcessMetrics::clear_gid_effective() {
-  _impl_.gid_effective_ = 0;
-}
-inline int32_t ProcessMetrics::_internal_gid_effective() const {
-  return _impl_.gid_effective_;
-}
-inline int32_t ProcessMetrics::gid_effective() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.gid_effective)
-  return _internal_gid_effective();
-}
-inline void ProcessMetrics::_internal_set_gid_effective(int32_t value) {
-  
-  _impl_.gid_effective_ = value;
-}
-inline void ProcessMetrics::set_gid_effective(int32_t value) {
-  _internal_set_gid_effective(value);
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.gid_effective)
 }
 
 // -------------------------------------------------------------------
