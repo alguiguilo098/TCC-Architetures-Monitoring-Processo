@@ -16,7 +16,7 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
 
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_user(metrics, pid);
-    if (metrics.cpu_percent()!=0.0f && metrics.user()!="root")
+    if (metrics.cpu_percent()!=0.0f && metrics.user()!=)
     {
         // Corretas
         collection->get_metrics_name(metrics, pid);

@@ -62,7 +62,9 @@ void LoadConfig(const std::string& filename, Config& config)
                 config.ServerHost = value;
             }else if (key == "server_port"){
                 config.ServerPort = std::stoi(value);
-            }else{
+            }else if (key=="username"){
+                config.username = value;
+            }else {
                 std::cerr << "Unknown config key: " << key << '\n';
 
             }
