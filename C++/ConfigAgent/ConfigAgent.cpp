@@ -66,7 +66,6 @@ void LoadConfig(const std::string& filename, Config& config)
                 config.username = value;
             }else {
                 std::cerr << "Unknown config key: " << key << '\n';
-
             }
         }
         catch (const std::exception& e)

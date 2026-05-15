@@ -16,37 +16,36 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
 
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_user(metrics, pid);
-    if (metrics.cpu_percent()!=0.0f && metrics.user()!=)
+    if (metrics.cpu_percent() != 0.0f && metrics.user() == configAgent.username && metrics.name() != "")
     {
-        // Corretas
-        collection->get_metrics_name(metrics, pid);
-        collection->get_metrics_pid(metrics, pid);
-        collection->get_metrics_user(metrics, pid);
-        collection->get_host_ip(metrics);
-        collection->get_metrics_timestamp(metrics, pid);
-        collection->get_metrics_num_fds(metrics, pid);
-        collection->get_metrics_nice(metrics, pid);
-        collection->get_metrics_status(metrics, pid);
-        collection->get_metrics_boottime(metrics);
-        collection->get_metrics_num_threads(metrics, pid);
-        collection->get_metrics_num_child_processes(metrics, pid);
-        collection->get_metrics_read_bytes(metrics, pid);
-        collection->get_metrics_write_bytes(metrics, pid);
-        collection->get_metrics_create_time(metrics, pid);
-        collection->get_metrics_memory_percent(metrics, pid);
-        collection->get_mem_statm(metrics, pid);
-        collection->get_io_nice(metrics, pid);
-        // Coleta o tempo de atividade do processo
+        
+            // Corretas
+            collection->get_metrics_name(metrics, pid);
+            collection->get_metrics_pid(metrics, pid);
+            collection->get_metrics_user(metrics, pid);
+            collection->get_host_ip(metrics);
+            collection->get_metrics_timestamp(metrics, pid);
+            collection->get_metrics_num_fds(metrics, pid);
+            collection->get_metrics_nice(metrics, pid);
+            collection->get_metrics_status(metrics, pid);
+            collection->get_metrics_boottime(metrics);
+            collection->get_metrics_num_threads(metrics, pid);
+            collection->get_metrics_num_child_processes(metrics, pid);
+            collection->get_metrics_read_bytes(metrics, pid);
+            collection->get_metrics_write_bytes(metrics, pid);
+            collection->get_metrics_create_time(metrics, pid);
+            collection->get_metrics_memory_percent(metrics, pid);
+            collection->get_mem_statm(metrics, pid);
+            collection->get_io_nice(metrics, pid);
+            // Coleta o tempo de atividade do processo
 
-        this->mutexBuffer.lock();
-        // Adiciona as métricas coletadas ao buffer de saída
-        this->BufferOutput.add_processes()->CopyFrom(metrics);
-        this->mutexBuffer.unlock();
+            this->mutexBuffer.lock();
+            // Adiciona as métricas coletadas ao buffer de saída
+            this->BufferOutput.add_processes()->CopyFrom(metrics);
+            this->mutexBuffer.unlock();
+        
     }
-
-    
 }
-
 /// @brief Monitora e coleta informações sobre a distribuição do kernel
 /// @param kernelDistro Estrutura onde as informações coletadas serão armazenadas
 /// @note Utiliza a função collectionKernelDistro para realizar a coleta
@@ -75,6 +74,7 @@ void AgentMonitoring::monitor_all_processes()
     get_all_pids(pids);
 
     size_t total_pids = pids.size();
+
     size_t pids_per_thread = (total_pids + num_threads - 1) / num_threads;
     std::vector<std::thread> threads;
     for (int i = 0; i < num_threads; ++i)
@@ -101,7 +101,6 @@ void AgentMonitoring::monitor_all_processes()
         }
     }
 }
-
 
 namespace fs = std::filesystem;
 /// @brief Obtém todos os PIDs dos processos em execução no sistema
