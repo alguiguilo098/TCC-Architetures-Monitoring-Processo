@@ -32,6 +32,7 @@ PROTOBUF_CONSTEXPR ProcessMetrics::ProcessMetrics(
   , /*decltype(_impl_.boottime_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.timestartprocess_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.hostip_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.laboratory_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.pid_)*/0
   , /*decltype(_impl_.num_threads_)*/0
   , /*decltype(_impl_.cpu_percent_)*/0
@@ -131,6 +132,7 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.cmdline_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.num_threads_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.num_child_processes_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.laboratory_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.cpu_percent_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.memory_percent_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::ProcessMetrics, _impl_.mem_rss_kb_),
@@ -152,6 +154,7 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   ~0u,
   ~0u,
   1,
+  ~0u,
   0,
   3,
   ~0u,
@@ -203,11 +206,11 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.programs_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 27, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
-  { 48, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
-  { 55, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
-  { 65, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
-  { 73, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
+  { 0, 28, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
+  { 50, -1, -1, sizeof(::ProcessMetricas::ProcessMetricsList)},
+  { 57, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
+  { 67, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
+  { 75, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -220,33 +223,34 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\025ProcessMetricas.proto\022\017ProcessMetricas"
-  "\"\272\004\n\016ProcessMetrics\022\013\n\003pid\030\001 \001(\005\022\014\n\004name"
+  "\"\316\004\n\016ProcessMetrics\022\013\n\003pid\030\001 \001(\005\022\014\n\004name"
   "\030\002 \001(\t\022\014\n\004user\030\006 \001(\t\022\017\n\007cmdline\030\003 \001(\t\022\023\n"
   "\013num_threads\030\007 \001(\005\022 \n\023num_child_processe"
-  "s\030\t \001(\005H\000\210\001\001\022\030\n\013cpu_percent\030\010 \001(\002H\001\210\001\001\022\033"
-  "\n\016memory_percent\030\n \001(\002H\002\210\001\001\022\022\n\nmem_rss_k"
-  "b\030\027 \001(\005\022\025\n\rmem_shared_kb\030\031 \001(\005\022\022\n\nmem_vm"
-  "s_kb\030\032 \001(\005\022\023\n\013mem_text_kb\030\033 \001(\005\022\032\n\rread_"
-  "bytes_kb\030\013 \001(\004H\003\210\001\001\022\033\n\016write_bytes_kb\030\014 "
-  "\001(\004H\004\210\001\001\022\024\n\007num_fds\030\r \001(\005H\005\210\001\001\022\014\n\004nice\030\016"
-  " \001(\005\022\024\n\014ionice_value\030\024 \001(\005\022\021\n\ttimestamp\030"
-  "\004 \001(\t\022\020\n\010boottime\030\017 \001(\t\022\030\n\020timestartproc"
-  "ess\030\020 \001(\t\022\016\n\006hostip\030\021 \001(\tB\026\n\024_num_child_"
-  "processesB\016\n\014_cpu_percentB\021\n\017_memory_per"
-  "centB\020\n\016_read_bytes_kbB\021\n\017_write_bytes_k"
-  "bB\n\n\010_num_fds\"H\n\022ProcessMetricsList\0222\n\tp"
-  "rocesses\030\001 \003(\0132\037.ProcessMetricas.Process"
-  "Metrics\"^\n\014KernelDistro\022\021\n\ttimestamp\030\003 \001"
-  "(\t\022\026\n\016kernel_version\030\001 \001(\t\022\023\n\013distro_nam"
-  "e\030\002 \001(\t\022\016\n\006hostip\030\021 \001(\t\"1\n\020InstalledProg"
-  "ram\022\014\n\004name\030\001 \001(\t\022\017\n\007version\030\002 \001(\t\"n\n\024In"
-  "stalledProgramList\022\021\n\ttimestamp\030\003 \001(\t\022\016\n"
-  "\006hostip\030\002 \001(\t\0223\n\010programs\030\001 \003(\0132!.Proces"
-  "sMetricas.InstalledProgramb\006proto3"
+  "s\030\t \001(\005H\000\210\001\001\022\022\n\nlaboratory\030\022 \001(\t\022\030\n\013cpu_"
+  "percent\030\010 \001(\002H\001\210\001\001\022\033\n\016memory_percent\030\n \001"
+  "(\002H\002\210\001\001\022\022\n\nmem_rss_kb\030\027 \001(\005\022\025\n\rmem_share"
+  "d_kb\030\031 \001(\005\022\022\n\nmem_vms_kb\030\032 \001(\005\022\023\n\013mem_te"
+  "xt_kb\030\033 \001(\005\022\032\n\rread_bytes_kb\030\013 \001(\004H\003\210\001\001\022"
+  "\033\n\016write_bytes_kb\030\014 \001(\004H\004\210\001\001\022\024\n\007num_fds\030"
+  "\r \001(\005H\005\210\001\001\022\014\n\004nice\030\016 \001(\005\022\024\n\014ionice_value"
+  "\030\024 \001(\005\022\021\n\ttimestamp\030\004 \001(\t\022\020\n\010boottime\030\017 "
+  "\001(\t\022\030\n\020timestartprocess\030\020 \001(\t\022\016\n\006hostip\030"
+  "\021 \001(\tB\026\n\024_num_child_processesB\016\n\014_cpu_pe"
+  "rcentB\021\n\017_memory_percentB\020\n\016_read_bytes_"
+  "kbB\021\n\017_write_bytes_kbB\n\n\010_num_fds\"H\n\022Pro"
+  "cessMetricsList\0222\n\tprocesses\030\001 \003(\0132\037.Pro"
+  "cessMetricas.ProcessMetrics\"^\n\014KernelDis"
+  "tro\022\021\n\ttimestamp\030\003 \001(\t\022\026\n\016kernel_version"
+  "\030\001 \001(\t\022\023\n\013distro_name\030\002 \001(\t\022\016\n\006hostip\030\021 "
+  "\001(\t\"1\n\020InstalledProgram\022\014\n\004name\030\001 \001(\t\022\017\n"
+  "\007version\030\002 \001(\t\"n\n\024InstalledProgramList\022\021"
+  "\n\ttimestamp\030\003 \001(\t\022\016\n\006hostip\030\002 \001(\t\0223\n\010pro"
+  "grams\030\001 \003(\0132!.ProcessMetricas.InstalledP"
+  "rogramb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProcessMetricas_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProcessMetricas_2eproto = {
-    false, false, 954, descriptor_table_protodef_ProcessMetricas_2eproto,
+    false, false, 974, descriptor_table_protodef_ProcessMetricas_2eproto,
     "ProcessMetricas.proto",
     &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 5,
     schemas, file_default_instances, TableStruct_ProcessMetricas_2eproto::offsets,
@@ -305,6 +309,7 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
     , decltype(_impl_.boottime_){}
     , decltype(_impl_.timestartprocess_){}
     , decltype(_impl_.hostip_){}
+    , decltype(_impl_.laboratory_){}
     , decltype(_impl_.pid_){}
     , decltype(_impl_.num_threads_){}
     , decltype(_impl_.cpu_percent_){}
@@ -377,6 +382,14 @@ ProcessMetrics::ProcessMetrics(const ProcessMetrics& from)
     _this->_impl_.hostip_.Set(from._internal_hostip(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.laboratory_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.laboratory_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_laboratory().empty()) {
+    _this->_impl_.laboratory_.Set(from._internal_laboratory(), 
+      _this->GetArenaForAllocation());
+  }
   ::memcpy(&_impl_.pid_, &from._impl_.pid_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.mem_text_kb_) -
     reinterpret_cast<char*>(&_impl_.pid_)) + sizeof(_impl_.mem_text_kb_));
@@ -397,6 +410,7 @@ inline void ProcessMetrics::SharedCtor(
     , decltype(_impl_.boottime_){}
     , decltype(_impl_.timestartprocess_){}
     , decltype(_impl_.hostip_){}
+    , decltype(_impl_.laboratory_){}
     , decltype(_impl_.pid_){0}
     , decltype(_impl_.num_threads_){0}
     , decltype(_impl_.cpu_percent_){0}
@@ -440,6 +454,10 @@ inline void ProcessMetrics::SharedCtor(
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.hostip_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.laboratory_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.laboratory_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 ProcessMetrics::~ProcessMetrics() {
@@ -460,6 +478,7 @@ inline void ProcessMetrics::SharedDtor() {
   _impl_.boottime_.Destroy();
   _impl_.timestartprocess_.Destroy();
   _impl_.hostip_.Destroy();
+  _impl_.laboratory_.Destroy();
 }
 
 void ProcessMetrics::SetCachedSize(int size) const {
@@ -479,6 +498,7 @@ void ProcessMetrics::Clear() {
   _impl_.boottime_.ClearToEmpty();
   _impl_.timestartprocess_.ClearToEmpty();
   _impl_.hostip_.ClearToEmpty();
+  _impl_.laboratory_.ClearToEmpty();
   ::memset(&_impl_.pid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.num_threads_) -
       reinterpret_cast<char*>(&_impl_.pid_)) + sizeof(_impl_.num_threads_));
@@ -647,6 +667,16 @@ const char* ProcessMetrics::_InternalParse(const char* ptr, ::_pbi::ParseContext
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.ProcessMetrics.hostip"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string laboratory = 18;
+      case 18:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 146)) {
+          auto str = _internal_mutable_laboratory();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.ProcessMetrics.laboratory"));
         } else
           goto handle_unusual;
         continue;
@@ -844,6 +874,16 @@ uint8_t* ProcessMetrics::_InternalSerialize(
         17, this->_internal_hostip(), target);
   }
 
+  // string laboratory = 18;
+  if (!this->_internal_laboratory().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_laboratory().data(), static_cast<int>(this->_internal_laboratory().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.ProcessMetrics.laboratory");
+    target = stream->WriteStringMaybeAliased(
+        18, this->_internal_laboratory(), target);
+  }
+
   // int32 ionice_value = 20;
   if (this->_internal_ionice_value() != 0) {
     target = stream->EnsureSpace(target);
@@ -937,6 +977,13 @@ size_t ProcessMetrics::ByteSizeLong() const {
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_hostip());
+  }
+
+  // string laboratory = 18;
+  if (!this->_internal_laboratory().empty()) {
+    total_size += 2 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_laboratory());
   }
 
   // int32 pid = 1;
@@ -1061,6 +1108,9 @@ void ProcessMetrics::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
   if (!from._internal_hostip().empty()) {
     _this->_internal_set_hostip(from._internal_hostip());
   }
+  if (!from._internal_laboratory().empty()) {
+    _this->_internal_set_laboratory(from._internal_laboratory());
+  }
   if (from._internal_pid() != 0) {
     _this->_internal_set_pid(from._internal_pid());
   }
@@ -1154,6 +1204,10 @@ void ProcessMetrics::InternalSwap(ProcessMetrics* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.hostip_, lhs_arena,
       &other->_impl_.hostip_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.laboratory_, lhs_arena,
+      &other->_impl_.laboratory_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(ProcessMetrics, _impl_.mem_text_kb_)

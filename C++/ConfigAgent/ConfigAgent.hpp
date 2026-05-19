@@ -11,6 +11,7 @@ struct Config {
     int TimeSpleepBetweenReads; // Sleep time between reads in seconds
     std::string ServerHost; // Hostname or IP address of the server
     int ServerPort; // Port number for the server
+    std::string laboratory; // Laboratory identifier
     std::string username; // Username
     
 };

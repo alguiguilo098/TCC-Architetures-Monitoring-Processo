@@ -200,6 +200,7 @@ class ProcessMetrics final :
     kBoottimeFieldNumber = 15,
     kTimestartprocessFieldNumber = 16,
     kHostipFieldNumber = 17,
+    kLaboratoryFieldNumber = 18,
     kPidFieldNumber = 1,
     kNumThreadsFieldNumber = 7,
     kCpuPercentFieldNumber = 8,
@@ -311,6 +312,20 @@ class ProcessMetrics final :
   const std::string& _internal_hostip() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_hostip(const std::string& value);
   std::string* _internal_mutable_hostip();
+  public:
+
+  // string laboratory = 18;
+  void clear_laboratory();
+  const std::string& laboratory() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_laboratory(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_laboratory();
+  PROTOBUF_NODISCARD std::string* release_laboratory();
+  void set_allocated_laboratory(std::string* laboratory);
+  private:
+  const std::string& _internal_laboratory() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_laboratory(const std::string& value);
+  std::string* _internal_mutable_laboratory();
   public:
 
   // int32 pid = 1;
@@ -480,6 +495,7 @@ class ProcessMetrics final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr boottime_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestartprocess_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr laboratory_;
     int32_t pid_;
     int32_t num_threads_;
     float cpu_percent_;
@@ -1441,6 +1457,56 @@ inline void ProcessMetrics::_internal_set_num_child_processes(int32_t value) {
 inline void ProcessMetrics::set_num_child_processes(int32_t value) {
   _internal_set_num_child_processes(value);
   // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.num_child_processes)
+}
+
+// string laboratory = 18;
+inline void ProcessMetrics::clear_laboratory() {
+  _impl_.laboratory_.ClearToEmpty();
+}
+inline const std::string& ProcessMetrics::laboratory() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.laboratory)
+  return _internal_laboratory();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProcessMetrics::set_laboratory(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.laboratory_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.laboratory)
+}
+inline std::string* ProcessMetrics::mutable_laboratory() {
+  std::string* _s = _internal_mutable_laboratory();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.laboratory)
+  return _s;
+}
+inline const std::string& ProcessMetrics::_internal_laboratory() const {
+  return _impl_.laboratory_.Get();
+}
+inline void ProcessMetrics::_internal_set_laboratory(const std::string& value) {
+  
+  _impl_.laboratory_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::_internal_mutable_laboratory() {
+  
+  return _impl_.laboratory_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProcessMetrics::release_laboratory() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.laboratory)
+  return _impl_.laboratory_.Release();
+}
+inline void ProcessMetrics::set_allocated_laboratory(std::string* laboratory) {
+  if (laboratory != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.laboratory_.SetAllocated(laboratory, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.laboratory_.IsDefault()) {
+    _impl_.laboratory_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.laboratory)
 }
 
 // optional float cpu_percent = 8;

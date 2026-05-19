@@ -24,7 +24,7 @@ class AgentMonitoring {
 
         ChannelCommunication* channelCommunication;
         std::chrono::steady_clock::time_point last_monitor_time;
-        
+        void set_laboratory_info(ProcessMetricas::ProcessMetrics &metrics);        
         void monitor_process(int pid, ProcessMetricas::ProcessMetrics &metrics);
         void monitor_kernel_distro(ProcessMetricas::KernelDistro &kernelDistro);
         void monitor_installed_programs(ProcessMetricas::InstalledProgramList &programList);

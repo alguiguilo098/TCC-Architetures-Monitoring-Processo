@@ -8,6 +8,11 @@
 // Nome: Guilherme Almeida Lopes
 // Data: 2025-01-29
 
+void AgentMonitoring::set_laboratory_info(ProcessMetricas::ProcessMetrics &metrics)
+{
+    metrics.set_laboratory(configAgent.laboratory);
+}
+
 /// @brief Monitora um processo específico coletando suas métricas
 /// @param pid Identificador do processo a ser monitorado
 /// @param metrics Estrutura onde as métricas coletadas serão armazenadas
@@ -18,7 +23,7 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_user(metrics, pid);
     if (metrics.cpu_percent() != 0.0f && metrics.user() == configAgent.username && metrics.name() != "")
     {
-        
+            this->set_laboratory_info(metrics);
             // Corretas
             collection->get_metrics_name(metrics, pid);
             collection->get_metrics_pid(metrics, pid);
@@ -208,3 +213,5 @@ void AgentMonitoring::strart_sending_data_server()
         this->BufferInput.Clear();
     }
 }
+
+

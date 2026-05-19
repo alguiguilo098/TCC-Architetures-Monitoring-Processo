@@ -13,6 +13,7 @@ message ProcessMetrics {
   string cmdline = 3; // IMPLEMENTADO        
   int32 num_threads = 7; // IMPLEMENTADO      
   optional int32 num_child_processes = 9; // IMPLEMENTADO   
+  string laboratory = 18; 
   
   // CPU                 
   optional float cpu_percent = 8; // IMPLEMENTADO
