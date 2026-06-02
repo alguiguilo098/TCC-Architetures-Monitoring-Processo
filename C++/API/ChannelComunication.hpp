@@ -18,4 +18,5 @@ public:
     void sendMessage(ProcessMetricas::InstalledProgramList &message);
     void sendMessage(ProcessMetricas::KernelDistro &message);
     void sendMessage(ProcessMetricas::ProcessMetricsList &message);
+    void sendMessage(ProcessMetricas::UrlAccess &message);
 };

@@ -63,3 +63,7 @@ void ChannelCommunication::sendMessage(ProcessMetricas::ProcessMetricsList &mess
 {
     sendTcpJson(protobufToJson(message), this->host, this->port);
 };
+void ChannelCommunication::sendMessage(ProcessMetricas::UrlAccess &message)
+{
+    sendTcpJson(protobufToJson(message), this->host, this->port);
+};

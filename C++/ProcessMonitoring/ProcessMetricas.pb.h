@@ -60,6 +60,9 @@ extern ProcessMetricsDefaultTypeInternal _ProcessMetrics_default_instance_;
 class ProcessMetricsList;
 struct ProcessMetricsListDefaultTypeInternal;
 extern ProcessMetricsListDefaultTypeInternal _ProcessMetricsList_default_instance_;
+class UrlAccess;
+struct UrlAccessDefaultTypeInternal;
+extern UrlAccessDefaultTypeInternal _UrlAccess_default_instance_;
 }  // namespace ProcessMetricas
 PROTOBUF_NAMESPACE_OPEN
 template<> ::ProcessMetricas::InstalledProgram* Arena::CreateMaybeMessage<::ProcessMetricas::InstalledProgram>(Arena*);
@@ -67,6 +70,7 @@ template<> ::ProcessMetricas::InstalledProgramList* Arena::CreateMaybeMessage<::
 template<> ::ProcessMetricas::KernelDistro* Arena::CreateMaybeMessage<::ProcessMetricas::KernelDistro>(Arena*);
 template<> ::ProcessMetricas::ProcessMetrics* Arena::CreateMaybeMessage<::ProcessMetricas::ProcessMetrics>(Arena*);
 template<> ::ProcessMetricas::ProcessMetricsList* Arena::CreateMaybeMessage<::ProcessMetricas::ProcessMetricsList>(Arena*);
+template<> ::ProcessMetricas::UrlAccess* Arena::CreateMaybeMessage<::ProcessMetricas::UrlAccess>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace ProcessMetricas {
 
@@ -1225,6 +1229,191 @@ class InstalledProgramList final :
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::ProcessMetricas::InstalledProgram > programs_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_ProcessMetricas_2eproto;
+};
+// -------------------------------------------------------------------
+
+class UrlAccess final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ProcessMetricas.UrlAccess) */ {
+ public:
+  inline UrlAccess() : UrlAccess(nullptr) {}
+  ~UrlAccess() override;
+  explicit PROTOBUF_CONSTEXPR UrlAccess(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  UrlAccess(const UrlAccess& from);
+  UrlAccess(UrlAccess&& from) noexcept
+    : UrlAccess() {
+    *this = ::std::move(from);
+  }
+
+  inline UrlAccess& operator=(const UrlAccess& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline UrlAccess& operator=(UrlAccess&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const UrlAccess& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const UrlAccess* internal_default_instance() {
+    return reinterpret_cast<const UrlAccess*>(
+               &_UrlAccess_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(UrlAccess& a, UrlAccess& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(UrlAccess* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(UrlAccess* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  UrlAccess* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<UrlAccess>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const UrlAccess& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const UrlAccess& from) {
+    UrlAccess::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UrlAccess* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ProcessMetricas.UrlAccess";
+  }
+  protected:
+  explicit UrlAccess(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kUrlFieldNumber = 1,
+    kTimestampFieldNumber = 2,
+    kHostipFieldNumber = 3,
+  };
+  // string url = 1;
+  void clear_url();
+  const std::string& url() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_url(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_url();
+  PROTOBUF_NODISCARD std::string* release_url();
+  void set_allocated_url(std::string* url);
+  private:
+  const std::string& _internal_url() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_url(const std::string& value);
+  std::string* _internal_mutable_url();
+  public:
+
+  // string timestamp = 2;
+  void clear_timestamp();
+  const std::string& timestamp() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_timestamp(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_timestamp();
+  PROTOBUF_NODISCARD std::string* release_timestamp();
+  void set_allocated_timestamp(std::string* timestamp);
+  private:
+  const std::string& _internal_timestamp() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_timestamp(const std::string& value);
+  std::string* _internal_mutable_timestamp();
+  public:
+
+  // string hostip = 3;
+  void clear_hostip();
+  const std::string& hostip() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_hostip(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_hostip();
+  PROTOBUF_NODISCARD std::string* release_hostip();
+  void set_allocated_hostip(std::string* hostip);
+  private:
+  const std::string& _internal_hostip() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_hostip(const std::string& value);
+  std::string* _internal_mutable_hostip();
+  public:
+
+  // @@protoc_insertion_point(class_scope:ProcessMetricas.UrlAccess)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr url_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2465,9 +2654,165 @@ InstalledProgramList::programs() const {
   return _impl_.programs_;
 }
 
+// -------------------------------------------------------------------
+
+// UrlAccess
+
+// string url = 1;
+inline void UrlAccess::clear_url() {
+  _impl_.url_.ClearToEmpty();
+}
+inline const std::string& UrlAccess::url() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.UrlAccess.url)
+  return _internal_url();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UrlAccess::set_url(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.UrlAccess.url)
+}
+inline std::string* UrlAccess::mutable_url() {
+  std::string* _s = _internal_mutable_url();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.UrlAccess.url)
+  return _s;
+}
+inline const std::string& UrlAccess::_internal_url() const {
+  return _impl_.url_.Get();
+}
+inline void UrlAccess::_internal_set_url(const std::string& value) {
+  
+  _impl_.url_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UrlAccess::_internal_mutable_url() {
+  
+  return _impl_.url_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UrlAccess::release_url() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.UrlAccess.url)
+  return _impl_.url_.Release();
+}
+inline void UrlAccess::set_allocated_url(std::string* url) {
+  if (url != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.url_.SetAllocated(url, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.url_.IsDefault()) {
+    _impl_.url_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.UrlAccess.url)
+}
+
+// string timestamp = 2;
+inline void UrlAccess::clear_timestamp() {
+  _impl_.timestamp_.ClearToEmpty();
+}
+inline const std::string& UrlAccess::timestamp() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.UrlAccess.timestamp)
+  return _internal_timestamp();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UrlAccess::set_timestamp(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.timestamp_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.UrlAccess.timestamp)
+}
+inline std::string* UrlAccess::mutable_timestamp() {
+  std::string* _s = _internal_mutable_timestamp();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.UrlAccess.timestamp)
+  return _s;
+}
+inline const std::string& UrlAccess::_internal_timestamp() const {
+  return _impl_.timestamp_.Get();
+}
+inline void UrlAccess::_internal_set_timestamp(const std::string& value) {
+  
+  _impl_.timestamp_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UrlAccess::_internal_mutable_timestamp() {
+  
+  return _impl_.timestamp_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UrlAccess::release_timestamp() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.UrlAccess.timestamp)
+  return _impl_.timestamp_.Release();
+}
+inline void UrlAccess::set_allocated_timestamp(std::string* timestamp) {
+  if (timestamp != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.timestamp_.SetAllocated(timestamp, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.timestamp_.IsDefault()) {
+    _impl_.timestamp_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.UrlAccess.timestamp)
+}
+
+// string hostip = 3;
+inline void UrlAccess::clear_hostip() {
+  _impl_.hostip_.ClearToEmpty();
+}
+inline const std::string& UrlAccess::hostip() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.UrlAccess.hostip)
+  return _internal_hostip();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UrlAccess::set_hostip(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.hostip_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.UrlAccess.hostip)
+}
+inline std::string* UrlAccess::mutable_hostip() {
+  std::string* _s = _internal_mutable_hostip();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.UrlAccess.hostip)
+  return _s;
+}
+inline const std::string& UrlAccess::_internal_hostip() const {
+  return _impl_.hostip_.Get();
+}
+inline void UrlAccess::_internal_set_hostip(const std::string& value) {
+  
+  _impl_.hostip_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UrlAccess::_internal_mutable_hostip() {
+  
+  return _impl_.hostip_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UrlAccess::release_hostip() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.UrlAccess.hostip)
+  return _impl_.hostip_.Release();
+}
+inline void UrlAccess::set_allocated_hostip(std::string* hostip) {
+  if (hostip != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.hostip_.SetAllocated(hostip, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.hostip_.IsDefault()) {
+    _impl_.hostip_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.UrlAccess.hostip)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

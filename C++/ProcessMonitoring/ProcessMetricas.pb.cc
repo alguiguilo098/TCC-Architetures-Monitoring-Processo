@@ -114,8 +114,23 @@ struct InstalledProgramListDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 InstalledProgramListDefaultTypeInternal _InstalledProgramList_default_instance_;
+PROTOBUF_CONSTEXPR UrlAccess::UrlAccess(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.timestamp_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.hostip_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct UrlAccessDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UrlAccessDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UrlAccessDefaultTypeInternal() {}
+  union {
+    UrlAccess _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UrlAccessDefaultTypeInternal _UrlAccess_default_instance_;
 }  // namespace ProcessMetricas
-static ::_pb::Metadata file_level_metadata_ProcessMetricas_2eproto[5];
+static ::_pb::Metadata file_level_metadata_ProcessMetricas_2eproto[6];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_ProcessMetricas_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_ProcessMetricas_2eproto = nullptr;
 
@@ -204,6 +219,15 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.timestamp_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.hostip_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::InstalledProgramList, _impl_.programs_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.url_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.timestamp_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.hostip_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 28, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
@@ -211,6 +235,7 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 57, -1, -1, sizeof(::ProcessMetricas::KernelDistro)},
   { 67, -1, -1, sizeof(::ProcessMetricas::InstalledProgram)},
   { 75, -1, -1, sizeof(::ProcessMetricas::InstalledProgramList)},
+  { 84, -1, -1, sizeof(::ProcessMetricas::UrlAccess)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -219,6 +244,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::ProcessMetricas::_KernelDistro_default_instance_._instance,
   &::ProcessMetricas::_InstalledProgram_default_instance_._instance,
   &::ProcessMetricas::_InstalledProgramList_default_instance_._instance,
+  &::ProcessMetricas::_UrlAccess_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -246,13 +272,14 @@ const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_
   "\007version\030\002 \001(\t\"n\n\024InstalledProgramList\022\021"
   "\n\ttimestamp\030\003 \001(\t\022\016\n\006hostip\030\002 \001(\t\0223\n\010pro"
   "grams\030\001 \003(\0132!.ProcessMetricas.InstalledP"
-  "rogramb\006proto3"
+  "rogram\";\n\tUrlAccess\022\013\n\003url\030\001 \001(\t\022\021\n\ttime"
+  "stamp\030\002 \001(\t\022\016\n\006hostip\030\003 \001(\tb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProcessMetricas_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProcessMetricas_2eproto = {
-    false, false, 974, descriptor_table_protodef_ProcessMetricas_2eproto,
+    false, false, 1035, descriptor_table_protodef_ProcessMetricas_2eproto,
     "ProcessMetricas.proto",
-    &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 5,
+    &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 6,
     schemas, file_default_instances, TableStruct_ProcessMetricas_2eproto::offsets,
     file_level_metadata_ProcessMetricas_2eproto, file_level_enum_descriptors_ProcessMetricas_2eproto,
     file_level_service_descriptors_ProcessMetricas_2eproto,
@@ -2301,6 +2328,309 @@ void InstalledProgramList::InternalSwap(InstalledProgramList* other) {
       file_level_metadata_ProcessMetricas_2eproto[4]);
 }
 
+// ===================================================================
+
+class UrlAccess::_Internal {
+ public:
+};
+
+UrlAccess::UrlAccess(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:ProcessMetricas.UrlAccess)
+}
+UrlAccess::UrlAccess(const UrlAccess& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  UrlAccess* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.url_){}
+    , decltype(_impl_.timestamp_){}
+    , decltype(_impl_.hostip_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_url().empty()) {
+    _this->_impl_.url_.Set(from._internal_url(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.timestamp_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.timestamp_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_timestamp().empty()) {
+    _this->_impl_.timestamp_.Set(from._internal_timestamp(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.hostip_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.hostip_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_hostip().empty()) {
+    _this->_impl_.hostip_.Set(from._internal_hostip(), 
+      _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:ProcessMetricas.UrlAccess)
+}
+
+inline void UrlAccess::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.url_){}
+    , decltype(_impl_.timestamp_){}
+    , decltype(_impl_.hostip_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.url_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.timestamp_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.timestamp_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.hostip_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.hostip_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+UrlAccess::~UrlAccess() {
+  // @@protoc_insertion_point(destructor:ProcessMetricas.UrlAccess)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void UrlAccess::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.url_.Destroy();
+  _impl_.timestamp_.Destroy();
+  _impl_.hostip_.Destroy();
+}
+
+void UrlAccess::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void UrlAccess::Clear() {
+// @@protoc_insertion_point(message_clear_start:ProcessMetricas.UrlAccess)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.url_.ClearToEmpty();
+  _impl_.timestamp_.ClearToEmpty();
+  _impl_.hostip_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* UrlAccess::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string url = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_url();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.UrlAccess.url"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string timestamp = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_timestamp();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.UrlAccess.timestamp"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string hostip = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_hostip();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.UrlAccess.hostip"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* UrlAccess::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ProcessMetricas.UrlAccess)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string url = 1;
+  if (!this->_internal_url().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_url().data(), static_cast<int>(this->_internal_url().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.UrlAccess.url");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_url(), target);
+  }
+
+  // string timestamp = 2;
+  if (!this->_internal_timestamp().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_timestamp().data(), static_cast<int>(this->_internal_timestamp().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.UrlAccess.timestamp");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_timestamp(), target);
+  }
+
+  // string hostip = 3;
+  if (!this->_internal_hostip().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_hostip().data(), static_cast<int>(this->_internal_hostip().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.UrlAccess.hostip");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_hostip(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ProcessMetricas.UrlAccess)
+  return target;
+}
+
+size_t UrlAccess::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ProcessMetricas.UrlAccess)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string url = 1;
+  if (!this->_internal_url().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_url());
+  }
+
+  // string timestamp = 2;
+  if (!this->_internal_timestamp().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_timestamp());
+  }
+
+  // string hostip = 3;
+  if (!this->_internal_hostip().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_hostip());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UrlAccess::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    UrlAccess::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UrlAccess::GetClassData() const { return &_class_data_; }
+
+
+void UrlAccess::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<UrlAccess*>(&to_msg);
+  auto& from = static_cast<const UrlAccess&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ProcessMetricas.UrlAccess)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_url().empty()) {
+    _this->_internal_set_url(from._internal_url());
+  }
+  if (!from._internal_timestamp().empty()) {
+    _this->_internal_set_timestamp(from._internal_timestamp());
+  }
+  if (!from._internal_hostip().empty()) {
+    _this->_internal_set_hostip(from._internal_hostip());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void UrlAccess::CopyFrom(const UrlAccess& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ProcessMetricas.UrlAccess)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UrlAccess::IsInitialized() const {
+  return true;
+}
+
+void UrlAccess::InternalSwap(UrlAccess* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.url_, lhs_arena,
+      &other->_impl_.url_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.timestamp_, lhs_arena,
+      &other->_impl_.timestamp_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.hostip_, lhs_arena,
+      &other->_impl_.hostip_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UrlAccess::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ProcessMetricas_2eproto_getter, &descriptor_table_ProcessMetricas_2eproto_once,
+      file_level_metadata_ProcessMetricas_2eproto[5]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace ProcessMetricas
 PROTOBUF_NAMESPACE_OPEN
@@ -2323,6 +2653,10 @@ Arena::CreateMaybeMessage< ::ProcessMetricas::InstalledProgram >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::ProcessMetricas::InstalledProgramList*
 Arena::CreateMaybeMessage< ::ProcessMetricas::InstalledProgramList >(Arena* arena) {
   return Arena::CreateMessageInternal< ::ProcessMetricas::InstalledProgramList >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ProcessMetricas::UrlAccess*
+Arena::CreateMaybeMessage< ::ProcessMetricas::UrlAccess >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ProcessMetricas::UrlAccess >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
