@@ -21,5 +21,12 @@ script:
 	./API/ChannelComunication.cpp \
 	./ProcessMonitoring/ProcessMetricas.pb.cc \
 	-O3 -lprotobuf -std=c++17 -o script_kernel
+
+	@g++ ./AgentMonitoring/URLScript.cpp \
+	 ./Scripts/Script.cpp \
+	./ConfigAgent/ConfigAgent.cpp  \
+	./API/ChannelComunication.cpp \
+	./ProcessMonitoring/ProcessMetricas.pb.cc \
+	-O3 -lprotobuf -std=c++17 -o script_url
 clean:
 	rm -f *.o ProcessMetricas.pb.cc ProcessMetricas.pb.h

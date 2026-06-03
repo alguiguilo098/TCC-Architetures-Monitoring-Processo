@@ -2,8 +2,23 @@
 #include <cstdio>
 #include <string>
 
-#include "API/ChannelComunication.hpp"
-#include "ConfigAgent/ConfigAgent.hpp"
+#include "../API/ChannelComunication.hpp"
+#include "../ConfigAgent/ConfigAgent.hpp"
+#include <iomanip>
+#include "../ProcessMonitoring/ProcessMetricas.pb.h"
+#include "../Scripts/Script.hpp"
+std::string getISO8601Timestamp() {
+    auto now = std::chrono::system_clock::now();
+    auto time = std::chrono::system_clock::to_time_t(now);
+
+    std::tm utc_tm{};
+    gmtime_r(&time, &utc_tm); // Linux
+
+    std::stringstream ss;
+    ss << std::put_time(&utc_tm, "%Y-%m-%dT%H:%M:%SZ");
+
+    return ss.str();
+}
 
 int main()
 {
@@ -24,7 +39,7 @@ int main()
     }
 
     Config configAgent;
-
+    LoadConfig("confagent.conf", configAgent);
 
     ChannelCommunication channel(
         configAgent.ServerHost,
@@ -32,7 +47,8 @@ int main()
     );
 
     char buffer[4096];
-
+    std::cout << configAgent.ServerHost << std::endl;
+    std::cout << configAgent.ServerPort << std::endl;
     std::cout << "Monitorando URLs..." << std::endl;
 
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr)
@@ -49,11 +65,17 @@ int main()
 
         std::cout << "URL acessada: " << dominio << std::endl;
 
-        /*
+        
         ProcessMetricas::UrlAccess urlAccess;
         urlAccess.set_url(dominio);
+
+        urlAccess.set_timestamp(getISO8601Timestamp());
+        std::string host_ip;
+        get_host_ip(host_ip);
+        urlAccess.set_hostip(host_ip);
+
         channel.sendMessage(urlAccess);
-        */
+        
     }
 
     std::cerr << "Tshark encerrado." << std::endl;

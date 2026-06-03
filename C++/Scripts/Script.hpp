@@ -5,3 +5,4 @@ void collectionInstalledPrograms(ProcessMetricas::InstalledProgramList &programL
 void WriteProcessMetricsToFile(const ProcessMetricas::ProcessMetricsList &metricsList, const std::string &filename);
 void WriteKernelDistroToFile(const ProcessMetricas::KernelDistro &kernelDistro, const std::string &filename);
 void WriteInstalledProgramsToFile(const ProcessMetricas::InstalledProgramList &programList, const std::string &filename);
+void get_host_ip(std::string &host);
