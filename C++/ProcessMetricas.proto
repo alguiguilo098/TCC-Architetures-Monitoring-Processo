@@ -72,6 +72,7 @@ message UrlAccess {
   string url = 1; // URL acessada
   string timestamp = 2; // Timestamp do acesso
   string hostip = 3; // IP do host
+  string user = 5; // Usuário
   string laboratory = 4; // Laboratório
 }
 

@@ -1360,6 +1360,8 @@ class UrlAccess final :
     kUrlFieldNumber = 1,
     kTimestampFieldNumber = 2,
     kHostipFieldNumber = 3,
+    kLaboratoryFieldNumber = 4,
+    kUserFieldNumber = 5,
   };
   // string url = 1;
   void clear_url();
@@ -1403,6 +1405,34 @@ class UrlAccess final :
   std::string* _internal_mutable_hostip();
   public:
 
+  // string laboratory = 4;
+  void clear_laboratory();
+  const std::string& laboratory() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_laboratory(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_laboratory();
+  PROTOBUF_NODISCARD std::string* release_laboratory();
+  void set_allocated_laboratory(std::string* laboratory);
+  private:
+  const std::string& _internal_laboratory() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_laboratory(const std::string& value);
+  std::string* _internal_mutable_laboratory();
+  public:
+
+  // string user = 5;
+  void clear_user();
+  const std::string& user() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_user(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_user();
+  PROTOBUF_NODISCARD std::string* release_user();
+  void set_allocated_user(std::string* user);
+  private:
+  const std::string& _internal_user() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_user(const std::string& value);
+  std::string* _internal_mutable_user();
+  public:
+
   // @@protoc_insertion_point(class_scope:ProcessMetricas.UrlAccess)
  private:
   class _Internal;
@@ -1414,6 +1444,8 @@ class UrlAccess final :
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr url_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hostip_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr laboratory_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -2806,6 +2838,106 @@ inline void UrlAccess::set_allocated_hostip(std::string* hostip) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.UrlAccess.hostip)
+}
+
+// string user = 5;
+inline void UrlAccess::clear_user() {
+  _impl_.user_.ClearToEmpty();
+}
+inline const std::string& UrlAccess::user() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.UrlAccess.user)
+  return _internal_user();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UrlAccess::set_user(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.user_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.UrlAccess.user)
+}
+inline std::string* UrlAccess::mutable_user() {
+  std::string* _s = _internal_mutable_user();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.UrlAccess.user)
+  return _s;
+}
+inline const std::string& UrlAccess::_internal_user() const {
+  return _impl_.user_.Get();
+}
+inline void UrlAccess::_internal_set_user(const std::string& value) {
+  
+  _impl_.user_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UrlAccess::_internal_mutable_user() {
+  
+  return _impl_.user_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UrlAccess::release_user() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.UrlAccess.user)
+  return _impl_.user_.Release();
+}
+inline void UrlAccess::set_allocated_user(std::string* user) {
+  if (user != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.user_.SetAllocated(user, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.user_.IsDefault()) {
+    _impl_.user_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.UrlAccess.user)
+}
+
+// string laboratory = 4;
+inline void UrlAccess::clear_laboratory() {
+  _impl_.laboratory_.ClearToEmpty();
+}
+inline const std::string& UrlAccess::laboratory() const {
+  // @@protoc_insertion_point(field_get:ProcessMetricas.UrlAccess.laboratory)
+  return _internal_laboratory();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UrlAccess::set_laboratory(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.laboratory_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:ProcessMetricas.UrlAccess.laboratory)
+}
+inline std::string* UrlAccess::mutable_laboratory() {
+  std::string* _s = _internal_mutable_laboratory();
+  // @@protoc_insertion_point(field_mutable:ProcessMetricas.UrlAccess.laboratory)
+  return _s;
+}
+inline const std::string& UrlAccess::_internal_laboratory() const {
+  return _impl_.laboratory_.Get();
+}
+inline void UrlAccess::_internal_set_laboratory(const std::string& value) {
+  
+  _impl_.laboratory_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UrlAccess::_internal_mutable_laboratory() {
+  
+  return _impl_.laboratory_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UrlAccess::release_laboratory() {
+  // @@protoc_insertion_point(field_release:ProcessMetricas.UrlAccess.laboratory)
+  return _impl_.laboratory_.Release();
+}
+inline void UrlAccess::set_allocated_laboratory(std::string* laboratory) {
+  if (laboratory != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.laboratory_.SetAllocated(laboratory, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.laboratory_.IsDefault()) {
+    _impl_.laboratory_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.UrlAccess.laboratory)
 }
 
 #ifdef __GNUC__

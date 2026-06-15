@@ -119,6 +119,8 @@ PROTOBUF_CONSTEXPR UrlAccess::UrlAccess(
     /*decltype(_impl_.url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.timestamp_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.hostip_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.laboratory_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.user_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct UrlAccessDefaultTypeInternal {
   PROTOBUF_CONSTEXPR UrlAccessDefaultTypeInternal()
@@ -228,6 +230,8 @@ const uint32_t TableStruct_ProcessMetricas_2eproto::offsets[] PROTOBUF_SECTION_V
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.url_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.timestamp_),
   PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.hostip_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.user_),
+  PROTOBUF_FIELD_OFFSET(::ProcessMetricas::UrlAccess, _impl_.laboratory_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 28, -1, sizeof(::ProcessMetricas::ProcessMetrics)},
@@ -272,12 +276,13 @@ const char descriptor_table_protodef_ProcessMetricas_2eproto[] PROTOBUF_SECTION_
   "\007version\030\002 \001(\t\"n\n\024InstalledProgramList\022\021"
   "\n\ttimestamp\030\003 \001(\t\022\016\n\006hostip\030\002 \001(\t\0223\n\010pro"
   "grams\030\001 \003(\0132!.ProcessMetricas.InstalledP"
-  "rogram\";\n\tUrlAccess\022\013\n\003url\030\001 \001(\t\022\021\n\ttime"
-  "stamp\030\002 \001(\t\022\016\n\006hostip\030\003 \001(\tb\006proto3"
+  "rogram\"]\n\tUrlAccess\022\013\n\003url\030\001 \001(\t\022\021\n\ttime"
+  "stamp\030\002 \001(\t\022\016\n\006hostip\030\003 \001(\t\022\014\n\004user\030\005 \001("
+  "\t\022\022\n\nlaboratory\030\004 \001(\tb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_ProcessMetricas_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ProcessMetricas_2eproto = {
-    false, false, 1035, descriptor_table_protodef_ProcessMetricas_2eproto,
+    false, false, 1069, descriptor_table_protodef_ProcessMetricas_2eproto,
     "ProcessMetricas.proto",
     &descriptor_table_ProcessMetricas_2eproto_once, nullptr, 0, 6,
     schemas, file_default_instances, TableStruct_ProcessMetricas_2eproto::offsets,
@@ -2347,6 +2352,8 @@ UrlAccess::UrlAccess(const UrlAccess& from)
       decltype(_impl_.url_){}
     , decltype(_impl_.timestamp_){}
     , decltype(_impl_.hostip_){}
+    , decltype(_impl_.laboratory_){}
+    , decltype(_impl_.user_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -2374,6 +2381,22 @@ UrlAccess::UrlAccess(const UrlAccess& from)
     _this->_impl_.hostip_.Set(from._internal_hostip(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.laboratory_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.laboratory_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_laboratory().empty()) {
+    _this->_impl_.laboratory_.Set(from._internal_laboratory(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.user_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.user_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_user().empty()) {
+    _this->_impl_.user_.Set(from._internal_user(), 
+      _this->GetArenaForAllocation());
+  }
   // @@protoc_insertion_point(copy_constructor:ProcessMetricas.UrlAccess)
 }
 
@@ -2385,6 +2408,8 @@ inline void UrlAccess::SharedCtor(
       decltype(_impl_.url_){}
     , decltype(_impl_.timestamp_){}
     , decltype(_impl_.hostip_){}
+    , decltype(_impl_.laboratory_){}
+    , decltype(_impl_.user_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.url_.InitDefault();
@@ -2398,6 +2423,14 @@ inline void UrlAccess::SharedCtor(
   _impl_.hostip_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.hostip_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.laboratory_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.laboratory_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.user_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.user_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -2415,6 +2448,8 @@ inline void UrlAccess::SharedDtor() {
   _impl_.url_.Destroy();
   _impl_.timestamp_.Destroy();
   _impl_.hostip_.Destroy();
+  _impl_.laboratory_.Destroy();
+  _impl_.user_.Destroy();
 }
 
 void UrlAccess::SetCachedSize(int size) const {
@@ -2430,6 +2465,8 @@ void UrlAccess::Clear() {
   _impl_.url_.ClearToEmpty();
   _impl_.timestamp_.ClearToEmpty();
   _impl_.hostip_.ClearToEmpty();
+  _impl_.laboratory_.ClearToEmpty();
+  _impl_.user_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2466,6 +2503,26 @@ const char* UrlAccess::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.UrlAccess.hostip"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string laboratory = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_laboratory();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.UrlAccess.laboratory"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string user = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_user();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "ProcessMetricas.UrlAccess.user"));
         } else
           goto handle_unusual;
         continue;
@@ -2528,6 +2585,26 @@ uint8_t* UrlAccess::_InternalSerialize(
         3, this->_internal_hostip(), target);
   }
 
+  // string laboratory = 4;
+  if (!this->_internal_laboratory().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_laboratory().data(), static_cast<int>(this->_internal_laboratory().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.UrlAccess.laboratory");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_laboratory(), target);
+  }
+
+  // string user = 5;
+  if (!this->_internal_user().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_user().data(), static_cast<int>(this->_internal_user().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "ProcessMetricas.UrlAccess.user");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_user(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2565,6 +2642,20 @@ size_t UrlAccess::ByteSizeLong() const {
         this->_internal_hostip());
   }
 
+  // string laboratory = 4;
+  if (!this->_internal_laboratory().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_laboratory());
+  }
+
+  // string user = 5;
+  if (!this->_internal_user().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_user());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -2591,6 +2682,12 @@ void UrlAccess::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   }
   if (!from._internal_hostip().empty()) {
     _this->_internal_set_hostip(from._internal_hostip());
+  }
+  if (!from._internal_laboratory().empty()) {
+    _this->_internal_set_laboratory(from._internal_laboratory());
+  }
+  if (!from._internal_user().empty()) {
+    _this->_internal_set_user(from._internal_user());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -2622,6 +2719,14 @@ void UrlAccess::InternalSwap(UrlAccess* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.hostip_, lhs_arena,
       &other->_impl_.hostip_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.laboratory_, lhs_arena,
+      &other->_impl_.laboratory_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.user_, lhs_arena,
+      &other->_impl_.user_, rhs_arena
   );
 }
 

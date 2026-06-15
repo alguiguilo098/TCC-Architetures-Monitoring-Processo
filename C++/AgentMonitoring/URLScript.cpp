@@ -7,7 +7,10 @@
 #include <iomanip>
 #include "../ProcessMonitoring/ProcessMetricas.pb.h"
 #include "../Scripts/Script.hpp"
-std::string getISO8601Timestamp() {
+#include <pwd.h>
+#include <unistd.h>
+std::string getISO8601Timestamp()
+{
     auto now = std::chrono::system_clock::now();
     auto time = std::chrono::system_clock::to_time_t(now);
 
@@ -20,6 +23,34 @@ std::string getISO8601Timestamp() {
     return ss.str();
 }
 
+#include <cstdio>
+#include <string>
+#include <sstream>
+
+std::string getLoggedUser()
+{
+    FILE* pipe = popen(
+        "loginctl list-sessions --no-legend | awk '$3 != \"\" {print $3; exit}'",
+        "r");
+
+    if (!pipe)
+        return "";
+
+    char buffer[256];
+    std::string user;
+
+    if (fgets(buffer, sizeof(buffer), pipe))
+    {
+        user = buffer;
+
+        user.erase(
+            user.find_last_not_of(" \n\r\t") + 1);
+    }
+
+    pclose(pipe);
+    return user;
+}
+
 int main()
 {
     FILE *pipe = popen(
@@ -29,8 +60,7 @@ int main()
         "-T fields "
         "-e tls.handshake.extensions_server_name "
         "2>/dev/null",
-        "r"
-    );
+        "r");
 
     if (!pipe)
     {
@@ -43,8 +73,7 @@ int main()
 
     ChannelCommunication channel(
         configAgent.ServerHost,
-        configAgent.ServerPort
-    );
+        configAgent.ServerPort);
 
     char buffer[4096];
     std::cout << configAgent.ServerHost << std::endl;
@@ -57,15 +86,13 @@ int main()
 
         // Remove '\n', '\r', espaços e tabs do final
         dominio.erase(
-            dominio.find_last_not_of(" \n\r\t") + 1
-        );
+            dominio.find_last_not_of(" \n\r\t") + 1);
 
         if (dominio.empty())
             continue;
 
         std::cout << "URL acessada: " << dominio << std::endl;
 
-        
         ProcessMetricas::UrlAccess urlAccess;
         urlAccess.set_url(dominio);
 
@@ -73,9 +100,9 @@ int main()
         std::string host_ip;
         get_host_ip(host_ip);
         urlAccess.set_hostip(host_ip);
-
+        urlAccess.set_user(getLoggedUser());
+        urlAccess.set_laboratory(configAgent.laboratory);
         channel.sendMessage(urlAccess);
-        
     }
 
     std::cerr << "Tshark encerrado." << std::endl;
