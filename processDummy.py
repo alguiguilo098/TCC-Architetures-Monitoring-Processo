@@ -12,7 +12,7 @@ logging.basicConfig(
 
 KAFKA_BOOTSTRAP_SERVERS = 'localhost:9092'
 KAFKA_TOPIC = 'monitoring-topic'
-ELASTIC_HOSTS = ['https://localhost:9200']
+ELASTIC_HOSTS = ['http://localhost:9200']
 ELASTIC_USER = 'elastic'
 ELASTIC_PASSWORD = 'LM5v1tZ0wLT7WvULS4DB'
 ELASTIC_INDEX = 'monitoring-logs'
