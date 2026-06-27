@@ -2,9 +2,8 @@ from kafka import KafkaConsumer
 from elasticsearch import Elasticsearch
 import logging
 import time
-from datetime import datetime
 import json
-
+from pyspark.sql import SparkSession
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
@@ -19,6 +18,14 @@ ELASTIC_INDEX = 'monitoring-logs'
 ELASTIC_INDEX1= 'url-logs'
 ELASTIC_INDEX2= 'programs-logs'
 ELASTIC_INDEX3= 'kernel-logs'
+def remove_duplicate_processes_by_name(processes):
+    unique = []   
+    processname = []
+    for process in processes:
+        if process['name'] not in processname:
+            unique.append(process)
+            processname.append(process['name'])
+    return unique
 
 def connect_elasticsearch():
     return Elasticsearch(
@@ -39,16 +46,21 @@ def create_kafka_consumer():
 
 def main():
     es = connect_elasticsearch()
-
+    spark = SparkSession.builder \
+                .appName("KafkaToElasticsearch") \
+                .master("local[*]") \
+                .getOrCreate()       
+    consumer = create_kafka_consumer()
     while True:
         try:
-            consumer = create_kafka_consumer()
+            
             logging.info("Consumidor Kafka iniciado, aguardando mensagens...")
             
             for message in consumer:
                 try:
                     if "processes" in message.value:
-                        for process in message.value["processes"]:
+                        processes = remove_duplicate_processes_by_name(message.value["processes"])
+                        for process in processes:
                             logging.info(f"Mensagem recebida: {process}")
                             es.index(index=ELASTIC_INDEX, document=process)
                     elif "url" in message.value:
