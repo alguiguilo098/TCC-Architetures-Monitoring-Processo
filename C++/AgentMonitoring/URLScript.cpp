@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
-
 #include "../API/ChannelComunication.hpp"
 #include "../ConfigAgent/ConfigAgent.hpp"
 #include <iomanip>
@@ -9,6 +8,7 @@
 #include "../Scripts/Script.hpp"
 #include <pwd.h>
 #include <unistd.h>
+// Função para obter o timestamp no formato ISO 8601
 std::string getISO8601Timestamp()
 {
     auto now = std::chrono::system_clock::now();
@@ -23,10 +23,7 @@ std::string getISO8601Timestamp()
     return ss.str();
 }
 
-#include <cstdio>
-#include <string>
-#include <sstream>
-
+// Função para obter o usuário logado
 std::string getLoggedUser()
 {
     FILE* pipe = popen(

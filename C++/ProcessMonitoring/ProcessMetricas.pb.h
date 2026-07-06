@@ -198,7 +198,6 @@ class ProcessMetrics final :
 
   enum : int {
     kNameFieldNumber = 2,
-    kCmdlineFieldNumber = 3,
     kTimestampFieldNumber = 4,
     kUserFieldNumber = 6,
     kBoottimeFieldNumber = 15,
@@ -232,20 +231,6 @@ class ProcessMetrics final :
   const std::string& _internal_name() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
   std::string* _internal_mutable_name();
-  public:
-
-  // string cmdline = 3;
-  void clear_cmdline();
-  const std::string& cmdline() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_cmdline(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_cmdline();
-  PROTOBUF_NODISCARD std::string* release_cmdline();
-  void set_allocated_cmdline(std::string* cmdline);
-  private:
-  const std::string& _internal_cmdline() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_cmdline(const std::string& value);
-  std::string* _internal_mutable_cmdline();
   public:
 
   // string timestamp = 4;
@@ -493,7 +478,6 @@ class ProcessMetrics final :
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr cmdline_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr timestamp_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr user_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr boottime_;
@@ -1580,56 +1564,6 @@ inline void ProcessMetrics::set_allocated_user(std::string* user) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.user)
-}
-
-// string cmdline = 3;
-inline void ProcessMetrics::clear_cmdline() {
-  _impl_.cmdline_.ClearToEmpty();
-}
-inline const std::string& ProcessMetrics::cmdline() const {
-  // @@protoc_insertion_point(field_get:ProcessMetricas.ProcessMetrics.cmdline)
-  return _internal_cmdline();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void ProcessMetrics::set_cmdline(ArgT0&& arg0, ArgT... args) {
- 
- _impl_.cmdline_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:ProcessMetricas.ProcessMetrics.cmdline)
-}
-inline std::string* ProcessMetrics::mutable_cmdline() {
-  std::string* _s = _internal_mutable_cmdline();
-  // @@protoc_insertion_point(field_mutable:ProcessMetricas.ProcessMetrics.cmdline)
-  return _s;
-}
-inline const std::string& ProcessMetrics::_internal_cmdline() const {
-  return _impl_.cmdline_.Get();
-}
-inline void ProcessMetrics::_internal_set_cmdline(const std::string& value) {
-  
-  _impl_.cmdline_.Set(value, GetArenaForAllocation());
-}
-inline std::string* ProcessMetrics::_internal_mutable_cmdline() {
-  
-  return _impl_.cmdline_.Mutable(GetArenaForAllocation());
-}
-inline std::string* ProcessMetrics::release_cmdline() {
-  // @@protoc_insertion_point(field_release:ProcessMetricas.ProcessMetrics.cmdline)
-  return _impl_.cmdline_.Release();
-}
-inline void ProcessMetrics::set_allocated_cmdline(std::string* cmdline) {
-  if (cmdline != nullptr) {
-    
-  } else {
-    
-  }
-  _impl_.cmdline_.SetAllocated(cmdline, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.cmdline_.IsDefault()) {
-    _impl_.cmdline_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:ProcessMetricas.ProcessMetrics.cmdline)
 }
 
 // int32 num_threads = 7;
