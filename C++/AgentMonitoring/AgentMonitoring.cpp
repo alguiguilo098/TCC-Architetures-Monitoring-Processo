@@ -161,17 +161,7 @@ void AgentMonitoring::load_config(std::string config_path)
     LoadConfig(config_path, this->configAgent);
 }
 
-/// @brief Verifica se um intervalo de tempo especificado passou desde o último tempo registrado
-/// @param last_time Último tempo registrado
-/// @param interval Intervalo de tempo a ser verificado
-/// @return true se o intervalo de tempo passou, false caso contrário
-bool has_time_passed(
-    const std::chrono::steady_clock::time_point &last_time,
-    std::chrono::seconds interval)
-{
-    // Verifica se o intervalo de tempo especificado passou desde o último tempo registrado
-    return (std::chrono::steady_clock::now() - last_time) >= interval;
-}
+
 
 void AgentMonitoring::start_monitoring()
 {
@@ -191,7 +181,7 @@ void AgentMonitoring::start_monitoring()
         {
             // Troca os buffers e escreve os dados coletados em arquivo
             this->BufferInput.Swap(&this->BufferOutput);
-            // Write BufferInput to file
+            std::cout << "bytes sent: " << this->BufferInput.ByteSizeLong() << std::endl;
             this->BufferOutput.Clear();
             sem_post(&this->semaphoreBuffer);
         }

@@ -40,6 +40,7 @@ void ChannelCommunication::sendTcpJson(const std::string &json,
     }
     send(this->sock, json.data(), json.size(), 0);
     close(this->sock);
+    return;
 }
 
 ChannelCommunication::ChannelCommunication(const std::string &host, int port)
