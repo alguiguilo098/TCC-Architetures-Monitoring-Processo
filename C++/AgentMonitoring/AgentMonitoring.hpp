@@ -22,6 +22,8 @@ class AgentMonitoring {
         std::mutex mutexBuffer;
         sem_t semaphoreBuffer;
 
+        size_t totaldebysents=0;
+
         ChannelCommunication* channelCommunication;
         std::chrono::steady_clock::time_point last_monitor_time;
         void set_laboratory_info(ProcessMetricas::ProcessMetrics &metrics);        

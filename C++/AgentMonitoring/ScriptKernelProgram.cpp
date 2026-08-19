@@ -4,7 +4,7 @@
 #include "../ConfigAgent/ConfigAgent.hpp"
 
 int main(int argc, char const *argv[])
-{;
+{
     Config config;
     LoadConfig(argv[1], config);
     ChannelCommunication channel(config.ServerHost, config.ServerPort);

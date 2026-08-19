@@ -181,7 +181,8 @@ void AgentMonitoring::start_monitoring()
         {
             // Troca os buffers e escreve os dados coletados em arquivo
             this->BufferInput.Swap(&this->BufferOutput);
-            std::cout << "bytes sent: " << this->BufferInput.ByteSizeLong() << std::endl;
+            this->totaldebysents += this->BufferInput.ByteSizeLong();
+            std::cout << "bytes sent: " << this->totaldebysents << std::endl;
             this->BufferOutput.Clear();
             sem_post(&this->semaphoreBuffer);
         }

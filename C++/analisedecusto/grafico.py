@@ -14,10 +14,16 @@ dell205=pd.read_csv('dell 2 5s.csv')
 dell305=pd.read_csv('dell 3 5s.csv')
 
 lenovo15=pd.read_csv('lenovo 1 5s.csv')
-lenovo25=pd.read_csv('lenovo 2  5s.csv')
+lenovo25=pd.read_csv('lenovo 2 5s.csv')
 lenovo35=pd.read_csv('lenovo 3 5s.csv')
 
+lenovo110=pd.read_csv('lenovo 1 10s.csv')
+lenovo210=pd.read_csv('lenovo 2 10s.csv')
+lenovo310=pd.read_csv('lenovo 3 10s.csv')
 
+lenovo15=pd.read_csv('lenovo.csv')
+
+k=lenovo110['cpu_percent'].std()
 cpu_15=(dell115['pid'].mean() + dell215['pid'].mean() + dell315['pid'].mean())/3
 desvio_15=(dell115['pid'].std() + dell215['pid'].std() + dell315['pid'].std())/3
 desvio_10=(dell110['pid'].std() + dell210['pid'].std() + dell310['pid'].std())/3
@@ -28,7 +34,8 @@ desvio_5=(dell105['pid'].std() + dell205['pid'].std() + dell305['pid'].std())/3
 
 lenovo_5=(lenovo15['cpu_percent'].mean() + lenovo25['cpu_percent'].mean() + lenovo35['cpu_percent'].mean())/3
 lenovo_desvio_5=(lenovo15['cpu_percent'].std() + lenovo25['cpu_percent'].std() + lenovo35['cpu_percent'].std())/3
-
+lenovo110=(lenovo110['cpu_percent'].mean() + lenovo210['cpu_percent'].mean() + lenovo310['cpu_percent'].mean())/3
+lenovo_desvio_10=(k + lenovo210['cpu_percent'].std() + lenovo310['cpu_percent'].std())/3
 labels = ["5s", "10s", "15s"]
 medias = [cpu_5, cpu_10, cpu_15]
 desvios = [desvio_5, desvio_10, desvio_15]
@@ -45,17 +52,17 @@ plt.errorbar(
     linewidth=2,
     markersize=8,
     capsize=8,
-    label="Computador 1"
+    label="i7 12ª geração"
 )
 plt.errorbar(
-    ["5s"],
-    [lenovo_5],
-    yerr=[lenovo_desvio_5],
+    ["5s", "10s", "15s"],
+    [lenovo_5, lenovo110, lenovo15['cpu_percent'].mean()],
+    yerr=[lenovo_desvio_5, lenovo_desvio_10, lenovo15['cpu_percent'].std()],
     fmt='-o',        
     color='red',
     markersize=8,
     capsize=8,
-    label="Computador 2"
+    label="i3 10ª geração"
 )
 
 plt.legend()
