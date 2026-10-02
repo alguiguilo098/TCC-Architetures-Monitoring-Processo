@@ -8,12 +8,16 @@
 #include <thread>
 #include <mutex>
 #include <semaphore.h>
-
+#include <unordered_map>
 
 
 class AgentMonitoring {
     private:
+        std::unordered_map<int, ProcessMetricas::ProcessMetrics> lastStates;
+        std::mutex mutexStates;
 
+        bool state_changed(const ProcessMetricas::ProcessMetrics& oldState,const ProcessMetricas::ProcessMetrics& newState);
+        bool check_process_state(const ProcessMetricas::ProcessMetrics& metrics);
         ProcessMetricas::ProcessMetricsList BufferOutput;
         ProcessMetricas::ProcessMetricsList BufferInput;
         

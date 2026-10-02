@@ -7,6 +7,43 @@
 // Descrição: Implementação das funções de monitoramento do agente
 // Nome: Guilherme Almeida Lopes
 // Data: 2025-01-29
+bool AgentMonitoring::state_changed(const ProcessMetricas::ProcessMetrics& oldState,const ProcessMetricas::ProcessMetrics& newState)
+{
+    return
+        oldState.name() != newState.name() ||
+        oldState.user() != newState.user() ||
+        oldState.num_threads() != newState.num_threads() ||
+        oldState.num_child_processes() != newState.num_child_processes() ||
+        oldState.nice() != newState.nice() ||
+        oldState.ionice_value() != newState.ionice_value();
+}
+
+bool AgentMonitoring::check_process_state(
+    const ProcessMetricas::ProcessMetrics& metrics)
+{
+    std::lock_guard<std::mutex> lock(mutexStates);
+
+    int pid = metrics.pid();
+
+    auto it = lastStates.find(pid);
+
+    // Processo apareceu pela primeira vez
+    if (it == lastStates.end())
+    {
+        lastStates[pid] = metrics;
+        return true;
+    }
+
+    // Verifica se o estado mudou
+    if (state_changed(it->second, metrics))
+    {
+        lastStates[pid] = metrics;
+        return true;
+    }
+
+    // Estado não mudou
+    return false;
+}
 
 void AgentMonitoring::set_laboratory_info(ProcessMetricas::ProcessMetrics &metrics)
 {
@@ -22,7 +59,7 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
     collection->get_metrics_cpu_percent(metrics, pid);
     collection->get_metrics_user(metrics, pid);
     collection->get_metrics_name(metrics, pid);
-    if (metrics.cpu_percent() != 0.0f && metrics.user() == configAgent.username && metrics.name() != "")
+    if (metrics.cpu_percent() != 0.0f && metrics.name() != "")
     {
         // Corretas
         collection->get_metrics_pid(metrics, pid);
@@ -44,12 +81,12 @@ void AgentMonitoring::monitor_process(int pid, ProcessMetricas::ProcessMetrics &
         this->set_laboratory_info(metrics);
         // Coleta o tempo de atividade do processo
 
-        this->mutexBuffer.lock();
-            // Adiciona as métricas coletadas ao buffer de saída
+        if (check_process_state(metrics)){
+            std::lock_guard<std::mutex> lock(mutexBuffer);
+            BufferOutput.add_processes()->CopyFrom(metrics);
 
-        this->BufferOutput.add_processes()->CopyFrom(metrics);
-        this->mutexBuffer.unlock();
-        
+            std::cout<< "Estado alterado - PID: "<< metrics.pid()<< " - Processo: "<< metrics.name()<< std::endl;
+}
     }
 }
 /// @brief Monitora e coleta informações sobre a distribuição do kernel

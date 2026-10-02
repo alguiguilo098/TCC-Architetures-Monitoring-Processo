@@ -9,6 +9,17 @@
 #include <pwd.h>
 #include <unistd.h>
 // Função para obter o timestamp no formato ISO 8601
+
+ProcessMetricas::UrlAccess createUrlAccessMessage(const std::string& url, const std::string& timestamp, const std::string& host_ip, const std::string& user, const std::string& laboratory)
+{
+    ProcessMetricas::UrlAccess urlAccess;
+    urlAccess.set_url(url);
+    urlAccess.set_timestamp(timestamp);
+    urlAccess.set_hostip(host_ip);
+    urlAccess.set_user(user);
+    urlAccess.set_laboratory(laboratory);
+    return urlAccess;
+}
 std::string getISO8601Timestamp()
 {
     auto now = std::chrono::system_clock::now();
@@ -68,15 +79,27 @@ int main()
     Config configAgent;
     LoadConfig("confagent.conf", configAgent);
 
+    std::cout
+        << "Servidor: "
+        << configAgent.ServerHost
+        << std::endl;
+
+    std::cout
+        << "Porta: "
+        << configAgent.ServerPort
+        << std::endl;
+        
+    std::cout
+        << "Monitorando URLs..."
+        << std::endl;
+
     ChannelCommunication channel(
         configAgent.ServerHost,
         configAgent.ServerPort);
 
     char buffer[4096];
-    std::cout << configAgent.ServerHost << std::endl;
-    std::cout << configAgent.ServerPort << std::endl;
-    std::cout << "Monitorando URLs..." << std::endl;
-
+    
+    std::string ultimaUrl = "";
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr)
     {
         std::string dominio(buffer);
@@ -88,17 +111,20 @@ int main()
         if (dominio.empty())
             continue;
 
+        if (dominio == ultimaUrl)
+            continue;
+
+        ultimaUrl = dominio;
+        
         std::cout << "URL acessada: " << dominio << std::endl;
 
-        ProcessMetricas::UrlAccess urlAccess;
-        urlAccess.set_url(dominio);
-
-        urlAccess.set_timestamp(getISO8601Timestamp());
-        std::string host_ip;
-        get_host_ip(host_ip);
-        urlAccess.set_hostip(host_ip);
-        urlAccess.set_user(getLoggedUser());
-        urlAccess.set_laboratory(configAgent.laboratory);
+        ProcessMetricas::UrlAccess urlAccess = createUrlAccessMessage(
+            dominio,
+            getISO8601Timestamp(),
+            configAgent.ServerHost,
+            getLoggedUser(),
+            configAgent.laboratory
+        );
         channel.sendMessage(urlAccess);
     }
 
