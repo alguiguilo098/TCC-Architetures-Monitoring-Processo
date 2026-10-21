@@ -1,5 +1,5 @@
 #!/bin/bash
 
-make compile
-make script
+./monitor_process confagent.conf &
+./script_url &
 
